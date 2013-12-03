@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 8d26f90ea773c06498193578c8b3df69
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - prefabCart: {instanceID: 0}
+  - cart: {fileID: 11400000, guid: c43a3a2322fce9242baef2a8b404d806, type: 2}
+  - player: {fileID: 11400000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
