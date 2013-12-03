@@ -44,6 +44,10 @@ MonoBehaviour:
   left: 0
   right: 0
   spawner: {fileID: 11400000, guid: af80c931cf3fec144b8ae298098b59f4, type: 2}
+  cartSpawnLocations: []
+  prefabCart: {fileID: 100000, guid: c43a3a2322fce9242baef2a8b404d806, type: 2}
+  CamX: .5
+  CamP: .5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -37,18 +37,17 @@ public class GameManager : MonoBehaviour {
 
 	private void CreatePlayers()
 	{
-		/*for (int i = 0; i < numberOfPlayers; i++)
-		{
-			players[i] = GameObject)Instantiate(playerPrefab) as GameObject).GetComponent<Player>();
-		}*/
+		int nop = 0;
 
 		foreach(GameObject playerPrefab in playerPrefabs)
 		{
 			Player player = (Instantiate(playerPrefab) as GameObject).GetComponent<Player>();
+			player.playerNumber = nop;
 			players.Add(player); // Adds a new player to the game
 
-			Cart cart = player.spawner.SpawnCart(); // Accessing the spawning function from the Spawn initiate script
+			Cart cart = player.SpawnCart(nop); // Accessing the spawning function from the Spawn initiate script
 			carts.Add(cart); // Adds a new cart to the Game manager list
+			nop++;
 		}
 	}
 	
