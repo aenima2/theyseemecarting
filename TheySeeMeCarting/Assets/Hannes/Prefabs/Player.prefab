@@ -43,7 +43,7 @@ MonoBehaviour:
   back: 0
   left: 0
   right: 0
-  spawner: {fileID: 0}
+  spawner: {fileID: 11400000, guid: af80c931cf3fec144b8ae298098b59f4, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

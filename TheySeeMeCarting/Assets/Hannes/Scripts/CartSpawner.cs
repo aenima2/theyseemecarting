@@ -50,6 +50,7 @@ public class CartSpawner : MonoBehaviour {
 		int randomLoc = Random.Range(1, cartSpawnLocations.Count); // Randomizes where to spawn new cart
 		
 		cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[randomLoc].position, Quaternion.identity)).GetComponent<Cart>();
+		print (cart+", "+cart.GetComponent<Player>());
 		cart.GetComponent<Player>().spawner = this;
 
 		/*

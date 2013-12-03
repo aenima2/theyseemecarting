@@ -301,9 +301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   carts: []
-  playerPrefabs:
-  - {fileID: 100000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
-  - {fileID: 100000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
+  playerPrefab: {fileID: 100000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
+  numberOfPlayers: 0
 --- !u!1 &881742993
 GameObject:
   m_ObjectHideFlags: 0

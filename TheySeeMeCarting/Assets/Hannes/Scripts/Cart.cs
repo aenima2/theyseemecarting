@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Cart : MonoBehaviour {
 
-	[System.NonSerialized]
 	public Player player;
+
+	[System.NonSerialized]
+	public CartSpawner cartSpawn;
 
 
 
