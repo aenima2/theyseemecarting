@@ -28,6 +28,4 @@ public class GameManager : MonoBehaviour {
 			carts.Add(cart); // Adds a new cart to the Game manager list
 		}
 	}
-
-
 }

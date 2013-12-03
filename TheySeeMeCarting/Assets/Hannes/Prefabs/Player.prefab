@@ -43,7 +43,6 @@ MonoBehaviour:
   back: 0
   left: 0
   right: 0
-  cart: {fileID: 11400000, guid: c43a3a2322fce9242baef2a8b404d806, type: 2}
   spawner: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
