@@ -18,16 +18,14 @@ public class Player : MonoBehaviour {
 	public CartSpawner spawner;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
-
-	public void AssignCart()
+	void Update ()
 	{
-		spawner.SpawnCart();
+	
 	}
 }
