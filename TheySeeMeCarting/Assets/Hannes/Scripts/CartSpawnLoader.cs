@@ -2,24 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CartSpawner : MonoBehaviour {
+public class CartSpawnLoader : MonoBehaviour {
 
-	private Transform lastLocation; // might not be needed
-
-	public GameObject[] carts; // might not be needed
+	// VARIABLES
 
 	public List<Transform> cartSpawnLocations;
 
-	public GameObject prefabCart;
-
-	[System.NonSerialized]
-	public Cart cart;
-
-	[System.NonSerialized]
-	public Player player;
-
-	//[System.NonSerialized]
-	//public GameManager gm;
 
 
 	void Awake ()
@@ -27,16 +15,12 @@ public class CartSpawner : MonoBehaviour {
 		LoadSpawnLocations();
 	}
 
-	void Start ()
-	{
-	
-	}
-	
-	void Update ()
-	{
-	
-	}
 
+	/*
+	 * public List<Transform> LoadSpawnLocations
+	 * Saves all the spawn locations in a list and then removing the Holder object
+	 * 
+	 */
 	public List<Transform> LoadSpawnLocations()
 	{
 		Transform[] tempSpawnLocs = GetComponentsInChildren<Transform>(); // Recieves all the spawnlocations from the Holder gameobject
@@ -45,12 +29,14 @@ public class CartSpawner : MonoBehaviour {
 		return cartSpawnLocations;
 	}
 
-	public Cart SpawnCart()
+	// Moved to player
+	/*public Cart SpawnCart()
 	{	
 		int randomLoc = Random.Range(1, cartSpawnLocations.Count); // Randomizes where to spawn new cart
 		
 		cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[randomLoc].position, Quaternion.identity)).GetComponent<Cart>();
-		cart.GetComponent<Player>().spawner = this;
+		print (cart+", "+cart.GetComponent<Player>());
+		cart.GetComponent<Player>().spawner = this;*/
 
 		/*
 		 * Put information about the cart here
@@ -58,6 +44,6 @@ public class CartSpawner : MonoBehaviour {
 		cart.tankCamera.rect = cameraRect;
 		cart.SetColor(tankColor);*/
 		
-		return cart;
-	}
+		/*return cart;
+	}*/
 }
