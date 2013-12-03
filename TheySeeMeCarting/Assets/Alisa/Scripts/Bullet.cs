@@ -3,23 +3,35 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
+	public float lifeSpan;
 
 	void Start () {
 	
 	}
 
 	void Update () {
-	
+		LifeSpan ();
 	}
+
+
 
 	void OnCollisionEnter(Collision other){
 
-		Debug.Log (other.gameObject.name);
-
-		Enemy enemy = other.gameObject.GetComponent<Enemy>();
+		Vehicle vehicle = other.gameObject.GetComponent<Vehicle>();
 
 		if (other.gameObject.tag == "Enemy"){
-			enemy.CalcLife();
+			vehicle.CalcLife();
+		}
+
+		Destroy (gameObject);
+	}
+
+	void LifeSpan(){
+		lifeSpan -= Time.deltaTime;
+		
+		if (lifeSpan <= 0f){
+			
+			Destroy(gameObject);
 		}
 	}
 }
