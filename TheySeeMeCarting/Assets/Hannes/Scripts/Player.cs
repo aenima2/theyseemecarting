@@ -32,28 +32,14 @@ public class Player : MonoBehaviour {
 
 	void Start ()
 	{
-		GameManager gameManager = FindObjectOfType<GameManager>();
-		if(gameManager == null)
-		{
-			Debug.LogError("Couldn't find a Game Manager in the scene");
-		}
+
 	}
 	
 	void Update ()
 	{
 
 	}
-
-
-	public void PlayerAmount()
-	{
-
-
-		GameManager gm = FindObjectOfType<GameManager>();
-		nop = gm.numberOfPlayers;
-
-		//return nop;
-	}
+	
 
 	public Cart SpawnCart(int pn)
 	{
@@ -64,9 +50,15 @@ public class Player : MonoBehaviour {
 		cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
 		cart.player = this; // Sets to player
 
-		// Gathers how many players that should spawn
-		GameManager gm = FindObjectOfType<GameManager>(); 
-		nop = gm.numberOfPlayers;
+		/*GameManager gm = FindObjectOfType<GameManager>(); // Gathers how many players that should spawn
+		// Failsafe to make sure there's a gamemanager in the scene
+		if(gm == null)
+		{
+			Debug.LogError("Couldn't find a Game Manager in the scene");
+		}
+		nop = gm.numberOfPlayers; // Sets number of players to "nop"*/
+
+		nop = GameManager.numberOfPlayers;
 
 		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
 
@@ -97,13 +89,8 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-
-
-
 		//tank.tankColor = tankColor;
 		//tank.SetColor(tankColor);
-
-
 
 		return cart;
 	}

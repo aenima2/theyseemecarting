@@ -10,6 +10,8 @@ public class CartSpawnLoader : MonoBehaviour {
 
 
 
+	// FUNCTIONS
+
 	void Awake ()
 	{
 		LoadSpawnLocations();

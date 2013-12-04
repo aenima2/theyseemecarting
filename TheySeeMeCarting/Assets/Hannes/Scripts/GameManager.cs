@@ -4,26 +4,21 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-	public List<Player> players = new List<Player>();
-
-	//GameObject[] players = new GameObject[]<Player>();
-
-	//private Player[] players = playerList.ToArray();
-
-	public List<Cart> carts = new List<Cart>();
+	public GameObject playerPrefab;
 	private List<GameObject> playerPrefabs = new List<GameObject>(); // This is where you put the playerPrefabs to create lists from, probably good to make this more generic*/
 
-	public GameObject playerPrefab;
+	[System.NonSerialized] // Variable invisible in inspector
+	public static float numberOfPlayers; // Number of players (attached to class)
 
-	public float numberOfPlayers;
+	public List<Player> players = new List<Player>();
+	public List<Cart> carts = new List<Cart>();
+	
 	
 
-	//public CartSpawner cartSpawner;
-
+	
 
 	void Start ()
 	{
-		numberOfPlayers = 4;
 		SetNumberOfPlayers(numberOfPlayers);
 		CreatePlayers();
 	}
