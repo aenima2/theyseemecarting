@@ -35,7 +35,7 @@ public class PlayerControls : MonoBehaviour {
 		vehicle.shootInput = shootKey;
 
 		
-		
+		//camera
 		Camera vecCam = vehicle.GetComponentInChildren<Camera>();	
 		vecCam.rect = new Rect(CamX, 0f, CamP, 1f);
 	}
