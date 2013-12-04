@@ -730,7 +730,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1610410049}
-  m_LocalRotation: {x: 0, y: -.52164644, z: 0, w: .853161812}
+  m_LocalRotation: {x: 0, y: -.927820504, z: 0, w: .373027086}
   m_LocalPosition: {x: 9.31678009, y: 1.36222315, z: -5.70234203}
   m_LocalScale: {x: 2.24311256, y: 2.24311256, z: 2.24311256}
   m_Children: []
@@ -750,6 +750,7 @@ MonoBehaviour:
   pickupList:
   - {fileID: 100004, guid: b0deb34151133ea4b85b338ddaad5140, type: 2}
   - {fileID: 100002, guid: 3e4ed7b4c17df704fa20ab7ec08974c1, type: 2}
+  - {fileID: 100000, guid: 4666c817ee7b2964bbf916691cc8de6c, type: 2}
   currentPickup: 0
 --- !u!54 &1610410055
 Rigidbody:
@@ -940,7 +941,7 @@ GameObject:
   - 65: {fileID: 1715372337}
   - 23: {fileID: 1715372336}
   - 114: {fileID: 1715372335}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Pickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -975,7 +976,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ebbfbfb8ba25d4c4b98b3731b3c5d08b, type: 2}
+  - {fileID: 2100000, guid: dea823c2e95d87a428c15a406bd7b5b6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

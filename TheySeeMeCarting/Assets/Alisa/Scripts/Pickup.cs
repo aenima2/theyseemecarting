@@ -25,13 +25,20 @@ public class Pickup : MonoBehaviour {
 
 			PickupSpawner colPlayer = other.gameObject.GetComponent<PickupSpawner>();
 
-			if (colPlayer.pickupList.GetRange())
+			int i = colPlayer.pickupList.Count;
+
+			Debug.Log (i);
+
+			if (i > 2){
+				colPlayer.pickupList.RemoveAt(0);
+			}
 
 			colPlayer.pickupList.Add (pickup);
+
+			}
 
 			Destroy (gameObject);
 
 		}
 
 	}
-}
