@@ -18,47 +18,60 @@ public class Player : MonoBehaviour {
 
 	public CartSpawnLoader spawner;
 
+	[System.NonSerialized]
 	public List<Transform> cartSpawnLocations;
-	
-	public GameObject prefabCart;
 
-	public float CamX;
-	public float CamP;
-	
-	public int playerNumber;
+	[System.NonSerialized]
+	public GameObject playerCharacter; // used for multi char select
 
-	private float nop;
+	public List<GameObject> possibleCharacters; // used for multi char select
+	public int characterIndex; // used for multi char select (change to static (i think))
+
+	public int playerNumber; // Player number
+
+	//private float nop; // Number of players
+
+
+
 	
+	void Awake() {
+		DontDestroyOnLoad(transform.gameObject);
+	}
 
 	void Start ()
 	{
-
+		// Show Selectcharacter menu
+		// Change prefab depending on player selection
+		// Call SpawnCart on select
 	}
 	
 	void Update ()
 	{
 
 	}
-	
 
 	public Cart SpawnCart(int pn)
 	{
+		float nop;
+
+		characterIndex = Random.Range (0, 3); // Set the cart to be spawned to random
+
 		GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
 		cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
 
-
-		cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
+		cart = ((GameObject)Instantiate(possibleCharacters[characterIndex-1], cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
 		cart.player = this; // Sets to player
 
-		/*GameManager gm = FindObjectOfType<GameManager>(); // Gathers how many players that should spawn
+		//cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
+		//cart.player = this; // Sets to player
+
+		GameManager gm = FindObjectOfType<GameManager>(); // Gathers how many players that should spawn
 		// Failsafe to make sure there's a gamemanager in the scene
 		if(gm == null)
 		{
 			Debug.LogError("Couldn't find a Game Manager in the scene");
 		}
-		nop = gm.numberOfPlayers; // Sets number of players to "nop"*/
-
-		nop = GameManager.numberOfPlayers;
+		nop = gm.numberOfPlayers; // Sets number of players to "nop"
 
 		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
 
@@ -93,5 +106,10 @@ public class Player : MonoBehaviour {
 		//tank.SetColor(tankColor);
 
 		return cart;
+	}
+
+	void MenuInput() // Add an in menu bool, so you change input depending on menu/game
+	{
+
 	}
 }

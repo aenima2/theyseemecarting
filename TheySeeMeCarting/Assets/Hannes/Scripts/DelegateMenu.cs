@@ -6,10 +6,11 @@ public class DelegateMenu : MonoBehaviour {
 	private delegate void MenuDelegate();
 	private MenuDelegate menuFunction;
 
-
+	private GameManager gameManager;
 
 	void Start ()
 	{
+		gameManager = FindObjectOfType<GameManager>();
 		menuFunction = TitleScreen;
 	}
 
@@ -78,19 +79,49 @@ public class DelegateMenu : MonoBehaviour {
 		
 		if(GUI.Button(NormalizeRect(p2), "2 players"))
 		{
-			GameManager.numberOfPlayers = 2;
+			gameManager.numberOfPlayers = 2;
+			gameManager.CreatePlayers();// <-- enable player input
+			menuFunction = CharacterSelect;
+		}
+		
+		if(GUI.Button(NormalizeRect(p3), "3 players"))
+		{
+			gameManager.numberOfPlayers = 3;
+			menuFunction = CharacterSelect;
+		}
+		
+		if(GUI.Button(NormalizeRect(p4), "4 players"))
+		{
+			gameManager.numberOfPlayers = 4;
+			menuFunction = CharacterSelect;
+		}
+	}
+
+	void CharacterSelect()
+	{
+		Rect msg = new Rect(0.32f, 0.1f, 0.4f, 0.1f);
+		Rect p2 = new Rect(0.42f, 0.5f, 0.2f, 0.05f);
+		Rect p3 = new Rect(0.42f, 0.57f, 0.2f, 0.05f);
+		Rect p4 = new Rect(0.42f, 0.64f, 0.2f, 0.05f);
+		
+		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
+		GUI.Label(NormalizeRect(msg), "Choose number of Players");
+		
+		if(GUI.Button(NormalizeRect(p2), "2 players"))
+		{
+			//player.characterIndex = 0;
 			Application.LoadLevel("testlevel");
 		}
 		
 		if(GUI.Button(NormalizeRect(p3), "3 players"))
 		{
-			GameManager.numberOfPlayers = 3;
+			//player.characterIndex = 1;
 			Application.LoadLevel("testlevel");
 		}
 		
 		if(GUI.Button(NormalizeRect(p4), "4 players"))
 		{
-			GameManager.numberOfPlayers = 4;
+			//player.characterIndex = 2;
 			Application.LoadLevel("testlevel");
 		}
 	}

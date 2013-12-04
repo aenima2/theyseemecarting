@@ -8,19 +8,20 @@ public class GameManager : MonoBehaviour {
 	private List<GameObject> playerPrefabs = new List<GameObject>(); // This is where you put the playerPrefabs to create lists from, probably good to make this more generic*/
 
 	[System.NonSerialized] // Variable invisible in inspector
-	public static float numberOfPlayers; // Number of players (attached to class)
-
+	public float numberOfPlayers; // Number of players (attached to class)
+	
 	public List<Player> players = new List<Player>();
 	public List<Cart> carts = new List<Cart>();
 	
 	
 
-	
+	void Awake() {
+		DontDestroyOnLoad(transform.gameObject);
+	}
 
 	void Start ()
 	{
-		SetNumberOfPlayers(numberOfPlayers);
-		CreatePlayers();
+		//SetNumberOfPlayers(numberOfPlayers);
 	}
 	
 	public void SetNumberOfPlayers(float n)
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private void CreatePlayers()
+	public void CreatePlayers()
 	{
 		int pn = 0;
 
@@ -41,9 +42,27 @@ public class GameManager : MonoBehaviour {
 			player.playerNumber = pn;
 			players.Add(player); // Adds a new player to the game
 
+			/*Cart cart = player.SpawnCart(pn); // Accessing the spawning function from the Spawn initiate script
+			carts.Add(cart); // Adds a new cart to the Game manager list*/
+			pn++;
+		}
+	}
+
+
+
+	/*private void CreateCarts()
+	{
+		int pn = 0;
+		
+		foreach(GameObject playerPrefab in players)
+		{
+			Player player = FindObjectOfType<Player>();
+
+
+			
 			Cart cart = player.SpawnCart(pn); // Accessing the spawning function from the Spawn initiate script
 			carts.Add(cart); // Adds a new cart to the Game manager list
 			pn++;
 		}
-	}
+	}*/
 }
