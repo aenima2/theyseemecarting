@@ -9,8 +9,7 @@ public class Pickup : MonoBehaviour {
 
 	void Start () {
 
-		int rand = Random.Range (0, 2);
-
+		int rand = Random.Range (0, pickups.Length);
 		pickup = pickups[rand];
 	}
 
@@ -18,13 +17,19 @@ public class Pickup : MonoBehaviour {
 	
 	}
 
-	void onTriggerEnter(Collider other){
+	void OnTriggerEnter(Collider other){
+
+		Debug.Log ("Collision detected");
 
 		if (other.gameObject.tag == "Player"){
 
 			PickupSpawner colPlayer = other.gameObject.GetComponent<PickupSpawner>();
 
+			if (colPlayer.pickupList.GetRange())
+
 			colPlayer.pickupList.Add (pickup);
+
+			Destroy (gameObject);
 
 		}
 

@@ -23,16 +23,6 @@ public class PickupSpawner : MonoBehaviour {
 		}
 
 	}
-
-//	void SpawnPickup(){
-//
-//		GameObject pickup = (GameObject)Instantiate(turretPrefab, transform.position, transform.localRotation);
-//		Physics.IgnoreCollision (pickup.collider, collider);
-//
-//		pickup.rigidbody.AddRelativeForce(transform.forward * 10f, ForceMode.VelocityChange);
-//
-//
-//	}
 	
 	void SpawnPickup(){
 

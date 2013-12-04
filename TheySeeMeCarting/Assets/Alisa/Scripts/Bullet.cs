@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other){
 
-		Vehicle vehicle = other.gameObject.GetComponent<Vehicle>();
+		VehicleTest vehicle = other.gameObject.GetComponent<VehicleTest>();
 
 		if (other.gameObject.tag == "Enemy"){
 			vehicle.CalcLife();

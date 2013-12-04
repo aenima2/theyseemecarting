@@ -16,7 +16,7 @@ public class Mine : MonoBehaviour {
 		Debug.Log(other.gameObject.name);	
 
 		if (other.gameObject.tag == "Player"){
-			Vehicle colPlayer = other.gameObject.GetComponent<Vehicle>();
+			VehicleTest colPlayer = other.gameObject.GetComponent<VehicleTest>();
 
 			colPlayer.CalcLife ();
 			Destroy (gameObject.rigidbody);

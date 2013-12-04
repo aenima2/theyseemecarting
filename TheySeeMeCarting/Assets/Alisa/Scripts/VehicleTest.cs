@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Vehicle : MonoBehaviour {
+public class VehicleTest : MonoBehaviour {
 
 	public int life;
 
