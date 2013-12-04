@@ -37,6 +37,19 @@ public class PickupSpawner : MonoBehaviour {
 		
 		GameObject pickup = (GameObject)Instantiate(pickupList[currentPickupInt], transform.position, transform.localRotation);
 		Physics.IgnoreCollision (pickup.collider, collider);
+
+		if (pickup.gameObject.name.Contains ("Clone")){
+			//Debug.Log ("Its a clone!");
+
+			MeshFilter pickupMesh = pickup.GetComponent<MeshFilter>();
+			pickupMesh.mesh = gameObject.GetComponent<MeshFilter>().mesh;
+
+			Transform pickupTransform = pickup.GetComponent<Transform>();
+			pickupTransform.localScale = transform.localScale;
+
+			MeshRenderer pickupMat = pickup.GetComponent<MeshRenderer>();
+			pickupMat.material = gameObject.GetComponent<MeshRenderer>().material;
+		}
 		
 		pickup.rigidbody.AddRelativeForce(transform.forward * 10f, ForceMode.VelocityChange);
 
