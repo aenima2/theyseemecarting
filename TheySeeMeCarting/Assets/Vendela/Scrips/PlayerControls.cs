@@ -6,12 +6,9 @@ public class PlayerControls : MonoBehaviour {
 	
 
 	public Color color;
-	
-	public string forwardKey;
-	public KeyCode backKey;
-	public KeyCode leftKey;
-	public KeyCode rightKey;
+
 	public KeyCode shootKey;
+	public KeyCode boostKey;
 	
 	//Camera
 	public float CamX;
@@ -34,10 +31,7 @@ public class PlayerControls : MonoBehaviour {
 		
 		//all key-codes
 		vehicle = vehicle.GetComponent<Vehicle>();
-		vehicle.backInput = backKey;
-		vehicle.forwardInput = forwardKey;
-		vehicle.leftInput = leftKey;
-		vehicle.rightInput = rightKey;
+		//vehicle.boostInput = boostKey;
 		vehicle.shootInput = shootKey;
 
 		
