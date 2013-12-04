@@ -27,41 +27,74 @@ public class Player : MonoBehaviour {
 	
 	public int playerNumber;
 
-	public GameObject numberOfPlayer;
+	private float nop;
+	
 
 	void Start ()
 	{
-		// Start here tomorrow
-		//GameObject gameManager = GameObject.FindWithTag("GM").gameObject;
-		//numberOfPlayer = gameManager.GetComponent<GameManager>().numberOfPlayers;
+		GameManager gameManager = FindObjectOfType<GameManager>();
+		if(gameManager == null)
+		{
+			Debug.LogError("Couldn't find a Game Manager in the scene");
+		}
 	}
 	
 	void Update ()
 	{
-	
+
 	}
 
-	public Cart SpawnCart(int nop)
+
+	public void PlayerAmount()
+	{
+
+
+		GameManager gm = FindObjectOfType<GameManager>();
+		nop = gm.numberOfPlayers;
+
+		//return nop;
+	}
+
+	public Cart SpawnCart(int pn)
 	{
 		GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
 		cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
 
-		cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[nop].position, Quaternion.identity)).GetComponent<Cart>();
+
+		cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
 		cart.player = this; // Sets to player
 
+		// Gathers how many players that should spawn
+		GameManager gm = FindObjectOfType<GameManager>(); 
+		nop = gm.numberOfPlayers;
+
+		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
+
+		// If 2 players
 		if (nop <= 2)
 		{
-		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>();
-		print (nop);
-		cam.rect = new Rect(0f, (.5f -(nop / 2f)), 1f, 0.5f);
-		print (cam.rect);
+			cam.rect = new Rect(0f, 0.5f - (pn / nop), 1f, 0.5f);
 		}
+
+		// If more than 2 players
 		else if (nop > 2)
 		{
-			Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>();
-			print (nop);
-			cam.rect = new Rect(0f, (.5f -(nop / 2f)), 1f, 0.5f);
-			print (cam.rect);
+			if(pn == 0) // Set correct Camera rect for player 4
+			{
+				cam.rect = new Rect(0f, 0.5f, 0.5f, 0.5f);
+			}
+			else if(pn == 1) // Set correct Camera rect for player 4
+			{
+				cam.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+			}
+			else if(pn == 2) // Set correct Camera rect for player 4
+			{
+				cam.rect = new Rect(0f, 0f, 0.5f, 0.5f);
+			}
+			else if(pn == 3) // Set correct Camera rect for player 4
+			{
+				cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
+			}
 		}
 
 
