@@ -524,8 +524,6 @@ MonoBehaviour:
   speedRotation: 180
   gravityVel: {x: 0, y: 0, z: 0}
   shootInput: 0
-  boostInput: 0
-  boostSpeed2: 1
   acc: 1
   velDamp: .100000001
 --- !u!54 &988471803
@@ -769,8 +767,6 @@ MonoBehaviour:
   speedRotation: 180
   gravityVel: {x: 0, y: 0, z: 0}
   shootInput: 0
-  boostInput: 0
-  boostSpeed2: 1
   acc: 1
   velDamp: .100000001
 --- !u!54 &1433166902
