@@ -5,8 +5,10 @@ public class Cart : MonoBehaviour {
 
 	public Player player;
 
-	[System.NonSerialized]
-	public CartSpawner cartSpawn;
+	[System.NonSerialized] // Variable invisible in inspector
+	public CartSpawnLoader cartSpawn;
+
+	public Camera cartCam;
 
 
 
@@ -18,6 +20,11 @@ public class Cart : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void CurrentCam()
+	{
+
 	}
 
 

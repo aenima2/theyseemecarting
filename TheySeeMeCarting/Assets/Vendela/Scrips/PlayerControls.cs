@@ -7,7 +7,7 @@ public class PlayerControls : MonoBehaviour {
 
 	public Color color;
 	
-	public KeyCode forwardKey;
+	public string forwardKey;
 	public KeyCode backKey;
 	public KeyCode leftKey;
 	public KeyCode rightKey;

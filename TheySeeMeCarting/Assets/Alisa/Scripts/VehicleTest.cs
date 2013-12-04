@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class VehicleTest : MonoBehaviour {
 
 	public int life;
 
@@ -14,6 +14,16 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+
+		if (Input.GetKey (KeyCode.UpArrow)){
+				transform.position += transform.forward * 10f * Time.deltaTime;
+			}
+
+	
+		if (Input.GetKey (KeyCode.DownArrow)){
+				transform.position -= transform.forward * 10f * Time.deltaTime;
+			}
+
 	}
 
 	public void CalcLife(){
@@ -25,6 +35,7 @@ public class Enemy : MonoBehaviour {
 	public void CheckGameOver(){
 		if (life == 0){
 			Debug.Log ("You have lost");
+			Destroy (gameObject);
 		}
 	}
 }
