@@ -19,7 +19,7 @@ public class Mine : MonoBehaviour {
 			VehicleTest colPlayer = other.gameObject.GetComponent<VehicleTest>();
 
 			colPlayer.CalcLife ();
-			Destroy (gameObject.rigidbody);
+			Destroy (gameObject);
 		}
 		
 	}

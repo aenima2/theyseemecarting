@@ -21,6 +21,8 @@ public class Pickup : MonoBehaviour {
 
 		Debug.Log ("Collision detected");
 
+
+		//If Collider is a Player
 		if (other.gameObject.tag == "Player"){
 
 			PickupSpawner colPlayer = other.gameObject.GetComponent<PickupSpawner>();
@@ -34,10 +36,11 @@ public class Pickup : MonoBehaviour {
 			}
 
 			colPlayer.pickupList.Add (pickup);
+		}
 
-			}
 
-			Destroy (gameObject);
+		//Destroy Pickup
+		Destroy (gameObject);
 
 		}
 
