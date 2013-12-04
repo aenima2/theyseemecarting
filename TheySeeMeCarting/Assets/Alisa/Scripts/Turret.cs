@@ -13,22 +13,25 @@ public class Turret : MonoBehaviour {
 
 	public ParticleSystem destroyedFX;
 
+	public float shootDelay;
 
-	// Use this for initialization
+	
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	
+
+		LocateEnemy ();
+
 		StartCoroutine (LifeSpan());
+
+		Shoot();
 
 		if (Input.GetKeyDown (KeyCode.A)){
 			SpawnBullet ();
 		}
-
-		LocateEnemy ();
 
 	}
 
@@ -43,13 +46,24 @@ public class Turret : MonoBehaviour {
 		GameObject bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawnLoc, Quaternion.identity);
 
 		Physics.IgnoreCollision (bullet.collider, collider);
-		bullet.rigidbody.AddRelativeForce (turretHead.forward * 15f, ForceMode.VelocityChange);
+		bullet.rigidbody.AddRelativeForce (turretHead.forward * 30f, ForceMode.VelocityChange);
 
 	}
 
 	void LocateEnemy(){
 
 		turretHead.LookAt (enemy);
+
+
+	}
+
+	void Shoot(){
+
+		shootDelay += Time.deltaTime;
+		if (shootDelay>0.4f){
+		SpawnBullet ();
+			shootDelay = 0.0f;
+		}
 	}
 	
 

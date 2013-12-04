@@ -1,0 +1,16 @@
+diff a/TheySeeMeCarting/TheySeeMeCarting.userprefs b/TheySeeMeCarting/TheySeeMeCarting.userprefs	(rejected hunks)
+@@ -1,13 +0,0 @@
+-﻿<Properties>
+-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Alisa\Scripts\Bullet.cs">
+-    <Files>
+-      <File FileName="Assets\Alisa\Scripts\Turret.cs" Line="25" Column="27" />
+-      <File FileName="Assets\Alisa\Scripts\Bullet.cs" Line="22" Column="21" />
+-    </Files>
+-  </MonoDevelop.Ide.Workbench>
+-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+-    <BreakpointStore />
+-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+-</Properties>
+\ No newline at end of file
