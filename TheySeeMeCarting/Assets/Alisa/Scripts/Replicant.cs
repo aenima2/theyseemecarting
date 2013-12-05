@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Clone : MonoBehaviour {
+public class Replicant : MonoBehaviour {
 
 	public GameObject clonedObject;
 	public GameObject waypointContainer;

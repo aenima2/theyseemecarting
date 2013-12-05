@@ -17,7 +17,6 @@ public class PickupSpawner : MonoBehaviour {
 		ShufflePickups();
 
 		if (Input.GetKeyDown (KeyCode.R)){
-
 			SpawnPickup ();
 		}
 
@@ -27,7 +26,6 @@ public class PickupSpawner : MonoBehaviour {
 	//Spawn pickups
 	void SpawnPickup(){
 
-
 		//if pickup list is empty, don't spawn.
 		if (pickupList.Count == 0){
 			return;
@@ -36,9 +34,25 @@ public class PickupSpawner : MonoBehaviour {
 		int currentPickupInt = (int)currentPickup;
 		
 		GameObject pickup = (GameObject)Instantiate(pickupList[currentPickupInt], transform.position, transform.localRotation);
-		Physics.IgnoreCollision (pickup.collider, collider);
 
-		if (pickup.gameObject.name.Contains ("Clone")){
+		if (pickup.collider != null){
+		Physics.IgnoreCollision (pickup.collider, collider);
+		}
+
+		if (pickup.gameObject.name.Contains ("Immortality")){
+
+			Immortality immo = pickup.GetComponent<Immortality>();
+			VehicleTest player = gameObject.GetComponent<VehicleTest>();
+
+			immo.spawner = player;
+
+
+			player.isImmortal = true;
+
+			setPlayerMat ();
+		}
+
+		if (pickup.gameObject.name.Contains ("Replicant")){
 			//Debug.Log ("Its a clone!");
 
 			MeshFilter pickupMesh = pickup.GetComponent<MeshFilter>();
@@ -50,8 +64,13 @@ public class PickupSpawner : MonoBehaviour {
 			MeshRenderer pickupMat = pickup.GetComponent<MeshRenderer>();
 			pickupMat.material = gameObject.GetComponent<MeshRenderer>().material;
 		}
-		
-		pickup.rigidbody.AddRelativeForce(transform.forward * 10f, ForceMode.VelocityChange);
+
+
+		if (pickup.rigidbody != null){
+
+			Vector3 throwAngle = new Vector3(0f, 20f, 10f);
+		pickup.rigidbody.AddRelativeForce(throwAngle, ForceMode.VelocityChange);
+		}
 
 		//Remove spawned pickup from the list and reset currently chosen pickup to 0(first in list).
 		pickupList.RemoveAt(currentPickupInt);
@@ -80,6 +99,12 @@ public class PickupSpawner : MonoBehaviour {
 		}
 
 
+	}
+
+	void setPlayerMat(){
+
+		MeshRenderer playerMat = gameObject.GetComponent<MeshRenderer>();
+		playerMat.material.color = Color.green;
 	}
 	
 }

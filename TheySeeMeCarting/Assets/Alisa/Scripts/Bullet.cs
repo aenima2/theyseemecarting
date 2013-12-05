@@ -17,10 +17,11 @@ public class Bullet : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other){
 
-		VehicleTest vehicle = other.gameObject.GetComponent<VehicleTest>();
+		if (other.gameObject.tag == "Player"){
 
-		if (other.gameObject.tag == "Enemy"){
+			VehicleTest vehicle = other.gameObject.GetComponent<VehicleTest>();
 			vehicle.CalcLife();
+
 		}
 
 		Destroy (gameObject);
@@ -30,7 +31,7 @@ public class Bullet : MonoBehaviour {
 		lifeSpan -= Time.deltaTime;
 		
 		if (lifeSpan <= 0f){
-			
+		
 			Destroy(gameObject);
 		}
 	}
