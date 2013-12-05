@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CharacterSelect : MonoBehaviour
+public class CharacterSelectOld : MonoBehaviour
 {
 
     [HideInInspector]

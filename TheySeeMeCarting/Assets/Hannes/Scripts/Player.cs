@@ -118,9 +118,34 @@ public class Player : MonoBehaviour {
 
 		return cart;
 	}
+	
 
 	void MenuInput() // Add an in menu bool, so you change input depending on menu/game
 	{
+		CharacterSelect charSelect = FindObjectOfType<CharacterSelect>();
+
+		if(Input.GetKeyDown(menuLeft))
+		{
+			charSelect.MenuLeft();
+		}
+		if(Input.GetKeyDown(menuRight))
+		{
+			charSelect.MenuRight();
+		}
+		/*if(Input.GetKeyDown(menuSelect))
+		{
+			delMenu.MenuSelect();
+		}*/
+
+
+
+
+
+
+
+
+
+
 		DelegateMenu delMenu = FindObjectOfType<DelegateMenu>();
 
 		if(Input.GetKeyDown(menuUp))

@@ -41,8 +41,9 @@ public class GameManager : MonoBehaviour {
 		{
 			Player player = (Instantiate(playerPrefab) as GameObject).GetComponent<Player>();
 			player.playerNumber = pn;
-			print (pn);
 			players.Add(player); // Adds a new player to the game
+
+
 
 			/*Cart cart = player.SpawnCart(pn); // Accessing the spawning function from the Spawn initiate script
 			carts.Add(cart); // Adds a new cart to the Game manager list*/
