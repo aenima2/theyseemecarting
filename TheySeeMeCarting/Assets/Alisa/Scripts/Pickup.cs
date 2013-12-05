@@ -36,11 +36,10 @@ public class Pickup : MonoBehaviour {
 			}
 
 			colPlayer.pickupList.Add (pickup);
+
+			//Destroy Pickup
+			Destroy (gameObject);
 		}
-
-
-		//Destroy Pickup
-		Destroy (gameObject);
 
 		}
 

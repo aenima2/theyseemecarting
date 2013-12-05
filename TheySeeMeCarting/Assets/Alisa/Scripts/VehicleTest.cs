@@ -5,13 +5,12 @@ public class VehicleTest : MonoBehaviour {
 
 	public int life;
 
-
-	// Use this for initialization
+	public bool isImmortal;
+	
 	void Start () {
-	
+
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	
 
@@ -27,6 +26,12 @@ public class VehicleTest : MonoBehaviour {
 	}
 
 	public void CalcLife(){
+
+		if (isImmortal == true){
+			return;
+		}
+
+
 		life--;
 		CheckGameOver ();
 
@@ -35,7 +40,23 @@ public class VehicleTest : MonoBehaviour {
 	public void CheckGameOver(){
 		if (life == 0){
 			Debug.Log ("You have lost");
-			Destroy (gameObject);
+			GameOver ();
+		}
+	}
+
+	public void GameOver(){
+		Destroy (gameObject);
+	}
+
+	public void setColor(){
+		MeshRenderer playerColor = gameObject.GetComponent<MeshRenderer>();
+
+		if (isImmortal){
+			playerColor.material.color = Color.green;
+		}
+
+		if (!isImmortal){
+			playerColor.material.color = Color.blue;
 		}
 	}
 }

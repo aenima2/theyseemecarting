@@ -182,8 +182,8 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   serializedVersion: 2
-  m_Mass: 50
-  m_Drag: 0
+  m_Mass: 300
+  m_Drag: 1
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -206,7 +206,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 100000, guid: 50690e9830f610848a4fe8163f73b6a2, type: 2}
   lifeSpan: 50
   destroyedFX: {fileID: 19800000, guid: be1ef7f22ca20cd498dcf504477bc762, type: 2}
-  timer: 0
+  shootDelay: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
