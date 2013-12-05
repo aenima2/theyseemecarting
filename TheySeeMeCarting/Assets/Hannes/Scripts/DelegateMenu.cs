@@ -7,11 +7,25 @@ public class DelegateMenu : MonoBehaviour {
 	private MenuDelegate menuFunction;
 
 	private GameManager gameManager;
+	private Player player;
+
+	// For GUI control
+	public GUISkin skin;
+	private int selection = 1;
+	private int selectionMax = 4;
+
+
 
 	void Start ()
 	{
 		gameManager = FindObjectOfType<GameManager>();
+		player = FindObjectOfType<Player>();
 		menuFunction = TitleScreen;
+	}
+
+	void Update()
+	{
+		//PlayerControl();
 	}
 
 
@@ -28,6 +42,8 @@ public class DelegateMenu : MonoBehaviour {
 	 */
 	void TitleScreen()
 	{
+		Screen.showCursor = false;
+
 		if(Input.anyKeyDown)
 		{
 			menuFunction = MainMenu;
@@ -70,29 +86,39 @@ public class DelegateMenu : MonoBehaviour {
 	{
 
 		Rect msg = new Rect(0.32f, 0.1f, 0.4f, 0.1f);
+		Rect p1 = new Rect(0.42f, 0.33f, 0.2f, 0.05f);
 		Rect p2 = new Rect(0.42f, 0.4f, 0.2f, 0.05f);
 		Rect p3 = new Rect(0.42f, 0.47f, 0.2f, 0.05f);
 		Rect p4 = new Rect(0.42f, 0.54f, 0.2f, 0.05f);
 
 		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
 		GUI.Label(NormalizeRect(msg), "Choose number of Players");
+
+		if(GUI.Button(NormalizeRect(p1), "1 players"))
+		{
+			gameManager.SetNumberOfPlayers(1);
+			gameManager.CreatePlayers();// <-- enable player input
+			menuFunction = CharacterSelect;
+		}
 		
 		if(GUI.Button(NormalizeRect(p2), "2 players"))
 		{
-			gameManager.numberOfPlayers = 2;
+			gameManager.SetNumberOfPlayers(2);
 			gameManager.CreatePlayers();// <-- enable player input
 			menuFunction = CharacterSelect;
 		}
 		
 		if(GUI.Button(NormalizeRect(p3), "3 players"))
 		{
-			gameManager.numberOfPlayers = 3;
+			gameManager.SetNumberOfPlayers(3);
+			gameManager.CreatePlayers();// <-- enable player input
 			menuFunction = CharacterSelect;
 		}
 		
 		if(GUI.Button(NormalizeRect(p4), "4 players"))
 		{
-			gameManager.numberOfPlayers = 4;
+			gameManager.SetNumberOfPlayers(4);
+			gameManager.CreatePlayers();// <-- enable player input
 			menuFunction = CharacterSelect;
 		}
 	}
@@ -100,13 +126,52 @@ public class DelegateMenu : MonoBehaviour {
 	void CharacterSelect()
 	{
 		Rect msg = new Rect(0.32f, 0.1f, 0.4f, 0.1f);
+		Rect p1 = new Rect(0.42f, 0.43f, 0.2f, 0.05f);
 		Rect p2 = new Rect(0.42f, 0.5f, 0.2f, 0.05f);
 		Rect p3 = new Rect(0.42f, 0.57f, 0.2f, 0.05f);
 		Rect p4 = new Rect(0.42f, 0.64f, 0.2f, 0.05f);
+
 		
 		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
-		GUI.Label(NormalizeRect(msg), "Choose number of Players");
-		
+		GUI.Label(NormalizeRect(msg), "Select you character");
+
+		if(selection == 1)
+		{
+			// GUI color(
+			GUI.Label(NormalizeRect(p1), "Cube<-");
+			GUI.Label(NormalizeRect(p2), "Capsule");
+			GUI.Label(NormalizeRect(p3), "Cylinder");
+			GUI.Label(NormalizeRect(p4), "Sphere");
+		}
+
+		if(selection == 2)
+		{
+			// GUI color(
+			GUI.Label(NormalizeRect(p1), "Cube");
+			GUI.Label(NormalizeRect(p2), "Capsule<-");
+			GUI.Label(NormalizeRect(p3), "Cylinder");
+			GUI.Label(NormalizeRect(p4), "Sphere");
+		}
+
+		if(selection == 3)
+		{
+			// GUI color(
+			GUI.Label(NormalizeRect(p1), "Cube");
+			GUI.Label(NormalizeRect(p2), "Capsule");
+			GUI.Label(NormalizeRect(p3), "Cylinder<-");
+			GUI.Label(NormalizeRect(p4), "Sphere");
+		}
+
+		if(selection == 4)
+		{
+			// GUI color(
+			GUI.Label(NormalizeRect(p1), "Cube");
+			GUI.Label(NormalizeRect(p2), "Capsule");
+			GUI.Label(NormalizeRect(p3), "Cylinder");
+			GUI.Label(NormalizeRect(p4), "Sphere<-");
+		}
+
+		/*
 		if(GUI.Button(NormalizeRect(p2), "2 players"))
 		{
 			//player.characterIndex = 0;
@@ -122,6 +187,71 @@ public class DelegateMenu : MonoBehaviour {
 		if(GUI.Button(NormalizeRect(p4), "4 players"))
 		{
 			//player.characterIndex = 2;
+			Application.LoadLevel("testlevel");
+		}
+
+		if(GUI.Button(NormalizeRect(p4), "4 players"))
+		{
+			//player.characterIndex = 2;
+			Application.LoadLevel("testlevel");
+		}*/
+	}
+
+
+	void PlayerControl()
+	{
+		if(Input.GetKeyDown(KeyCode.S))
+		{
+			selection += 1;
+		}
+		
+		if(Input.GetKeyDown(KeyCode.W))
+		{
+			selection -= 1;
+		}
+		
+		selection = Mathf.Clamp(selection, 1, selectionMax);
+	}
+
+	public void MenuUp()
+	{
+		selection -= 1;
+
+		selection = Mathf.Clamp(selection, 1, selectionMax);
+	}
+	
+	public void MenuDown()
+	{
+		selection += 1;
+
+		selection = Mathf.Clamp(selection, 1, selectionMax);
+	}
+
+	public void MenuSelect()
+	{
+		if(selection == 1)
+		{ 
+			player.characterIndex = 0;
+			//player.SpawnCart();
+			print (player.characterIndex);
+			Application.LoadLevel("testlevel");
+		}
+		if(selection == 2)
+		{ 
+			player.characterIndex = 1;
+			print (player.characterIndex);
+			Application.LoadLevel("testlevel");
+		}
+		if(selection == 3)
+		{ 
+			player.characterIndex = 2;
+			print (player.characterIndex);
+			Application.LoadLevel("testlevel");
+		}
+		if(selection == 4)
+		{ 
+			player.characterIndex = 3;
+			print (player.characterIndex);
 			Application.LoadLevel("testlevel");
 		}
 	}

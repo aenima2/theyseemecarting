@@ -12,6 +12,16 @@ public class Player : MonoBehaviour {
 	public KeyCode back;
 	public KeyCode left;
 	public KeyCode right;
+	public KeyCode fire;
+
+	// Menu handling
+	public KeyCode menuUp;
+	public KeyCode menuDown;
+	public KeyCode menuLeft;
+	public KeyCode menuRight;
+	public KeyCode menuSelect;
+
+	//public DelegateMenu delegateMenu;
 
 	[System.NonSerialized] // Variable invisible in inspector
 	public Cart cart;
@@ -40,6 +50,7 @@ public class Player : MonoBehaviour {
 
 	void Start ()
 	{
+		// Add bool if in menu (for control)
 		// Show Selectcharacter menu
 		// Change prefab depending on player selection
 		// Call SpawnCart on select
@@ -47,7 +58,7 @@ public class Player : MonoBehaviour {
 	
 	void Update ()
 	{
-
+		MenuInput();
 	}
 
 	public Cart SpawnCart(int pn)
@@ -110,6 +121,20 @@ public class Player : MonoBehaviour {
 
 	void MenuInput() // Add an in menu bool, so you change input depending on menu/game
 	{
+		DelegateMenu delMenu = FindObjectOfType<DelegateMenu>();
+
+		if(Input.GetKeyDown(menuUp))
+		{
+			delMenu.MenuUp();
+		}
+		if(Input.GetKeyDown(menuDown))
+		{
+			delMenu.MenuDown();
+		}
+		if(Input.GetKeyDown(menuSelect))
+		{
+			delMenu.MenuSelect();
+		}
 
 	}
 }

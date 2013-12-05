@@ -43,6 +43,12 @@ MonoBehaviour:
   back: 0
   left: 0
   right: 0
+  fire: 0
+  menuUp: 119
+  menuDown: 115
+  menuLeft: 0
+  menuRight: 0
+  menuSelect: 32
   spawner: {fileID: 11400000, guid: af80c931cf3fec144b8ae298098b59f4, type: 2}
   possibleCharacters:
   - {fileID: 100000, guid: c43a3a2322fce9242baef2a8b404d806, type: 2}
@@ -50,7 +56,6 @@ MonoBehaviour:
   - {fileID: 100000, guid: c696299391e964d47ba1411d05b877be, type: 2}
   - {fileID: 100000, guid: de56143acc8bbab479fb73c70416dc6b, type: 2}
   characterIndex: 0
-  cartPrefab: {fileID: 100000, guid: c43a3a2322fce9242baef2a8b404d806, type: 2}
   playerNumber: 0
 --- !u!1001 &100100000
 Prefab:

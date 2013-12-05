@@ -13,15 +13,16 @@ public class GameManager : MonoBehaviour {
 	public List<Player> players = new List<Player>();
 	public List<Cart> carts = new List<Cart>();
 	
-	
+	int pn = 0;
 
-	void Awake() {
+	void Awake()
+	{
 		DontDestroyOnLoad(transform.gameObject);
 	}
 
 	void Start ()
 	{
-		//SetNumberOfPlayers(numberOfPlayers);
+
 	}
 	
 	public void SetNumberOfPlayers(float n)
@@ -34,12 +35,13 @@ public class GameManager : MonoBehaviour {
 
 	public void CreatePlayers()
 	{
-		int pn = 0;
+		//int pn = 0;
 
 		foreach(GameObject playerPrefab in playerPrefabs)
 		{
 			Player player = (Instantiate(playerPrefab) as GameObject).GetComponent<Player>();
 			player.playerNumber = pn;
+			print (pn);
 			players.Add(player); // Adds a new player to the game
 
 			/*Cart cart = player.SpawnCart(pn); // Accessing the spawning function from the Spawn initiate script
