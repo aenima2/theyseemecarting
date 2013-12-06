@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Mine : MonoBehaviour {
 
+	public GameObject raycastHolder;
+
 
 	void Start () {
 	
@@ -12,13 +14,16 @@ public class Mine : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider other){ // other is the collider that entered the trigger 
+	void OnTriggerEnter(Collider other){
 		Debug.Log(other.gameObject.name);	
 
 		if (other.gameObject.tag == "Player"){
-			VehicleTest colPlayer = other.gameObject.GetComponent<VehicleTest>();
 
-			colPlayer.CalcLife ();
+			ParticleFX particles = gameObject.GetComponent<ParticleFX>();
+			particles.SpawnFX();
+
+			Raycast ray = raycastHolder.GetComponentInChildren<Raycast>();
+			ray.RayCast ();
 			Destroy (gameObject);
 		}
 		

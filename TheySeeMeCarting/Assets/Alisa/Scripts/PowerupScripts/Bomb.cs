@@ -5,8 +5,6 @@ public class Bomb : MonoBehaviour {
 
 	public float lifeSpan;
 
-	public ParticleSystem explodeFX;
-
 	public GameObject raycastHolder;
 
 	void Start () {
@@ -27,9 +25,12 @@ public class Bomb : MonoBehaviour {
 
 	void Explode(){
 
-		ParticleSystem exlodeFX = (ParticleSystem)Instantiate(explodeFX, transform.position, Quaternion.identity);
+		ParticleFX particles = gameObject.GetComponent<ParticleFX>();
+		particles.SpawnFX();
 		Raycast ray = raycastHolder.GetComponentInChildren<Raycast>();
 		ray.RayCast();
+		Destroy (gameObject);
+
 	}
 
 }

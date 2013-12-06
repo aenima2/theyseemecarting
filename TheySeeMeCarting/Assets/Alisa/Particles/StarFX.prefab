@@ -13,7 +13,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: ExplodeFX
+  m_Name: StarFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.6714993, y: 1.73323727, z: -24.8011169}
-  m_LocalScale: {x: 1.94695497, y: 1.94695497, z: 1.94695497}
+  m_LocalPosition: {x: -2.22202969, y: 1.8712759, z: 9.60914898}
+  m_LocalScale: {x: .195453033, y: .195453033, z: .195453033}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!65 &6500000
@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626ad52d426fb174b81271f3ddac8256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particlesSystem: {fileID: 0}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -103,7 +104,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 30
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -230,7 +231,7 @@ ParticleSystem:
         rgba: 4278245631
       minMaxState: 0
     startSize:
-      scalar: 2
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -302,7 +303,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 0
-    radius: 1
+    radius: .5
     angle: 25
     length: 5
     boxX: 1
@@ -310,12 +311,12 @@ ParticleSystem:
     boxZ: 1
     placementMode: 0
     m_Mesh: {fileID: 0}
-    randomDirection: 0
+    randomDirection: 1
   EmissionModule:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 0
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -347,7 +348,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 200
+    cnt0: 50
     cnt1: 30
     cnt2: 30
     cnt3: 30
@@ -359,22 +360,12 @@ ParticleSystem:
   SizeModule:
     enabled: 1
     curve:
-      scalar: 1
+      scalar: .5090909
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .5090909
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: .482926846
-          value: .968181789
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 1
-          value: .5090909
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -384,11 +375,6 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 1
           value: 0
           inSlope: 0
           outSlope: 0
@@ -1122,7 +1108,7 @@ ParticleSystemRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cfde19516f4bc4f468dda30fa9501262, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
