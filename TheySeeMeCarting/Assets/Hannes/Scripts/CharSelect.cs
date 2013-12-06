@@ -2,59 +2,115 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CharSelect : MonoBehaviour {
-
-	public List<Transform> charSpawnLocations;
+public class CharSelect : MonoBehaviour { 
 
 	public Color highlighter;
-	
+	public Color notSelected;
 
-	// The characters prefabs to pick
-	public Transform[] charsPrefabs;
+	private float previousDpadAxis; // Previous D-pad input 
 	
-	// The game objects created to be showed on screen
-	private GameObject[] chars;
-	
-	// The index of the current character
-	private int currentChar = 0;
+	public Transform[] charsPrefabs; // The characters prefabs to pick
+
+	public List<Transform> charSpawnLocations; // Character spawnlocs
+
+	private GameObject[] chars; // The game objects created to be showed on screen
+
+	private int currentChar = 0; // The index of the current character
+
+	//private int previousChar = -1;
+
+	private bool curSelected = false;
+
 	
 	void Start() {
 		LoadSpawnLocations();
 		// We initialize the chars array
 		chars = new GameObject[charsPrefabs.Length];
-		
+
+		notSelected = Color.white;
+
+
 		// We create game objects based on characters prefabs
 		int index = 0;
 		foreach (Transform t in charsPrefabs)
 		{
 			chars[index++] = GameObject.Instantiate(t.gameObject, charSpawnLocations[index - 1].position, Quaternion.identity) as GameObject;
-			print (index);
+			//print (index);
 		}
 	}
+
+	void Update()
+	{
+		ScrollVertically();
+		//ScrollHorizontally(); // Needs more work
+
+		//GameObject selectedChar = chars[currentChar];
+
+		/*for (int i = 0; i < chars.Length; i++)
+		{
+			if(i = currentChar)
+			{
+				selectedChar.renderer.material.color = highlighter;
+			}
+		}*/
+		//notSelected = chars[notSelected - currentChar]
+
+	}
 	
+
+
+	public void SelectedHighlighter()
+	{
+		GameObject selectedChar = chars[currentChar];
+		MenuCart menuCart = FindObjectOfType<MenuCart>();
+
+		if(curSelected == true)
+		{
+			menuCart.renderer.material.color = highlighter;
+
+			selectedChar.renderer.material.color = highlighter;
+		}
+
+	}
+
+	void ScrollVertically()
+	{
+		GameObject selectedChar = chars[currentChar];
+
+		if(Input.GetAxis ("DPADVert1") != previousDpadAxis )
+		{
+
+
+			previousDpadAxis = Input.GetAxis ("DPADVert1");
+
+			currentChar += (int)previousDpadAxis;
+
+			currentChar = Mathf.Clamp(currentChar, 0, chars.Length - 1);
+		}
+	}
+
+	void ScrollHorizontally()
+	{
+		GameObject selectedChar = chars[currentChar];
+		
+		if(Input.GetAxis ("DPADHor1") != previousDpadAxis)
+		{
+			previousDpadAxis = Input.GetAxis ("DPADHor1");
+			Debug.Log(Input.GetAxis ("DPADHor1"));
+			
+			currentChar += 3;
+			
+			currentChar = Mathf.Clamp(currentChar, 0, chars.Length - 1);
+		}
+	}
+
+
+ 
+
+
 	void OnGUI() {
 		GameObject selectedChar = chars[currentChar];
 
-		// Here we create a button to choose a next char
-		if (GUI.Button(new Rect(10, (Screen.height - 50) / 2, 100, 50), "Previous")) {
-			currentChar--;
-			//prevChar.renderer.material.color = Color.white;
-
-			if (currentChar < 0) {
-				currentChar = 0;
-			}
-		}
-		
-		// Now we create a button to choose a previous char
-		if (GUI.Button(new Rect(Screen.width - 100 - 10, (Screen.height - 50) / 2, 100, 50), "Next")) {
-			currentChar++;
-			//prevChar.renderer.material.color = Color.white;
-			
-			if (currentChar >= chars.Length) {
-				currentChar = chars.Length - 1;
-			}
-		}
-		
 		// Shows a label with the name of the selected character
 		//GameObject selectedChar = chars[currentChar];
 		string labelChar = selectedChar.name;
@@ -67,7 +123,7 @@ public class CharSelect : MonoBehaviour {
 		// The index of the right character
 		int rightTopIndex = currentChar - 1;
 
-
+		/*
 		// For each character we set the position based on the current index
 		for (int index = 0; index < chars.Length; index++)
 		{
@@ -86,7 +142,7 @@ public class CharSelect : MonoBehaviour {
 			{
 				selectedChar.renderer.material.color = highlighter;				
 			}
-		}
+		}*/
 	}
 
 	public List<Transform> LoadSpawnLocations()
