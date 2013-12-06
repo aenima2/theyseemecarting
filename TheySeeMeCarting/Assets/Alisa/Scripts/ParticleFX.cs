@@ -19,8 +19,3 @@ public class ParticleFX : MonoBehaviour {
 
 }
 
-
-for (int i = 0; i < max; i++) {
-
-
-}
