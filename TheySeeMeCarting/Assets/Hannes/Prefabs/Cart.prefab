@@ -165,7 +165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 11400000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
   cartCam: {fileID: 2000000}
-  cart: {fileID: 100000}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

@@ -13,7 +13,7 @@ public class DelegateMenu : MonoBehaviour {
 	public GUISkin skin;
 	private int selection = 1;
 	private int selectionMax = 4;
-
+	
 
 
 	void Start ()
@@ -98,28 +98,32 @@ public class DelegateMenu : MonoBehaviour {
 		{
 			gameManager.SetNumberOfPlayers(1);
 			gameManager.CreatePlayers();// <-- enable player input
-			menuFunction = CharacterSelect;
+			Application.LoadLevel("charSelectScene");
+			//menuFunction = CharacterSelect;
 		}
 		
 		if(GUI.Button(NormalizeRect(p2), "2 players"))
 		{
 			gameManager.SetNumberOfPlayers(2);
 			gameManager.CreatePlayers();// <-- enable player input
-			menuFunction = CharacterSelect;
+			Application.LoadLevel("charSelectScene");
+			//menuFunction = CharacterSelect;
 		}
 		
 		if(GUI.Button(NormalizeRect(p3), "3 players"))
 		{
 			gameManager.SetNumberOfPlayers(3);
 			gameManager.CreatePlayers();// <-- enable player input
-			menuFunction = CharacterSelect;
+			Application.LoadLevel("charSelectScene");
+			//menuFunction = CharacterSelect;
 		}
 		
 		if(GUI.Button(NormalizeRect(p4), "4 players"))
 		{
 			gameManager.SetNumberOfPlayers(4);
 			gameManager.CreatePlayers();// <-- enable player input
-			menuFunction = CharacterSelect;
+			Application.LoadLevel("charSelectScene");
+			//menuFunction = CharacterSelect;
 		}
 	}
 
@@ -271,6 +275,11 @@ public class DelegateMenu : MonoBehaviour {
 		r.height *= Screen.height;
 		
 		return r;
+	}
+
+	void Test()
+	{
+
 	}
 
 }
