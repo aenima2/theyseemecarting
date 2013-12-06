@@ -18,11 +18,12 @@ public class GameManager : MonoBehaviour {
 	void Awake()
 	{
 		DontDestroyOnLoad(transform.gameObject);
+		//SetNumberOfPlayers(4);
 	}
 
 	void Start ()
 	{
-
+		//CreatePlayers();
 	}
 	
 	public void SetNumberOfPlayers(float n)

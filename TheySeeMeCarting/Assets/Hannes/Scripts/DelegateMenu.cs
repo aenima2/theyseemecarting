@@ -44,8 +44,9 @@ public class DelegateMenu : MonoBehaviour {
 	{
 		Screen.showCursor = false;
 
-		if(Input.anyKeyDown)
+		if(Input.anyKeyDown || Input.GetButtonDown ("StartAll"))
 		{
+			print ("hej");
 			menuFunction = MainMenu;
 		}
 
@@ -66,6 +67,7 @@ public class DelegateMenu : MonoBehaviour {
 		Rect quitButton = new Rect(0.3f, 0.5f, 0.4f, 0.2f);
 
 		if(GUI.Button(new Rect(NormalizeRect(battleButton)), "Battle"))
+		if(Input.GetButtonDown("Fire1"))
 		{
 			menuFunction = GameSelect;
 		}
@@ -84,7 +86,6 @@ public class DelegateMenu : MonoBehaviour {
 	 */
 	void GameSelect()
 	{
-
 		Rect msg = new Rect(0.32f, 0.1f, 0.4f, 0.1f);
 		Rect p1 = new Rect(0.42f, 0.33f, 0.2f, 0.05f);
 		Rect p2 = new Rect(0.42f, 0.4f, 0.2f, 0.05f);
@@ -98,7 +99,7 @@ public class DelegateMenu : MonoBehaviour {
 		{
 			gameManager.SetNumberOfPlayers(1);
 			gameManager.CreatePlayers();// <-- enable player input
-			Application.LoadLevel("charSelectScene");
+			Application.LoadLevel("characterSelectNew");
 			//menuFunction = CharacterSelect;
 		}
 		
@@ -106,7 +107,7 @@ public class DelegateMenu : MonoBehaviour {
 		{
 			gameManager.SetNumberOfPlayers(2);
 			gameManager.CreatePlayers();// <-- enable player input
-			Application.LoadLevel("charSelectScene");
+			Application.LoadLevel("characterSelectNew");
 			//menuFunction = CharacterSelect;
 		}
 		
@@ -114,7 +115,7 @@ public class DelegateMenu : MonoBehaviour {
 		{
 			gameManager.SetNumberOfPlayers(3);
 			gameManager.CreatePlayers();// <-- enable player input
-			Application.LoadLevel("charSelectScene");
+			Application.LoadLevel("characterSelectNew");
 			//menuFunction = CharacterSelect;
 		}
 		
@@ -122,7 +123,7 @@ public class DelegateMenu : MonoBehaviour {
 		{
 			gameManager.SetNumberOfPlayers(4);
 			gameManager.CreatePlayers();// <-- enable player input
-			Application.LoadLevel("charSelectScene");
+			Application.LoadLevel("characterSelectNew");
 			//menuFunction = CharacterSelect;
 		}
 	}
