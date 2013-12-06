@@ -30,14 +30,14 @@ public class PlayerControls : MonoBehaviour {
 
 		
 		//all key-codes
-		vehicle = vehicle.GetComponent<Vehicle>();
+		//vehicle = vehicle.GetComponent<Vehicle>();
 		//vehicle.boostInput = boostKey;
-		vehicle.shootInput = shootKey;
+		//vehicle.shootInput = shootKey;
 
 		
 		//camera
-		Camera vecCam = vehicle.GetComponentInChildren<Camera>();	
-		vecCam.rect = new Rect(CamX, 0f, CamP, 1f);
+		//Camera vecCam = vehicle.GetComponentInChildren<Camera>();	
+		//vecCam.rect = new Rect(CamX, 0f, CamP, 1f);
 	}
 	
 

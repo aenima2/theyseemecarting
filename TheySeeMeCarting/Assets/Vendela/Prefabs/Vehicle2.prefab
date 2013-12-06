@@ -75,8 +75,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: .190856725, y: -.0474837646, z: -.0924204737, w: .976103246}
-  m_LocalPosition: {x: .212957382, y: 1.06363344, z: -1.62659359}
+  m_LocalRotation: {x: .114726022, y: .697737753, z: -.114725992, w: .697737813}
+  m_LocalPosition: {x: -1.94252694, y: .887654305, z: .00219863653}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -106,7 +106,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: .5
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
@@ -186,7 +186,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
@@ -237,9 +237,6 @@ MonoBehaviour:
   speed: 10
   speedRotation: 180
   gravityVel: {x: 0, y: 0, z: 0}
-  shootInput: 0
-  boostInput: 0
-  boostSpeed2: 1
   acc: 1
   velDamp: .100000001
 --- !u!124 &12400000
