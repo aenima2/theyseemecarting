@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f060dc623c11a4a91df6a3a9ae4780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlighter: {r: .95588237, g: .00702855363, b: .00702855363, a: 0}
-  notSelected: {r: 0, g: 0, b: 0, a: 0}
+  selected: {r: .91911763, g: .0608239658, b: .0608239658, a: 0}
+  notSelected: {r: 1, g: 1, b: 1, a: 0}
   charsPrefabs:
   - {fileID: 400000, guid: 496e521cc14525e44b8e0f60dd2fd542, type: 2}
   - {fileID: 400000, guid: d8b400cc520533b4b8fa5677fb2e094a, type: 2}
@@ -268,6 +268,9 @@ MonoBehaviour:
   - {fileID: 400000, guid: d8f74e03f898b1e47b6f339944c4a42e, type: 2}
   - {fileID: 400000, guid: 77157f58402d4e848907bc3e6d117e4d, type: 2}
   charSpawnLocations: []
+  chars: []
+  currentChar: 0
+  curSelected: 0
 --- !u!1 &1444484320
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CharSelect : MonoBehaviour { 
 
-	public Color highlighter;
+	public Color selected;
 	public Color notSelected;
 
 	private float previousDpadAxis; // Previous D-pad input 
@@ -13,73 +13,58 @@ public class CharSelect : MonoBehaviour {
 
 	public List<Transform> charSpawnLocations; // Character spawnlocs
 
-	private GameObject[] chars; // The game objects created to be showed on screen
+	public GameObject[] chars; // The game objects created to be showed on screen
 
-	private int currentChar = 0; // The index of the current character
-
-	//private int previousChar = -1;
-
-	private bool curSelected = false;
-
+	public int currentChar = 0; // The index of the current character
 	
+	public bool curSelected = false;
+
+
+
 	void Start() {
 		LoadSpawnLocations();
-		// We initialize the chars array
-		chars = new GameObject[charsPrefabs.Length];
-
-		notSelected = Color.white;
+		// Initialize the chars array
 
 
-		// We create game objects based on characters prefabs
-		int index = 0;
-		foreach (Transform t in charsPrefabs)
-		{
-			chars[index++] = GameObject.Instantiate(t.gameObject, charSpawnLocations[index - 1].position, Quaternion.identity) as GameObject;
-			//print (index);
-		}
+		SpawnCharacters();
+
 	}
-
+	
 	void Update()
 	{
 		ScrollVertically();
 		//ScrollHorizontally(); // Needs more work
+		SetColor();
+	}
 
-		//GameObject selectedChar = chars[currentChar];
+	void OnGUI() {
+		GameObject selectedChar = chars[currentChar];
+		
+		// Shows a label with the name of the selected character
+		string labelChar = selectedChar.name;
+		GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
+	}
 
-		/*for (int i = 0; i < chars.Length; i++)
+
+	public void SetColor()
+	{	
+		for (int i = 0; i < chars.Length; i++)
 		{
-			if(i = currentChar)
-			{
-				selectedChar.renderer.material.color = highlighter;
+			if (i == currentChar){
+				
+				chars[i].renderer.material.color = selected;
+				
+			}else{
+				chars[i].renderer.material.color = notSelected;
 			}
-		}*/
-		//notSelected = chars[notSelected - currentChar]
-
+		}
 	}
 	
-
-
-	public void SelectedHighlighter()
-	{
-		GameObject selectedChar = chars[currentChar];
-		MenuCart menuCart = FindObjectOfType<MenuCart>();
-
-		if(curSelected == true)
-		{
-			menuCart.renderer.material.color = highlighter;
-
-			selectedChar.renderer.material.color = highlighter;
-		}
-
-	}
-
 	void ScrollVertically()
 	{
-		GameObject selectedChar = chars[currentChar];
-
 		if(Input.GetAxis ("DPADVert1") != previousDpadAxis )
 		{
-
+			SetColor();
 
 			previousDpadAxis = Input.GetAxis ("DPADVert1");
 
@@ -88,10 +73,10 @@ public class CharSelect : MonoBehaviour {
 			currentChar = Mathf.Clamp(currentChar, 0, chars.Length - 1);
 		}
 	}
-
+	
 	void ScrollHorizontally()
 	{
-		GameObject selectedChar = chars[currentChar];
+		//GameObject selectedChar = chars[currentChar];
 		
 		if(Input.GetAxis ("DPADHor1") != previousDpadAxis)
 		{
@@ -103,53 +88,24 @@ public class CharSelect : MonoBehaviour {
 			currentChar = Mathf.Clamp(currentChar, 0, chars.Length - 1);
 		}
 	}
-
-
- 
-
-
-	void OnGUI() {
-		GameObject selectedChar = chars[currentChar];
-
-		// Shows a label with the name of the selected character
-		//GameObject selectedChar = chars[currentChar];
-		string labelChar = selectedChar.name;
-		GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
-
-		// The index of the middle character
-		int middleTopIndex = currentChar + 1;        
-		// The index of the left character
-		int leftTopIndex = currentChar;
-		// The index of the right character
-		int rightTopIndex = currentChar - 1;
-
-		/*
-		// For each character we set the position based on the current index
-		for (int index = 0; index < chars.Length; index++)
-		{
-			Renderer rend = chars[index].renderer;
-
-
-			if (index == leftTopIndex)
-			{
-				selectedChar.renderer.material.color = highlighter;		
-			}
-			else if (index == middleTopIndex)
-			{
-				selectedChar.renderer.material.color = highlighter;				
-			}
-			else if (index == rightTopIndex)
-			{
-				selectedChar.renderer.material.color = highlighter;				
-			}
-		}*/
-	}
-
+	
 	public List<Transform> LoadSpawnLocations()
 	{
 		Transform[] tempSpawnLocs = GetComponentsInChildren<Transform>(); // Recieves all the spawnlocations from the Holder gameobject
 		charSpawnLocations.AddRange(tempSpawnLocs); // Counts the spawn locations and adds cartSpawnLocations to the list 
 		charSpawnLocations.Remove(transform); // Removes the Holder gamobject from the list
 		return charSpawnLocations;
+	}
+
+	void SpawnCharacters()
+	{
+		chars = new GameObject[charsPrefabs.Length];
+		// Create game objects based on characters prefabs
+		int index = 0;
+		foreach (Transform t in charsPrefabs)
+		{
+			chars[index++] = GameObject.Instantiate(t.gameObject, charSpawnLocations[index - 1].position, Quaternion.identity) as GameObject;
+			//print (index);
+		}
 	}
 }
