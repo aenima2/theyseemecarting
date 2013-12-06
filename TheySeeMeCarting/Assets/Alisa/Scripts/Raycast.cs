@@ -5,9 +5,11 @@ public class Raycast : MonoBehaviour {
 
 	public RaycastHit hit;
 	
-	public GameObject bomb;
+	public GameObject caster;
 
 	public float rotDegree;
+
+	public float rayLength;
 
 	public bool done;
 
@@ -15,21 +17,14 @@ public class Raycast : MonoBehaviour {
 	
 	}
 
+
 	void Update () {
 	
 		//if (!done){
 		//RayCast ();
 		//}
 	}
-
-//		for (int i = 0; i < 10; i++) {
-//		
-//			Quaternion q = Quaternion.AngleAxis(delta_degree, Vector3.forward);
-//			Vector3 direction = Vector3.up;
-//
-//				direction = q * direction;
-//
-//				
+				
 	public void RayCast(){
 
 		for (int i = 0; i < 361; i++) {
@@ -41,12 +36,16 @@ public class Raycast : MonoBehaviour {
 			Vector3 rayDirection = transform.forward;
 			transform.Rotate (0f, rotDegree, 0f);
 			
-			if (Physics.Raycast(transform.position, rayDirection, out hit, 20f)){
+			if (Physics.Raycast(transform.position, rayDirection, out hit, rayLength)){
 
 				if (hit.collider.gameObject.tag == "Player"){
 
 					done = true;
+
 					VehicleTest player = hit.collider.gameObject.GetComponent<VehicleTest>();
+					Rigidbody playerRB = hit.collider.gameObject.GetComponent<Rigidbody>();
+
+					playerRB.AddExplosionForce(500f, transform.position, 20f); 
 					player.CalcLife();
 					break;
 
