@@ -77,20 +77,6 @@ public class CharSelectCopy : MonoBehaviour {
 
 	}
 
-	public void SelectedHighlighter()
-	{
-		GameObject selectedChar = chars[currentChar];
-		MenuCart menuCart = FindObjectOfType<MenuCart>();
-
-		if(curSelected == true)
-		{
-			menuCart.renderer.material.color = highlighter;
-
-			selectedChar.renderer.material.color = highlighter;
-		}
-
-	}
-
 	void ScrollVertically()
 	{
 		GameObject selectedChar = chars[currentChar];
