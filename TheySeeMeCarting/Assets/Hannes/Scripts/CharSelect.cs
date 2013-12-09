@@ -4,38 +4,35 @@ using System.Collections.Generic;
 
 public class CharSelect : MonoBehaviour { 
 
-	public Color selected;
-	public Color notSelected;
+	public Color selectedColor; // Selected highlight color
+	public Color notSelectedColor; // Standard de-selected color
 
-	private float previousDpadAxis; // Previous D-pad input 
-	private float previousDpadAxisY;
+	private float previousDpadAxisX; // Previous D-pad X-axis input 
+	private float previousDpadAxisY; // Previous D-pad Y-axis input
+
+	public int rows; // Set number of row for the matrix
+	public int cols; // Set number of cols for the matrix
 	
-	public Transform[] charsPrefabs; // The characters prefabs to pick
+	public GameObject[] charsPrefabs; // All the different character prefabs
+	public GameObject [][] chars; // The game objects created to be showed on screen
 
-	public List<Transform> charSpawnLocations; // Character spawnlocs
-
-	public GameObject[] chars; // The game objects created to be showed on screen
-
-	public int currentChar = 0; // The index of the current character
+	public Vector2 currentChar = Vector2.zero; // The index of the current character
 
 	[System.NonSerialized] // Don't display in inspector
-	public bool hasSelected = false;
+	public bool hasSelected = false; // For if player has selected a character
 
-	public bool startGameFailMsg = false;
+	private bool startGameFailMsg = false; // Checks if all players have chosen a character
 
-	// for new spawnsystem
-	public int rows;
-	public int cols;
-	public GameObject [][] pieces; 
+
+
 
 
 
 
 	void Start()
 	{
-		LoadSpawnLocations();
 		SpawnSelectableCharacters();
-		chars[currentChar].renderer.material.color = selected; // Highlight the first character
+		chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = selectedColor; // Highlight the first character at start
 	}
 	
 	void Update()
@@ -52,13 +49,13 @@ public class CharSelect : MonoBehaviour {
 
 		if(hasSelected == false)
 		{
-			if(Input.GetAxis ("DPADVert1") != previousDpadAxis )
+			if(Input.GetAxis ("DPADHor1") != previousDpadAxisX)
+			{
+				ScrollHorizontally();
+			}
+			if(Input.GetAxis ("DPADVert1") != previousDpadAxisY)
 			{
 				ScrollVertically();
-			}
-			if(Input.GetAxis ("DPADHor1") != previousDpadAxis)
-			{
-				ScrollHorizontally(); // Doesn't work
 			}
 		}
 
@@ -69,11 +66,11 @@ public class CharSelect : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GameObject selectedChar = chars[currentChar];
+		GameObject selectedChar = charsPrefabs[(int)(currentChar.x + cols * currentChar.y)];
 		
-		// Shows a label with the name of the selected character
-		//string labelChar = selectedChar.name;
-		//GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
+		//Shows a label with the name of the selected character
+		string labelChar = selectedChar.name;
+		GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
 
 
 		// All players must select a character Msg
@@ -84,115 +81,105 @@ public class CharSelect : MonoBehaviour {
 			GUI.Label (new Rect(NormalizeRect(playersMustSelect)), "All players must select a character"); // Displays message
 		}
 	}
-	
+
+	/*
+	 * void SetColor
+	 * Highlights the selected color by comparing current character to the values of y and x
+	 * 
+	 */
 	public void SetColor()
-	{	
-		for (int i = 0; i < chars.Length; i++)
+	{
+		for (int i=0; i < rows; i++)
 		{
-			if (i == currentChar)
+			for (int j = 0; j < cols; j++)
 			{
-				
-				chars[i].renderer.material.color = selected;
-				
-			}
-			else
-			{
-				chars[i].renderer.material.color = notSelected;
+				if (i == currentChar.x && j == currentChar.y)
+				{
+					chars[i][j].renderer.material.color = selectedColor;
+				}
+				else
+				{
+					chars[i][j].renderer.material.color = notSelectedColor;
+				}
 			}
 		}
 	}
-	
-	public void ScrollVertically()
-	{
-		SetColor();
 
-		previousDpadAxis = Input.GetAxis ("DPADVert1");
-
-		currentChar += (int)previousDpadAxis;
-		currentChar = Mathf.Clamp(currentChar, 0, chars.Length - 1);
-	}
-
-	// Not finished
+	/*
+	 * public void ScrollHorizontally
+	 * Scrolls through objects in the rows by comparing the value of the previously selected char
+	 * and adding/subtracting to it depending on if you press left or right.
+	 * 
+	 */
 	public void ScrollHorizontally()
 	{
-		SetColor();
+		SetColor(); // Calls for SetColor function to add the highlight color to the current character
 
-		//previousDpadAxisY = Input.GetAxis ("DPADHor1");
-		Debug.Log(Input.GetAxis ("DPADHor1"));
+		previousDpadAxisX = Input.GetAxis ("DPADHor1"); // Set the current D-pad X-axis as previous
 
-		if(currentChar == 0)
-		{
-			currentChar += 3;
-			currentChar = Mathf.Clamp(currentChar, 0, chars.Length - 1);
-			print ("horiz");
-		}
-
-		//currentChar += 3;
-		//currentChar = Mathf.Clamp(currentChar, 0, chars.Length - 1);
+		currentChar.x += (int)previousDpadAxisX;
+		currentChar.x = Mathf.Clamp(currentChar.x, 0, rows - 1);
 	}
-	
-	public List<Transform> LoadSpawnLocations()
+
+	/*
+	 * public void ScrollVertically
+	 * Scrolls through objects in the cols by comparing the value of the previously selected char
+	 * and adding/subtracting to it depending on if you press up or down.
+	 * 
+	 */
+	public void ScrollVertically()
 	{
-		Transform[] tempSpawnLocs = GetComponentsInChildren<Transform>(); // Recieves all the spawnlocations from the Holder gameobject
-		charSpawnLocations.AddRange(tempSpawnLocs); // Counts the spawn locations and adds cartSpawnLocations to the list 
-		charSpawnLocations.Remove(transform); // Removes the Holder gamobject from the list
-		return charSpawnLocations;
+		SetColor(); // Calls for SetColor function to add the highlight color to the current character
+
+		previousDpadAxisY = Input.GetAxis ("DPADVert1"); // Set the current D-pad Y-axis as previous
+
+		currentChar.y += (int)previousDpadAxisY;
+		currentChar.y = Mathf.Clamp(currentChar.y, 0, cols - 1);
 	}
 
 
 	void SpawnSelectableCharacters()
 	{
+		chars = new GameObject[rows][];
 
-		/*Vector2.x = 1;
-		Vector2.y = 2;
+		//for (int i = 0; i < charsPrefabs.Length; i++)
+		//	Debug.Log("chars #" + i + "is: " + charsPrefabs[i].name);
 
-		// use this instead of the previous spawn function
-		for(int y = 0; y < Vector2.y; x++) // loop through all x-rows
-		{
-			for(int x = 0; x < Vector2.x; y++) // fill up first x-row
-			{
-				chars[index++] = GameObject.Instantiate(t.gameObject, Vector2(x,y), Quaternion.identity) as GameObject;//Instantiate(new Vector2(x,y); // instantiate 
-			}
-		}*/
-
-		/*for (int i = 0; i < chars.Length; i++)
-			Debug.Log("chars #" + i + "is: " + chars[i].name);
-		
 		for (int i=0; i < rows; i++)
 		{
-			pieces[i] = new GameObject[rows];
+			chars[i] = new GameObject[rows];
 			for (int j = 0; j < cols; j++)
 			{
-				pieces[i][j] = (GameObject) Instantiate (chars[i], new Vector2(i,j), Quaternion.identity);
+				chars[i][j] = (GameObject) Instantiate (charsPrefabs[i * cols + j], new Vector2(i + i * 0.2f,j + j * 0.2f), Quaternion.identity);
 			}
-		}*/
-
-		chars = new GameObject[charsPrefabs.Length];
-
-		// Create game objects based on characters prefabs
-		int index = 0;
-		foreach (Transform t in charsPrefabs)
-		{
-			chars[index++] = GameObject.Instantiate(t.gameObject, charSpawnLocations[index - 1].position, Quaternion.identity) as GameObject;
-			//print (index);
 		}
-
-
-
-
-
 	}
 
+	/*
+	 * public void SelectCharacter
+	 * If player has selected, sets to hasSelected bool to true
+	 * 
+	 */
 	public void SelectCharacter()
 	{
 		hasSelected = true;
 	}
 
+	/*
+	 * public void SelectCharacter
+	 * If player de-selects a character, sets to hasSelected bool to false
+	 * 
+	 */
 	public void DeSelectCharacter()
 	{
 		hasSelected = false;
 	}
 
+	/*
+	 * public void TryStartGame
+	 * Tries to start the game by checking if all players have chosen a character by comparing the hasSelected bools
+	 * 
+	 */
 	public void TryStartGame()
 	{
 		if(hasSelected == true)
@@ -213,6 +200,10 @@ public class CharSelect : MonoBehaviour {
 		}
 	}
 
+	/*
+	 * void StartGame
+	 * 
+	 */
 	void StartGame()
 	{
 		Application.LoadLevel("testlevel");
