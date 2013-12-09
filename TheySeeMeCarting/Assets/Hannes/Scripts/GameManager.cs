@@ -12,17 +12,20 @@ public class GameManager : MonoBehaviour {
 	
 	public List<Player> players = new List<Player>();
 	public List<Cart> carts = new List<Cart>();
-	
-	int pn = 0;
+
+	[System.NonSerialized]
+	public int pn = 0;
 
 	void Awake()
 	{
 		DontDestroyOnLoad(transform.gameObject);
-		//SetNumberOfPlayers(4);
+		SetNumberOfPlayers(1);
+		CreatePlayers();
 	}
 
 	void Start ()
 	{
+		//Activate here when full menu is made
 		//CreatePlayers();
 	}
 	

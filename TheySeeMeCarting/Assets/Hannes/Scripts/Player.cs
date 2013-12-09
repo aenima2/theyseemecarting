@@ -15,11 +15,7 @@ public class Player : MonoBehaviour {
 	public KeyCode fire;
 
 	// Menu handling
-	public KeyCode menuUp;
-	public KeyCode menuDown;
-	public KeyCode menuLeft;
-	public KeyCode menuRight;
-	public KeyCode menuSelect;
+	public bool inMenu = false;
 
 	//public DelegateMenu delegateMenu;
 
@@ -50,6 +46,7 @@ public class Player : MonoBehaviour {
 
 	void Start ()
 	{
+		print ("start");
 		// Add bool if in menu (for control)
 		// Show Selectcharacter menu
 		// Change prefab depending on player selection
@@ -58,7 +55,10 @@ public class Player : MonoBehaviour {
 	
 	void Update ()
 	{
-		MenuInput();
+		if (inMenu == true)
+		{
+			MenuInput();
+		}
 	}
 
 	public Cart SpawnCart(int pn)
@@ -69,8 +69,14 @@ public class Player : MonoBehaviour {
 
 		GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
 		cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
+		print ("found spawnloc");
+		cart = ((GameObject)Instantiate(playerCharacter/*[characterIndex-1]*/, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
+		print ("spawned cart");
 
-		cart = ((GameObject)Instantiate(possibleCharacters[characterIndex-1], cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
+		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
+		cam.enabled = true;
+		print ("cam active");
+
 		cart.player = this; // Sets to player
 
 		//cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
@@ -84,7 +90,7 @@ public class Player : MonoBehaviour {
 		}
 		nop = gm.numberOfPlayers; // Sets number of players to "nop"
 
-		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
+		//Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
 
 		// If 2 players
 		if (nop <= 2)
@@ -122,44 +128,35 @@ public class Player : MonoBehaviour {
 
 	void MenuInput() // Add an in menu bool, so you change input depending on menu/game
 	{
-		CharacterSelect charSelect = FindObjectOfType<CharacterSelect>();
+		CharSelect cs = FindObjectOfType<CharSelect>();
 
-		if(Input.GetKeyDown(menuLeft))
+		// Menu navigation
+		if(cs.hasSelected == false)
 		{
-			charSelect.MenuLeft();
-		}
-		if(Input.GetKeyDown(menuRight))
-		{
-			charSelect.MenuRight();
-		}
-		/*if(Input.GetKeyDown(menuSelect))
-		{
-			delMenu.MenuSelect();
-		}*/
-
-
-
-
-
-
-
-
-
-
-		DelegateMenu delMenu = FindObjectOfType<DelegateMenu>();
-
-		if(Input.GetKeyDown(menuUp))
-		{
-			delMenu.MenuUp();
-		}
-		if(Input.GetKeyDown(menuDown))
-		{
-			delMenu.MenuDown();
-		}
-		if(Input.GetKeyDown(menuSelect))
-		{
-			delMenu.MenuSelect();
+			if(Input.GetAxis ("DPADHor1") != cs.previousDpadAxisX)
+			{
+				cs.ScrollHorizontally();
+			}
+			if(Input.GetAxis ("DPADVert1") != cs.previousDpadAxisY)
+			{
+				cs.ScrollVertically();
+			}
 		}
 
+		// Button commands
+		if(Input.GetButtonDown("Select1"))
+		{
+			print ("select");
+			cs.SelectCharacter();
+		}
+		if(Input.GetButtonDown("DeSelect1"))
+		{
+			cs.DeSelectCharacter();
+			print ("deselect");
+		}
+		if(Input.GetButtonDown("StartAll"))
+		{
+			cs.TryStartGame();
+		}
 	}
 }

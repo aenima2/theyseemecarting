@@ -8,6 +8,10 @@ public class Cart : MonoBehaviour {
 	public Camera cartCam;
 
 
+	void Start()
+	{
+		//cartCam.enabled = true;
+	}
 
 	void ChangeMesh()
 	{

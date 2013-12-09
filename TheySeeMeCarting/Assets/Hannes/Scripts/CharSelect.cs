@@ -7,15 +7,17 @@ public class CharSelect : MonoBehaviour {
 	public Color selectedColor; // Selected highlight color
 	public Color notSelectedColor; // Standard de-selected color
 
-	private float previousDpadAxisX; // Previous D-pad X-axis input 
-	private float previousDpadAxisY; // Previous D-pad Y-axis input
+	[System.NonSerialized] // Variable invisible in inspector
+	public float previousDpadAxisX; // Previous D-pad X-axis input
+	[System.NonSerialized] // Variable invisible in inspector
+	public float previousDpadAxisY; // Previous D-pad Y-axis input
 
 	public int rows; // Set number of row for the matrix
 	public int cols; // Set number of cols for the matrix
 	
 	public GameObject[] charsPrefabs; // All the different character prefabs
-	public GameObject [][] chars; // The game objects created to be showed on screen
-
+	public GameObject[][] chars; // The game objects created to be showed on screen
+	[System.NonSerialized] // Variable invisible in inspector
 	public Vector2 currentChar = Vector2.zero; // The index of the current character
 
 	[System.NonSerialized] // Don't display in inspector
@@ -23,31 +25,33 @@ public class CharSelect : MonoBehaviour {
 
 	private bool startGameFailMsg = false; // Checks if all players have chosen a character
 
-
-
-
-
+	//private Player player;
 
 
 	void Start()
 	{
 		SpawnSelectableCharacters();
+		Cart cart = FindObjectOfType<Cart>();
+		cart.cartCam.enabled = false;
 		chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = selectedColor; // Highlight the first character at start
+
+		Player player = FindObjectOfType<Player>();
+		player.inMenu = true;
 	}
 	
 	void Update()
 	{
-		if(Input.GetButtonDown("Select1"))
+		/*if(Input.GetButtonDown("Select1"))
 		{
 			SelectCharacter();
-		}
+		}*/
 
-		if(Input.GetButtonDown("DeSelect1"))
+		/*if(Input.GetButtonDown("DeSelect1"))
 		{
 			DeSelectCharacter();
-		}
+		}*/
 
-		if(hasSelected == false)
+		/*if(hasSelected == false)
 		{
 			if(Input.GetAxis ("DPADHor1") != previousDpadAxisX)
 			{
@@ -57,12 +61,12 @@ public class CharSelect : MonoBehaviour {
 			{
 				ScrollVertically();
 			}
-		}
+		}*/
 
-		if(Input.GetButtonDown("StartAll"))
+		/*if(Input.GetButtonDown("StartAll"))
 		{
 			TryStartGame();
-		}
+		}*/
 	}
 
 	void OnGUI() {
@@ -157,12 +161,28 @@ public class CharSelect : MonoBehaviour {
 
 	/*
 	 * public void SelectCharacter
-	 * If player has selected, sets to hasSelected bool to true
+	 * If player has selected, sets hasSelected bool to true
 	 * 
 	 */
 	public void SelectCharacter()
 	{
 		hasSelected = true;
+
+		Player player = FindObjectOfType<Player>();
+
+		for (int i=0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				if (i == currentChar.x && j == currentChar.y)
+				{
+					player.playerCharacter = chars[i][j].gameObject;
+					DontDestroyOnLoad(player.playerCharacter);
+				}
+			}
+
+		}
+		//currentChar = player.possibleCharacters;
 	}
 
 	/*
@@ -202,15 +222,25 @@ public class CharSelect : MonoBehaviour {
 
 	/*
 	 * void StartGame
+	 * Start game, loads next level and set player inMenu-controls to false
 	 * 
 	 */
 	void StartGame()
 	{
 		Application.LoadLevel("testlevel");
+		Player player = FindObjectOfType<Player>();
+		player.inMenu = false;
+		Cart cart = FindObjectOfType<Cart>();
+		cart.cartCam.enabled = true;
+		//GameManager gm = FindObjectOfType<GameManager>();
+		//player.SpawnCart(gm.pn);
 	}
-
 	
-
+	/*
+	 * IEnumerator Coroutine1
+	 * Adds wait time for the Start game fail message
+	 * 
+	 */
 	IEnumerator Coroutine1(float waitTime)
 	{
 		yield return new WaitForSeconds(waitTime);

@@ -270,11 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d26f90ea773c06498193578c8b3df69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cartSpawnLocations:
-  - {fileID: 400008}
-  - {fileID: 400002}
-  - {fileID: 400006}
-  - {fileID: 400004}
+  cartSpawnLocations: []
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

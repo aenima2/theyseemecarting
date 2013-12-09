@@ -44,16 +44,9 @@ MonoBehaviour:
   left: 0
   right: 0
   fire: 0
-  menuUp: 119
-  menuDown: 115
-  menuLeft: 97
-  menuRight: 100
-  menuSelect: 32
+  inMenu: 0
   spawner: {fileID: 11400000, guid: af80c931cf3fec144b8ae298098b59f4, type: 2}
   possibleCharacters:
-  - {fileID: 100002, guid: b841585000a227b41b61e83dd2d7cc37, type: 2}
-  - {fileID: 100002, guid: b841585000a227b41b61e83dd2d7cc37, type: 2}
-  - {fileID: 100002, guid: b841585000a227b41b61e83dd2d7cc37, type: 2}
   - {fileID: 100002, guid: b841585000a227b41b61e83dd2d7cc37, type: 2}
   characterIndex: 0
   playerNumber: 0

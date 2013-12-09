@@ -15,6 +15,7 @@ public class CartSpawnLoader : MonoBehaviour {
 	void Awake ()
 	{
 		LoadSpawnLocations();
+		//SpawnCarts();
 	}
 
 
@@ -30,6 +31,15 @@ public class CartSpawnLoader : MonoBehaviour {
 		cartSpawnLocations.Remove(transform); // Removes the Holder gamobject from the list
 		return cartSpawnLocations;
 	}
+
+	public void SpawnCarts()
+	{
+		Player player = FindObjectOfType<Player>();
+		GameManager gm = FindObjectOfType<GameManager>();
+
+		player.SpawnCart(gm.pn);
+	}
+
 
 	// Moved to player
 	/*public Cart SpawnCart()

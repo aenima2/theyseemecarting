@@ -46,7 +46,6 @@ public class DelegateMenu : MonoBehaviour {
 
 		if(Input.anyKeyDown || Input.GetButtonDown ("StartAll"))
 		{
-			print ("hej");
 			menuFunction = MainMenu;
 		}
 
@@ -67,7 +66,7 @@ public class DelegateMenu : MonoBehaviour {
 		Rect quitButton = new Rect(0.3f, 0.5f, 0.4f, 0.2f);
 
 		if(GUI.Button(new Rect(NormalizeRect(battleButton)), "Battle"))
-		if(Input.GetButtonDown("Fire1"))
+		//if(Input.GetButtonDown("Fire1"))
 		{
 			menuFunction = GameSelect;
 		}
