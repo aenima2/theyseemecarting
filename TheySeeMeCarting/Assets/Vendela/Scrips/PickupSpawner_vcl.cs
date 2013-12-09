@@ -55,11 +55,11 @@ public class PickupSpawner_vcl : MonoBehaviour {
 	
 	
 	//Shuffle between pickups
-	void ShufflePickups()
+	public void ShufflePickups()
 	{
-		Vehicle vehicle = FindObjectOfType<Vehicle>();
+		Vehicle vehicle = gameObject.GetComponent<Vehicle>();
 		
-		if (Input.GetAxis ("Shuffle" + vehicle.playerNum) < 0.5f){
+		if (Input.GetAxis ("Shuffle" + vehicle.playerNum) < 0f){
 			
 			currentPickup -= 1f;
 			currentPickup = Mathf.Clamp (currentPickup, 0f, pickupList.Count-1f);
@@ -67,7 +67,7 @@ public class PickupSpawner_vcl : MonoBehaviour {
 			
 		}
 		
-		if (Input.GetAxis ("Shuffle" + vehicle.playerNum) > 0.5f){
+		if (Input.GetAxis ("Shuffle" + vehicle.playerNum) > 0f){
 
 			
 			currentPickup += 1f;

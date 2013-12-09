@@ -181,38 +181,6 @@ InputManager:
     axis: 2
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Horizontal
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: .189999998
-    sensitivity: 1
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 0
-    joyNum: 4
-  - serializedVersion: 3
-    m_Name: Vertical
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: .189999998
-    sensitivity: 1
-    snap: 0
-    invert: 1
-    type: 1
-    axis: 1
-    joyNum: 0
-  - serializedVersion: 3
     m_Name: Shuffle1
     descriptiveName: 
     descriptiveNegativeName: 
@@ -252,13 +220,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 3
     dead: .200000003
-    sensitivity: 1000
+    sensitivity: 1
     snap: 0
     invert: 1
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 1
   - serializedVersion: 3
     m_Name: Forward2
@@ -268,13 +236,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 3
     dead: .200000003
-    sensitivity: 1000
+    sensitivity: 1
     snap: 0
     invert: 1
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: Back1
@@ -284,13 +252,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 3
     dead: .200000003
-    sensitivity: 1000
+    sensitivity: 1
     snap: 0
     invert: 1
     type: 2
-    axis: 8
+    axis: 2
     joyNum: 1
   - serializedVersion: 3
     m_Name: Back2
@@ -300,13 +268,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 3
     dead: .200000003
-    sensitivity: 1000
+    sensitivity: 1
     snap: 0
     invert: 1
     type: 2
-    axis: 8
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: Jump1
