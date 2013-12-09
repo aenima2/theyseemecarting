@@ -23,6 +23,11 @@ public class CharSelect : MonoBehaviour {
 
 	public bool startGameFailMsg = false;
 
+	// for new spawnsystem
+	public int rows;
+	public int cols;
+	public GameObject [][] pieces; 
+
 
 
 
@@ -67,8 +72,8 @@ public class CharSelect : MonoBehaviour {
 		GameObject selectedChar = chars[currentChar];
 		
 		// Shows a label with the name of the selected character
-		string labelChar = selectedChar.name;
-		GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
+		//string labelChar = selectedChar.name;
+		//GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
 
 
 		// All players must select a character Msg
@@ -134,22 +139,36 @@ public class CharSelect : MonoBehaviour {
 		return charSpawnLocations;
 	}
 
-	// Start from here Hannes
+
 	void SpawnSelectableCharacters()
 	{
-		/*
-		Vector2 hest = new Vector2;
 
-		// use this instead of the previous criss
+		/*Vector2.x = 1;
+		Vector2.y = 2;
+
+		// use this instead of the previous spawn function
 		for(int y = 0; y < Vector2.y; x++) // loop through all x-rows
 		{
 			for(int x = 0; x < Vector2.x; y++) // fill up first x-row
 			{
-				Instantiate(new Vector2(x,y); // instantiate the criss
+				chars[index++] = GameObject.Instantiate(t.gameObject, Vector2(x,y), Quaternion.identity) as GameObject;//Instantiate(new Vector2(x,y); // instantiate 
+			}
+		}*/
+
+		/*for (int i = 0; i < chars.Length; i++)
+			Debug.Log("chars #" + i + "is: " + chars[i].name);
+		
+		for (int i=0; i < rows; i++)
+		{
+			pieces[i] = new GameObject[rows];
+			for (int j = 0; j < cols; j++)
+			{
+				pieces[i][j] = (GameObject) Instantiate (chars[i], new Vector2(i,j), Quaternion.identity);
 			}
 		}*/
 
 		chars = new GameObject[charsPrefabs.Length];
+
 		// Create game objects based on characters prefabs
 		int index = 0;
 		foreach (Transform t in charsPrefabs)
@@ -157,6 +176,11 @@ public class CharSelect : MonoBehaviour {
 			chars[index++] = GameObject.Instantiate(t.gameObject, charSpawnLocations[index - 1].position, Quaternion.identity) as GameObject;
 			//print (index);
 		}
+
+
+
+
+
 	}
 
 	public void SelectCharacter()
