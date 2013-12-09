@@ -12,16 +12,6 @@ public class VehicleTest : MonoBehaviour {
 	}
 
 	void Update () {
-	
-
-		if (Input.GetKey (KeyCode.UpArrow)){
-				transform.position += transform.forward * 10f * Time.deltaTime;
-			}
-
-	
-		if (Input.GetKey (KeyCode.DownArrow)){
-				transform.position -= transform.forward * 10f * Time.deltaTime;
-			}
 
 	}
 

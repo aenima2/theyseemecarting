@@ -24,7 +24,7 @@ public class PickupSpawner : MonoBehaviour {
 
 
 	//Spawn pickups
-	void SpawnPickup(){
+	public void SpawnPickup(){
 
 		//if pickup list is empty, don't spawn.
 		if (pickupList.Count == 0){

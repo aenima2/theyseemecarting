@@ -13,9 +13,11 @@ GameObject:
   - 23: {fileID: 2300000}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Creature
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,8 +78,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: 9.94167593e-09, y: .973792374, z: -.227439106, w: -4.25658193e-08}
-  m_LocalPosition: {x: .0251145363, y: 1.22062826, z: 1.6824708}
+  m_LocalRotation: {x: .227439106, y: 0, z: 0, w: .973792315}
+  m_LocalPosition: {x: .0251145363, y: 1.22062826, z: -1.5332222}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -88,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00203633308, y: -.263293266, z: -.914315701}
+  m_LocalPosition: {x: .00203633308, y: -.263293266, z: .469067097}
   m_LocalScale: {x: 1, y: .482744157, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -248,6 +250,33 @@ MonoBehaviour:
   acc: 1
   accBack: .300000012
   velDamp: .100000001
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17877c9ec871c6845ba2bddd99918d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 5
+  isImmortal: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d17eae7d2a9adc48808ba350298481b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupList: []
+  currentPickup: 0
+  PlayerNum: 1
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
