@@ -51,7 +51,7 @@ public class Vehicle : MonoBehaviour {
 
 		if(Input.GetButtonDown ("Fire" + playerNum))
 		{
-			PickupSpawner spawner = gameObject.GetComponent<PickupSpawner>();
+			PickupSpawner_vcl spawner = gameObject.GetComponent<PickupSpawner_vcl>();
 			spawner.SpawnPickup();
 			//Fire();
 		}
