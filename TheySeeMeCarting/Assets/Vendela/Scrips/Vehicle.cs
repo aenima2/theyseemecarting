@@ -33,15 +33,16 @@ public class Vehicle : MonoBehaviour {
 	}
 		
 	
-	void OnGUI(){
+	/*void OnGUI(){
 		Rect r = new Rect(32,32,512,32);
 		GUI.Box (r,"Player= " + playerNum);
 
 		r.y += r.height;
 
 		GUI.Box (r,"Forward2 = " + Input.GetAxis ("Forward2") + playerNum);
+		}*/
 	
-	}
+
 
 	void FixedUpdate(){
 
