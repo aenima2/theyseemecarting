@@ -80,7 +80,7 @@ public class Player : MonoBehaviour {
 			VehicleInput();
 	}
 
-	public Cart SpawnCart(int pn)
+	public Vehicle SpawnVehicle(int pn)
 	{
 		//float nop;
 
@@ -89,14 +89,15 @@ public class Player : MonoBehaviour {
 		GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
 		cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
 		print ("found spawnloc");
-		cart = ((GameObject)Instantiate(playerCharacter/*[characterIndex-1]*/, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
+		vehicle = ((GameObject)Instantiate(playerCharacter/*[characterIndex-1]*/, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Vehicle>();
 		print ("spawned cart");
 
-		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
-		cam.enabled = true;
-		print ("cam active");
+		//Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
+		//cam.enabled = true;
+		//print ("cam active");
 
-		cart.player = this; // Sets to player
+		//cart.player = this; // Sets to player
+		vehicle.player = this;
 
 		//cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
 		//cart.player = this; // Sets to player
@@ -143,7 +144,8 @@ public class Player : MonoBehaviour {
 		//tank.tankColor = tankColor;
 		//tank.SetColor(tankColor);
 
-		return cart;
+		//return cart;
+		return vehicle;
 	}
 	
 
