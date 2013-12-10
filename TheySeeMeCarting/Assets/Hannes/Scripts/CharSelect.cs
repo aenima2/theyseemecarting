@@ -11,21 +11,15 @@ public class CharSelect : MonoBehaviour {
 	public float previousDpadAxisX; // Previous D-pad X-axis input
 	[System.NonSerialized] // Variable invisible in inspector
 	public float previousDpadAxisY; // Previous D-pad Y-axis input
-	[System.NonSerialized] // Variable invisible in inspector
-	public float previousDpadAxisX1; // Previous D-pad X-axis input
-	[System.NonSerialized] // Variable invisible in inspector
-	public float previousDpadAxisY1; // Previous D-pad Y-axis input
 
 	public int rows; // Set number of row for the matrix
 	public int cols; // Set number of cols for the matrix
 	
 	public GameObject[] charsPrefabs; // All the different character prefabs
 	public GameObject[][] chars; // The game objects created to be showed on screen
-	//[System.NonSerialized] // Variable invisible in inspector
-	//public Vector2 currentChar = Vector2.zero; // The index of the current character
 
-	[System.NonSerialized] // Don't display in inspector
-	public bool hasSelected = false; // For if player has selected a character
+	//[System.NonSerialized] // Don't display in inspector
+	//public bool hasSelected = false; // For if player has selected a character
 
 	private bool startGameFailMsg = false; // Checks if all players have chosen a character
 
@@ -34,20 +28,23 @@ public class CharSelect : MonoBehaviour {
 
 	private Player player;
 
+	void Awake()
+	{
+		Player player = FindObjectOfType<Player>();
+	}
 
 	void Start()
 	{
 		SpawnSelectableCharacters();
 		Cart cart = FindObjectOfType<Cart>();
-		cart.cartCam.enabled = false;
-		//chars[(int)player.currentChar.x][(int)player.currentChar.y].renderer.material.color = Color.blue; // Highlight the first character at start (using the same color as player1, if their color changes, change this color to match it
 
-		//player.inMenu = true;
+		//cart.cartCam.enabled = false;
 	}
 	
 	void Update()
 	{
 		if(player != null)
+			print ("inmenu yo");
 			player.inMenu = true; // Move these out of here!!!
 	}
 
@@ -94,13 +91,20 @@ public class CharSelect : MonoBehaviour {
 		{
 			for (int j = 0; j < cols; j++)
 			{
+				CharPrefab charP = chars[i][j].GetComponent<CharPrefab>(); // Get reference from CharPrefab script
+
 				if (i == player.currentChar.x && j == player.currentChar.y)
 				{
+					charP.Select(player);
 					chars[i][j].renderer.material.color = player.playerCol;
 				}
 				else
 				{
-					chars[i][j].renderer.material.color = notSelectedColor;
+					charP.DeSelect(player);
+					if(charP.players.Count < 1)
+					{
+						chars[i][j].renderer.material.color = notSelectedColor;
+					}
 				}
 			}
 		}
@@ -114,13 +118,12 @@ public class CharSelect : MonoBehaviour {
 	 */
 	public void ScrollHorizontally(Player p)
 	{
-		print ("ScrollHorizontally()" + p.playerNumber);
 		player = p;
 
 		SetColor(); // Calls for SetColor function to add the highlight color to the current character
 
 		player.previousDpadAxisX = Input.GetAxis ("DPADHor" + player.playerNumber); // Set the current D-pad X-axis as previous
-		//print ("horizontally1");
+
 		player.currentChar.x += (int)player.previousDpadAxisX;
 		player.currentChar.x = Mathf.Clamp(player.currentChar.x, 0, rows - 1);
 	}
@@ -133,13 +136,12 @@ public class CharSelect : MonoBehaviour {
 	 */
 	public void ScrollVertically(Player p)
 	{
-		print ("ScrollVertically()" + p.playerNumber);
 		player = p;
 
 		SetColor(); // Calls for SetColor function to add the highlight color to the current character
 
-		previousDpadAxisY = Input.GetAxis ("DPADVert0" /*+ player.playerNumber*/); // Set the current D-pad Y-axis as previous
-		print ("vertically1");
+		previousDpadAxisY = Input.GetAxis ("DPADVert" + player.playerNumber); // Set the current D-pad Y-axis as previous
+
 		player.currentChar.y += (int)previousDpadAxisY;
 		player.currentChar.y = Mathf.Clamp(player.currentChar.y, 0, cols - 1);
 	}
@@ -166,11 +168,13 @@ public class CharSelect : MonoBehaviour {
 	 * If player has selected, sets hasSelected bool to true
 	 * 
 	 */
-	public void SelectCharacter()
+	public void SelectCharacter(Player p)
 	{
-		hasSelected = true;
+		player = p;
 
-		for (int i=0; i < rows; i++)
+		player.hasSelected = true;
+
+		/*for (int i=0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
@@ -181,7 +185,7 @@ public class CharSelect : MonoBehaviour {
 				}
 			}
 
-		}
+		}*/
 		//currentChar = player.possibleCharacters;
 	}
 
@@ -190,9 +194,11 @@ public class CharSelect : MonoBehaviour {
 	 * If player de-selects a character, sets to hasSelected bool to false
 	 * 
 	 */
-	public void DeSelectCharacter()
+	public void DeSelectCharacter(Player p)
 	{
-		hasSelected = false;
+		player = p;
+
+		player.hasSelected = false;
 	}
 
 	/*
@@ -202,7 +208,7 @@ public class CharSelect : MonoBehaviour {
 	 */
 	public void TryStartGame()
 	{
-		if(hasSelected == true)
+		if(player.hasSelected == true)
 		{
 			StartGame();
 		}

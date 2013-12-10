@@ -37,7 +37,7 @@ public class CartSpawnLoader : MonoBehaviour {
 		Player player = FindObjectOfType<Player>();
 		GameManager gm = FindObjectOfType<GameManager>();
 
-		player.SpawnCart(gm.pn);
+		player.SpawnVehicle(gm.pn);
 	}
 
 

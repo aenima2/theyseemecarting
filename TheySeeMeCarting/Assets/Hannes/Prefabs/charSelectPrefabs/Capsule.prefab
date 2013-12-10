@@ -132,11 +132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9216d0de03808c648b619a9f66a60b6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8409ef0bb54ba6d408709d9bf96bc082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 11400000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
-  cartCam: {fileID: 2000000}
+  players: []
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
