@@ -23,8 +23,9 @@ public class Vehicle : MonoBehaviour {
 	public float velDamp;
 
 	void Start(){
-		rigidbody.centerOfMass = new Vector3(0f, -1f, 0f);
-		Debug.Log (rigidbody.centerOfMass);
+
+		rigidbody.centerOfMass = new Vector3 (0f,-0.5f,0f);
+
 	}
 		
 	
@@ -37,12 +38,20 @@ public class Vehicle : MonoBehaviour {
 		GUI.Box (r,"Forward2 = " + Input.GetAxis ("Forward2"));
 	
 	}
+
+	void FixedUpdate(){
+
+		if (transform.position.y > 1.768831){
+		vel += Physics.gravity * Time.fixedDeltaTime;
+		}
+	}
 	
 	void Update ()
 	{
+
 		if(Input.GetButtonDown ("Fire" + playerNum))
 		{
-			PickupSpawner spawner = gameObject.GetComponent<PickupSpawner>();
+			PickupSpawner_vcl spawner = gameObject.GetComponent<PickupSpawner_vcl>();
 			spawner.SpawnPickup();
 			//Fire();
 		}
