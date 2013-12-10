@@ -30,15 +30,15 @@ public class PickupScreen : MonoBehaviour {
 			
 			Player currentPlayer = players[i].GetComponent<Player>();
 			
-			if (currentPlayer.cart == null) {
+			if (currentPlayer.vehicle == null) {
 				continue;
 			}
 			
-			GUI.color = currentPlayer.cart.renderer.material.color;
+			GUI.color = currentPlayer.vehicle.renderer.material.color;
 			
 			
-			int health = currentPlayer.cart.life;
-			GUI.Box (r, players[i].name  + "\n" + "Health: " + health );
+			int life = currentPlayer.vehicle.life;
+			GUI.Box (r, players[i].name  + "\n" + "Life: " + life );
 			r.y += r.height; 
 
 		}
