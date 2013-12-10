@@ -22,6 +22,7 @@ public class PendingPlayerActivation : MonoBehaviour {
 	{
 		CharSelect cs = FindObjectOfType<CharSelect>();
 		GameManager gm = FindObjectOfType<GameManager>();
+		Player player = FindObjectOfType<Player>();
 
 		if(joinedP2 == false)
 		{
@@ -30,8 +31,9 @@ public class PendingPlayerActivation : MonoBehaviour {
 				cs.activateP2 = true;
 				gm.CreatePlayers();
 				joinedP2 = true;
-				//.chars[0][0].renderer.material.color = Color.red;
-				print("player 2 joined");
+				cs.chars[0][0].renderer.material.color = Color.red; // Marks the first character as player 2
+				player.nop = 2;
+				print("player 2 joined " + "\nNumber of players: " + player.nop);
 			}
 		}
 	}

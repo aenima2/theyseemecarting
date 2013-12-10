@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Cart : MonoBehaviour {
+
 
 	public Player player;
 
@@ -17,4 +19,5 @@ public class Cart : MonoBehaviour {
 	{
 
 	}
+
 }
