@@ -630,7 +630,12 @@ Prefab:
       propertyPath: m_Constraints
       value: 80
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11400000, guid: a042d5223840507489b1cfc583cbabf0, type: 2}
+      propertyPath: life
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11400002, guid: a042d5223840507489b1cfc583cbabf0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a042d5223840507489b1cfc583cbabf0, type: 2}
   m_RootGameObject: {fileID: 988471800}
   m_IsPrefabParent: 0
@@ -1055,9 +1060,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebe3104d18b2fd4caa7754182d95cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 0
+  isImmortal: 0
   playerNum: 1
   speed: 40
   speedRotation: 180
+  player: {fileID: 0}
   gravityVel: {x: 0, y: 0, z: 0}
   acc: 1
   accBack: .300000012
@@ -1186,7 +1194,6 @@ GameObject:
   - 23: {fileID: 988471804}
   - 54: {fileID: 988471803}
   - 114: {fileID: 988471802}
-  - 114: {fileID: 988471808}
   - 114: {fileID: 988471807}
   m_Layer: 0
   m_Name: Vehicle
@@ -1220,9 +1227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebe3104d18b2fd4caa7754182d95cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 5
+  isImmortal: 0
   playerNum: 1
   speed: 40
   speedRotation: 180
+  player: {fileID: 0}
   gravityVel: {x: 0, y: 0, z: 0}
   acc: 1
   accBack: .300000012
@@ -1301,20 +1311,6 @@ MonoBehaviour:
   pickupList: []
   currentPickup: 0
   PlayerNum: 1
---- !u!114 &988471808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: a042d5223840507489b1cfc583cbabf0,
-    type: 2}
-  m_PrefabInternal: {fileID: 740253792}
-  m_GameObject: {fileID: 988471800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17877c9ec871c6845ba2bddd99918d34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 5
-  isImmortal: 0
 --- !u!1 &1036353412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1828,9 +1824,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebe3104d18b2fd4caa7754182d95cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 0
+  isImmortal: 0
   playerNum: 2
   speed: 40
   speedRotation: 180
+  player: {fileID: 0}
   gravityVel: {x: 0, y: 0, z: 0}
   acc: 1
   accBack: .300000012
