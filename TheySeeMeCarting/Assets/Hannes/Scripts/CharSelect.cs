@@ -4,59 +4,62 @@ using System.Collections.Generic;
 
 public class CharSelect : MonoBehaviour { 
 
-	public Color selectedColor; // Selected highlight color
 	public Color notSelectedColor; // Standard de-selected color
 
-	[System.NonSerialized] // Variable invisible in inspector
+	[HideInInspector] // Variable invisible in inspector
 	public float previousDpadAxisX; // Previous D-pad X-axis input
-	[System.NonSerialized] // Variable invisible in inspector
+	[HideInInspector] // Variable invisible in inspector
 	public float previousDpadAxisY; // Previous D-pad Y-axis input
 
 	public int rows; // Set number of row for the matrix
 	public int cols; // Set number of cols for the matrix
 	
-	public GameObject[] charsPrefabs; // All the different character prefabs
+	public GameObject[] charPrefabs; // All the different character prefabs
 	public GameObject[][] chars; // The game objects created to be showed on screen
-
-	//[System.NonSerialized] // Don't display in inspector
-	//public bool hasSelected = false; // For if player has selected a character
 
 	private bool startGameFailMsg = false; // Checks if all players have chosen a character
 
-	[HideInInspector] // Don't display in inspector (same as [system.nonserialized]
+	[HideInInspector]
 	public bool activateP2 = false;
+	[HideInInspector]
+	public bool activateP3 = false;
+	[HideInInspector]
+	public bool activateP4 = false;
 
 	private Player player;
-
-	void Awake()
-	{
-		Player player = FindObjectOfType<Player>();
-	}
+	private GameManager gm;
+	
 
 	void Start()
 	{
 		SpawnSelectableCharacters();
-		Cart cart = FindObjectOfType<Cart>();
+		//Cart cart = FindObjectOfType<Cart>();
+		player = FindObjectOfType<Player>();
+		gm = FindObjectOfType<GameManager>();
 
 		//cart.cartCam.enabled = false;
 	}
 	
 	void Update()
 	{
-		if(player != null)
-			print ("inmenu yo");
-			player.inMenu = true; // Move these out of here!!!
+
 	}
 
-	void OnGUI() {
-
-		/*GameObject selectedChar = charsPrefabs[(int)(player.currentChar.x + cols * player.currentChar.y)];
+	void OnGUI()
+	{
+		// Checks which character is selected at the moment and display it in the window
+		// Needs to be reworked due to problem with multiple players
+		if(player != null)
+		{
+			GameObject selectedChar = charPrefabs[(int)(player.currentChar.x + cols * player.currentChar.y)];
+			//Shows a label with the name of the selected character
+			string labelChar = selectedChar.name;
+			GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
+		}
 		
-		//Shows a label with the name of the selected character
-		string labelChar = selectedChar.name;
-		GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);*/
 
-		// Activate player 2 stuff
+
+		// Activate player 2 gui
 		if(activateP2 == true)
 		{
 		Rect player2msg = new Rect(0.15f, 0.85f, 0.4f, 0.2f);
@@ -69,6 +72,33 @@ public class CharSelect : MonoBehaviour {
 		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
 		GUI.Label (new Rect(NormalizeRect(activateP2msg)), "Press start to join"); // Displays message
 		}
+		// Activate player 3 gui
+		if(activateP3 == true)
+		{
+			Rect player2msg = new Rect(0.4f, 0.85f, 0.4f, 0.2f);
+			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
+			GUI.Label (new Rect(NormalizeRect(player2msg)), "Player 3"); // Displays message
+		}
+		else
+		{
+			Rect activateP2msg = new Rect(0.4f, 0.85f, 0.4f, 0.2f);
+			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
+			GUI.Label (new Rect(NormalizeRect(activateP2msg)), "Press start to join"); // Displays message
+		}
+		// Activate player 4 gui
+		if(activateP4 == true)
+		{
+			Rect player2msg = new Rect(0.65f, 0.85f, 0.4f, 0.2f);
+			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
+			GUI.Label (new Rect(NormalizeRect(player2msg)), "Player 4"); // Displays message
+		}
+		else
+		{
+			Rect activateP2msg = new Rect(0.65f, 0.85f, 0.4f, 0.2f);
+			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
+			GUI.Label (new Rect(NormalizeRect(activateP2msg)), "Press start to join"); // Displays message
+		}
+
 
 
 		// All players must select a character Msg
@@ -77,6 +107,23 @@ public class CharSelect : MonoBehaviour {
 			Rect playersMustSelect = new Rect(0.3f, 0.2f, 0.4f, 0.2f);
 			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
 			GUI.Label (new Rect(NormalizeRect(playersMustSelect)), "All players must select a character"); // Displays message
+		}
+	}
+
+	void SpawnSelectableCharacters()
+	{
+		chars = new GameObject[rows][];
+		
+		//for (int i = 0; i < charPrefabs.Length; i++)
+		//	Debug.Log("chars #" + i + "is: " + charPrefabs[i].name);
+		
+		for (int i=0; i < rows; i++)
+		{
+			chars[i] = new GameObject[rows];
+			for (int j = 0; j < cols; j++)
+			{
+				chars[i][j] = (GameObject) Instantiate (charPrefabs[i * cols + j], new Vector2(i + i * 0.2f,j + j * 0.2f), Quaternion.identity);
+			}
 		}
 	}
 
@@ -96,7 +143,8 @@ public class CharSelect : MonoBehaviour {
 				if (i == player.currentChar.x && j == player.currentChar.y)
 				{
 					charP.Select(player);
-					chars[i][j].renderer.material.color = player.playerCol;
+					if(chars[i][j].renderer.material.color == notSelectedColor) // If a player already highlighted a character, don't highlight again
+						chars[i][j].renderer.material.color = player.playerCol;
 				}
 				else
 				{
@@ -145,24 +193,7 @@ public class CharSelect : MonoBehaviour {
 		player.currentChar.y += (int)previousDpadAxisY;
 		player.currentChar.y = Mathf.Clamp(player.currentChar.y, 0, cols - 1);
 	}
-
-	void SpawnSelectableCharacters()
-	{
-		chars = new GameObject[rows][];
-
-		//for (int i = 0; i < charsPrefabs.Length; i++)
-		//	Debug.Log("chars #" + i + "is: " + charsPrefabs[i].name);
-
-		for (int i=0; i < rows; i++)
-		{
-			chars[i] = new GameObject[rows];
-			for (int j = 0; j < cols; j++)
-			{
-				chars[i][j] = (GameObject) Instantiate (charsPrefabs[i * cols + j], new Vector2(i + i * 0.2f,j + j * 0.2f), Quaternion.identity);
-			}
-		}
-	}
-
+	
 	/*
 	 * public void SelectCharacter
 	 * If player has selected, sets hasSelected bool to true
@@ -170,22 +201,21 @@ public class CharSelect : MonoBehaviour {
 	 */
 	public void SelectCharacter(Player p)
 	{
+
 		player = p;
 
 		player.hasSelected = true;
-
-		/*for (int i=0; i < rows; i++)
+		for (int i=0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
 				if (i == player.currentChar.x && j == player.currentChar.y)
 				{
-					player.playerCharacter = chars[i][j].gameObject;
-					DontDestroyOnLoad(player.playerCharacter);
+					player.playerVehicle = chars[i][j].gameObject;
+					DontDestroyOnLoad(player.playerVehicle);
 				}
 			}
-
-		}*/
+		}
 		//currentChar = player.possibleCharacters;
 	}
 
@@ -208,21 +238,22 @@ public class CharSelect : MonoBehaviour {
 	 */
 	public void TryStartGame()
 	{
-		if(player.hasSelected == true)
+		bool startGame = true;
+
+		for (int i = 0; i < gm.players.Count; i++)
+		{
+			if(gm.players[i].hasSelected == false)
+				startGame = false;
+		}
+
+		if(startGame == true)
 		{
 			StartGame();
 		}
 		else
 		{
-			if(startGameFailMsg)
-			{
-				startGameFailMsg = false;
-			}
-			else
-			{
-				startGameFailMsg = true;
-				StartCoroutine(Coroutine1(2f)); // Active 2 sec
-			}
+			startGameFailMsg = true;
+			StartCoroutine(Coroutine1(2f)); // Active 2 sec
 		}
 	}
 
@@ -236,10 +267,10 @@ public class CharSelect : MonoBehaviour {
 		Application.LoadLevel("testlevel");
 		Player player = FindObjectOfType<Player>();
 		player.inMenu = false;
-		Cart cart = FindObjectOfType<Cart>();
-		cart.cartCam.enabled = true;
-		//GameManager gm = FindObjectOfType<GameManager>();
-		//player.SpawnCart(gm.pn);
+		//Cart cart = FindObjectOfType<Cart>();
+		//cart.cartCam.enabled = true;
+		GameManager gm = FindObjectOfType<GameManager>();
+		player.SpawnVehicle(gm.pn);
 	}
 	
 	/*
