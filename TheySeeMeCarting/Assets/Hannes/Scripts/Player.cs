@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
 	// Player info
 	public string playerName;
+	public Color playerCol;
 
 	// Cart handling
 	public KeyCode forward;
@@ -14,28 +15,43 @@ public class Player : MonoBehaviour {
 	public KeyCode right;
 	public KeyCode fire;
 
+	[HideInInspector]
+	public float previousDpadAxisX;
+	[HideInInspector]
+	public float previousDpadAxisY;
+	[HideInInspector]
+	public bool hasSelected = false;
+
+	[HideInInspector]
+	public Vector2 currentChar = Vector2.zero; // The index of the current character
+
 	// Menu handling
 	public bool inMenu = false;
 
 	//public DelegateMenu delegateMenu;
 
-	[System.NonSerialized] // Variable invisible in inspector
+	[HideInInspector]
 	public Cart cart;
+
+	public Vehicle vehicle;
 
 	public CartSpawnLoader spawner;
 
-	[System.NonSerialized]
+	[HideInInspector]
 	public List<Transform> cartSpawnLocations;
 
-	[System.NonSerialized]
-	public GameObject playerCharacter; // used for multi char select
+	[HideInInspector]
+	public GameObject playerCharacter;
 
 	public List<GameObject> possibleCharacters; // used for multi char select
 	public int characterIndex; // used for multi char select (change to static (i think))
 
 	public int playerNumber; // Player number
 
-	//private float nop; // Number of players
+	[HideInInspector]
+	public int nop = 0; // Number of players
+
+	private CharSelect cs;
 
 
 
@@ -46,6 +62,9 @@ public class Player : MonoBehaviour {
 
 	void Start ()
 	{
+		cs = FindObjectOfType<CharSelect>();
+		if(playerNumber == 0)
+			cs.chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = Color.blue; // Highlight the first character at start (using the same color as player1, if their color changes, change this color to match it
 		print ("start");
 		// Add bool if in menu (for control)
 		// Show Selectcharacter menu
@@ -56,28 +75,29 @@ public class Player : MonoBehaviour {
 	void Update ()
 	{
 		if (inMenu == true)
-		{
 			MenuInput();
-		}
+		else
+			VehicleInput();
 	}
 
-	public Cart SpawnCart(int pn)
+	public Vehicle SpawnVehicle(int pn)
 	{
-		float nop;
+		//float nop;
 
 		characterIndex = Random.Range (0, 3); // Set the cart to be spawned to random
 
 		GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
 		cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
 		print ("found spawnloc");
-		cart = ((GameObject)Instantiate(playerCharacter/*[characterIndex-1]*/, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
+		vehicle = ((GameObject)Instantiate(playerCharacter/*[characterIndex-1]*/, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Vehicle>();
 		print ("spawned cart");
 
-		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
-		cam.enabled = true;
-		print ("cam active");
+		//Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
+		//cam.enabled = true;
+		//print ("cam active");
 
-		cart.player = this; // Sets to player
+		//cart.player = this; // Sets to player
+		vehicle.player = this;
 
 		//cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
 		//cart.player = this; // Sets to player
@@ -88,10 +108,11 @@ public class Player : MonoBehaviour {
 		{
 			Debug.LogError("Couldn't find a Game Manager in the scene");
 		}
-		nop = gm.numberOfPlayers; // Sets number of players to "nop"
+
+		/*nop = gm.numberOfPlayers; // Sets number of players to "nop"
 
 		//Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
-
+		
 		// If 2 players
 		if (nop <= 2)
 		{
@@ -103,6 +124,7 @@ public class Player : MonoBehaviour {
 		{
 			if(pn == 0) // Set correct Camera rect for player 4
 			{
+				playerCol = Color.blue;
 				cam.rect = new Rect(0f, 0.5f, 0.5f, 0.5f);
 			}
 			else if(pn == 1) // Set correct Camera rect for player 4
@@ -117,46 +139,50 @@ public class Player : MonoBehaviour {
 			{
 				cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
 			}
-		}
+		}*/
 
 		//tank.tankColor = tankColor;
 		//tank.SetColor(tankColor);
 
-		return cart;
+		//return cart;
+		return vehicle;
 	}
 	
 
 	void MenuInput() // Add an in menu bool, so you change input depending on menu/game
 	{
-		CharSelect cs = FindObjectOfType<CharSelect>();
-
 		// Menu navigation
-		if(cs.hasSelected == false)
+		if(hasSelected == false)
 		{
-			if(Input.GetAxis ("DPADHor1") != cs.previousDpadAxisX)
+			if(Input.GetAxis("DPADHor" + playerNumber) != previousDpadAxisX)
 			{
-				cs.ScrollHorizontally();
+				cs.ScrollHorizontally(this);
 			}
-			if(Input.GetAxis ("DPADVert1") != cs.previousDpadAxisY)
+			if(Input.GetAxis("DPADVert" + playerNumber) != previousDpadAxisY)
 			{
-				cs.ScrollVertically();
+				cs.ScrollVertically(this);
 			}
 		}
 
 		// Button commands
-		if(Input.GetButtonDown("Select1"))
+		if(Input.GetButtonDown("Select" + playerNumber))
 		{
 			print ("select");
-			cs.SelectCharacter();
+			cs.SelectCharacter(this);
 		}
-		if(Input.GetButtonDown("DeSelect1"))
+		if(Input.GetButtonDown("DeSelect" + playerNumber))
 		{
-			cs.DeSelectCharacter();
+			cs.DeSelectCharacter(this);
 			print ("deselect");
 		}
 		if(Input.GetButtonDown("StartAll"))
 		{
 			cs.TryStartGame();
 		}
+	}
+
+	void VehicleInput()
+	{
+		print ("in vehicle");
 	}
 }

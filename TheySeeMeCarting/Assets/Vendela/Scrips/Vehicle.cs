@@ -3,11 +3,15 @@ using System.Collections;
 
 public class Vehicle : MonoBehaviour {
 
+	//health
+	public int life;
+	public bool isImmortal;
 
 	public int playerNum;
 
 	public float speed;
 	public float speedRotation;
+	public Player player;
 	
 	public Vector3 gravityVel = Vector3.zero;
 
@@ -29,15 +33,16 @@ public class Vehicle : MonoBehaviour {
 	}
 		
 	
-	void OnGUI(){
+	/*void OnGUI(){
 		Rect r = new Rect(32,32,512,32);
-		GUI.Box (r,"Forward1 = " + Input.GetAxis ("Forward1"));
+		GUI.Box (r,"Player= " + playerNum);
 
 		r.y += r.height;
 
-		GUI.Box (r,"Forward2 = " + Input.GetAxis ("Forward2"));
+		GUI.Box (r,"Forward2 = " + Input.GetAxis ("Forward2") + playerNum);
+		}*/
 	
-	}
+
 
 	void FixedUpdate(){
 
@@ -47,7 +52,7 @@ public class Vehicle : MonoBehaviour {
 
 		if(Input.GetButtonDown ("Fire" + playerNum))
 		{
-			PickupSpawner spawner = gameObject.GetComponent<PickupSpawner>();
+			PickupSpawner_vcl spawner = gameObject.GetComponent<PickupSpawner_vcl>();
 			spawner.SpawnPickup();
 			//Fire();
 		}
@@ -117,5 +122,40 @@ public class Vehicle : MonoBehaviour {
 	public void Jump()
 	{
 		print ("jump");
+	}
+
+	public void CalcLife(){
+		
+		if (isImmortal == true){
+			return;
+		}
+		
+		
+		life--;
+		CheckGameOver ();
+		
+	}
+	
+	public void CheckGameOver(){
+		if (life == 0){
+			Debug.Log ("You have lost");
+			GameOver ();
+		}
+	}
+	
+	public void GameOver(){
+		Destroy (gameObject);
+	}
+	
+	public void setColor(){
+		MeshRenderer playerColor = gameObject.GetComponent<MeshRenderer>();
+		
+		if (isImmortal){
+			playerColor.material.color = Color.green;
+		}
+		
+		if (!isImmortal){
+			playerColor.material.color = Color.blue;
+		}
 	}
 }
