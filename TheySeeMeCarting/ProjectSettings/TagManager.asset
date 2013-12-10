@@ -9,6 +9,7 @@ TagManager:
   - Pickup
   - Mine
   - Waypoint
+  - Arena
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

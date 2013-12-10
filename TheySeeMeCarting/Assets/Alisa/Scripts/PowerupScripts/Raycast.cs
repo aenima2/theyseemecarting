@@ -45,7 +45,8 @@ public class Raycast : MonoBehaviour {
 					VehicleTest player = hit.collider.gameObject.GetComponent<VehicleTest>();
 					Rigidbody playerRB = hit.collider.gameObject.GetComponent<Rigidbody>();
 
-					playerRB.AddExplosionForce(500f, transform.position, 20f); 
+					playerRB.AddExplosionForce(300f, transform.position, 20f); 
+
 					player.CalcLife();
 					break;
 

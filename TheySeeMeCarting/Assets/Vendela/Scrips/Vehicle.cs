@@ -24,7 +24,7 @@ public class Vehicle : MonoBehaviour {
 
 	void Start(){
 
-		rigidbody.centerOfMass = new Vector3 (0f,-0.5f,0f);
+		rigidbody.centerOfMass = new Vector3 (0f,-1f,0f);
 
 	}
 		
@@ -41,13 +41,9 @@ public class Vehicle : MonoBehaviour {
 
 	void FixedUpdate(){
 
-		if (transform.position.y > 1.768831){
-		vel += Physics.gravity * Time.fixedDeltaTime;
+		if (transform.position.y > 2.628834){
+			vel += Physics.gravity * Time.fixedDeltaTime;
 		}
-	}
-	
-	void Update ()
-	{
 
 		if(Input.GetButtonDown ("Fire" + playerNum))
 		{
@@ -55,18 +51,22 @@ public class Vehicle : MonoBehaviour {
 			spawner.SpawnPickup();
 			//Fire();
 		}
-
+		
 		if(Input.GetButtonDown ("Jump" + playerNum))
 		{
 			Jump();
 		}
-
+		
 		vel *= Mathf.Pow(velDamp, Time.deltaTime);
 		rigidbody.velocity = vel * Time.deltaTime * speed;
-
+		
 		MoveForward();
-
+		
 		MoveBack();
+	}
+	
+	void Update ()
+	{
 
 		// D-pad test
 		if (Input.GetAxis ("Shuffle" + playerNum) > 0f){

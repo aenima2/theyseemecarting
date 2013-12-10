@@ -45,7 +45,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: .701675415, z: 0, w: .712496817}
-  m_LocalPosition: {x: -21.2781754, y: 1.03079414, z: -25.2328243}
+  m_LocalPosition: {x: 23.6897831, y: 2.81468105, z: -12.0509634}
   m_LocalScale: {x: 2.05170035, y: 2.05170035, z: 2.05170035}
   m_Children:
   - {fileID: 400002}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 100000}
-  rotDegree: 1
+  rotDegree: 10
   rayLength: 20
   done: 0
 --- !u!114 &11400004

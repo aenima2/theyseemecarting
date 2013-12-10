@@ -56,7 +56,9 @@ public class PickupSpawner : MonoBehaviour {
 			//Debug.Log ("Its a clone!");
 
 			MeshFilter pickupMesh = pickup.GetComponent<MeshFilter>();
+		
 			pickupMesh.mesh = gameObject.GetComponent<MeshFilter>().mesh;
+			pickupMesh.GetComponentsInChildren<MeshFilter>();
 
 			Transform pickupTransform = pickup.GetComponent<Transform>();
 			pickupTransform.localScale = transform.localScale;
@@ -68,7 +70,7 @@ public class PickupSpawner : MonoBehaviour {
 
 		if (pickup.rigidbody != null){
 
-			Vector3 throwAngle = new Vector3(0f, 20f, 10f);
+			Vector3 throwAngle = new Vector3(0f, 7f, 8f);
 		pickup.rigidbody.AddRelativeForce(throwAngle, ForceMode.VelocityChange);
 		}
 

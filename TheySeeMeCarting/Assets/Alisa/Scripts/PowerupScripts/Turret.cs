@@ -15,9 +15,23 @@ public class Turret : MonoBehaviour {
 
 	public float shootDelay;
 
+	Vector3 vel;
+
+	public float velDamp;
+
+	public float speed;
+
 	
 	void Start () {
 	
+	}
+
+	void FixedUpdate(){
+
+		//rigidbody.velocity += Physics.gravity * Time.deltaTime;
+
+		//vel *= Mathf.Pow(velDamp, Time.deltaTime);
+		//rigidbody.velocity = vel * Time.deltaTime * speed;
 	}
 
 	void Update () {
@@ -60,7 +74,7 @@ public class Turret : MonoBehaviour {
 	void Shoot(){
 
 		shootDelay += Time.deltaTime;
-		if (shootDelay>0.4f){
+		if (shootDelay>0.2f){
 		SpawnBullet ();
 			shootDelay = 0.0f;
 		}
@@ -78,5 +92,10 @@ public class Turret : MonoBehaviour {
 
 	}
 
-
+//	void OnCollisionEnter(Collision other){
+//
+//		if(other.gameObject.tag == "Arena"){
+//			rigidbody.drag = 3f;
+//		}
+//	}
 }
