@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
 	// Player info
 	public string playerName;
+	public Color playerCol;
 
 	// Cart handling
 	public KeyCode forward;
@@ -13,6 +14,12 @@ public class Player : MonoBehaviour {
 	public KeyCode left;
 	public KeyCode right;
 	public KeyCode fire;
+
+	public float previousDpadAxisX;
+	public float previousDpadAxisY;
+
+	[System.NonSerialized] // Variable invisible in inspector
+	public Vector2 currentChar = Vector2.zero; // The index of the current character
 
 	// Menu handling
 	public bool inMenu = false;
@@ -37,6 +44,8 @@ public class Player : MonoBehaviour {
 
 	//private float nop; // Number of players
 
+	private CharSelect cs;
+
 
 
 	
@@ -46,6 +55,7 @@ public class Player : MonoBehaviour {
 
 	void Start ()
 	{
+		cs = FindObjectOfType<CharSelect>();
 		print ("start");
 		// Add bool if in menu (for control)
 		// Show Selectcharacter menu
@@ -55,10 +65,10 @@ public class Player : MonoBehaviour {
 	
 	void Update ()
 	{
-		if (inMenu == true)
-		{
+		//if (inMenu == true)
+		//{
 			MenuInput();
-		}
+		//}
 	}
 
 	public Cart SpawnCart(int pn)
@@ -91,7 +101,7 @@ public class Player : MonoBehaviour {
 		nop = gm.numberOfPlayers; // Sets number of players to "nop"
 
 		//Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
-
+		
 		// If 2 players
 		if (nop <= 2)
 		{
@@ -103,6 +113,7 @@ public class Player : MonoBehaviour {
 		{
 			if(pn == 0) // Set correct Camera rect for player 4
 			{
+				playerCol = Color.blue;
 				cam.rect = new Rect(0f, 0.5f, 0.5f, 0.5f);
 			}
 			else if(pn == 1) // Set correct Camera rect for player 4
@@ -128,18 +139,16 @@ public class Player : MonoBehaviour {
 
 	void MenuInput() // Add an in menu bool, so you change input depending on menu/game
 	{
-		CharSelect cs = FindObjectOfType<CharSelect>();
-
 		// Menu navigation
 		if(cs.hasSelected == false)
 		{
-			if(Input.GetAxis ("DPADHor1") != cs.previousDpadAxisX)
+			if(Input.GetAxis ( "DPADHor" + playerNumber ) != previousDpadAxisX)
 			{
-				cs.ScrollHorizontally();
+				cs.ScrollHorizontally(this);
 			}
-			if(Input.GetAxis ("DPADVert1") != cs.previousDpadAxisY)
+			if(Input.GetAxis ("DPADVert" + playerNumber) != previousDpadAxisY)
 			{
-				cs.ScrollVertically();
+				cs.ScrollVertically(this);
 			}
 		}
 

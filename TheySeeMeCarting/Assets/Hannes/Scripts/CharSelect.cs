@@ -11,21 +11,28 @@ public class CharSelect : MonoBehaviour {
 	public float previousDpadAxisX; // Previous D-pad X-axis input
 	[System.NonSerialized] // Variable invisible in inspector
 	public float previousDpadAxisY; // Previous D-pad Y-axis input
+	[System.NonSerialized] // Variable invisible in inspector
+	public float previousDpadAxisX1; // Previous D-pad X-axis input
+	[System.NonSerialized] // Variable invisible in inspector
+	public float previousDpadAxisY1; // Previous D-pad Y-axis input
 
 	public int rows; // Set number of row for the matrix
 	public int cols; // Set number of cols for the matrix
 	
 	public GameObject[] charsPrefabs; // All the different character prefabs
 	public GameObject[][] chars; // The game objects created to be showed on screen
-	[System.NonSerialized] // Variable invisible in inspector
-	public Vector2 currentChar = Vector2.zero; // The index of the current character
+	//[System.NonSerialized] // Variable invisible in inspector
+	//public Vector2 currentChar = Vector2.zero; // The index of the current character
 
 	[System.NonSerialized] // Don't display in inspector
 	public bool hasSelected = false; // For if player has selected a character
 
 	private bool startGameFailMsg = false; // Checks if all players have chosen a character
 
-	//private Player player;
+	[HideInInspector] // Don't display in inspector (same as [system.nonserialized]
+	public bool activateP2 = false;
+
+	private Player player;
 
 
 	void Start()
@@ -33,48 +40,38 @@ public class CharSelect : MonoBehaviour {
 		SpawnSelectableCharacters();
 		Cart cart = FindObjectOfType<Cart>();
 		cart.cartCam.enabled = false;
-		chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = selectedColor; // Highlight the first character at start
+		//chars[(int)player.currentChar.x][(int)player.currentChar.y].renderer.material.color = Color.blue; // Highlight the first character at start (using the same color as player1, if their color changes, change this color to match it
 
-		Player player = FindObjectOfType<Player>();
-		player.inMenu = true;
+		//player.inMenu = true;
 	}
 	
 	void Update()
 	{
-		/*if(Input.GetButtonDown("Select1"))
-		{
-			SelectCharacter();
-		}*/
-
-		/*if(Input.GetButtonDown("DeSelect1"))
-		{
-			DeSelectCharacter();
-		}*/
-
-		/*if(hasSelected == false)
-		{
-			if(Input.GetAxis ("DPADHor1") != previousDpadAxisX)
-			{
-				ScrollHorizontally();
-			}
-			if(Input.GetAxis ("DPADVert1") != previousDpadAxisY)
-			{
-				ScrollVertically();
-			}
-		}*/
-
-		/*if(Input.GetButtonDown("StartAll"))
-		{
-			TryStartGame();
-		}*/
+		if(player != null)
+			player.inMenu = true; // Move these out of here!!!
 	}
 
 	void OnGUI() {
-		GameObject selectedChar = charsPrefabs[(int)(currentChar.x + cols * currentChar.y)];
+
+		/*GameObject selectedChar = charsPrefabs[(int)(player.currentChar.x + cols * player.currentChar.y)];
 		
 		//Shows a label with the name of the selected character
 		string labelChar = selectedChar.name;
-		GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
+		GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);*/
+
+		// Activate player 2 stuff
+		if(activateP2 == true)
+		{
+		Rect player2msg = new Rect(0.15f, 0.85f, 0.4f, 0.2f);
+		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
+		GUI.Label (new Rect(NormalizeRect(player2msg)), "Player 2"); // Displays message
+		}
+		else
+		{
+		Rect activateP2msg = new Rect(0.15f, 0.85f, 0.4f, 0.2f);
+		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
+		GUI.Label (new Rect(NormalizeRect(activateP2msg)), "Press start to join"); // Displays message
+		}
 
 
 		// All players must select a character Msg
@@ -97,9 +94,9 @@ public class CharSelect : MonoBehaviour {
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				if (i == currentChar.x && j == currentChar.y)
+				if (i == player.currentChar.x && j == player.currentChar.y)
 				{
-					chars[i][j].renderer.material.color = selectedColor;
+					chars[i][j].renderer.material.color = player.playerCol;
 				}
 				else
 				{
@@ -115,14 +112,17 @@ public class CharSelect : MonoBehaviour {
 	 * and adding/subtracting to it depending on if you press left or right.
 	 * 
 	 */
-	public void ScrollHorizontally()
+	public void ScrollHorizontally(Player p)
 	{
+		print ("ScrollHorizontally()" + p.playerNumber);
+		player = p;
+
 		SetColor(); // Calls for SetColor function to add the highlight color to the current character
 
-		previousDpadAxisX = Input.GetAxis ("DPADHor1"); // Set the current D-pad X-axis as previous
-
-		currentChar.x += (int)previousDpadAxisX;
-		currentChar.x = Mathf.Clamp(currentChar.x, 0, rows - 1);
+		player.previousDpadAxisX = Input.GetAxis ("DPADHor" + player.playerNumber); // Set the current D-pad X-axis as previous
+		//print ("horizontally1");
+		player.currentChar.x += (int)player.previousDpadAxisX;
+		player.currentChar.x = Mathf.Clamp(player.currentChar.x, 0, rows - 1);
 	}
 
 	/*
@@ -131,16 +131,18 @@ public class CharSelect : MonoBehaviour {
 	 * and adding/subtracting to it depending on if you press up or down.
 	 * 
 	 */
-	public void ScrollVertically()
+	public void ScrollVertically(Player p)
 	{
+		print ("ScrollVertically()" + p.playerNumber);
+		player = p;
+
 		SetColor(); // Calls for SetColor function to add the highlight color to the current character
 
-		previousDpadAxisY = Input.GetAxis ("DPADVert1"); // Set the current D-pad Y-axis as previous
-
-		currentChar.y += (int)previousDpadAxisY;
-		currentChar.y = Mathf.Clamp(currentChar.y, 0, cols - 1);
+		previousDpadAxisY = Input.GetAxis ("DPADVert0" /*+ player.playerNumber*/); // Set the current D-pad Y-axis as previous
+		print ("vertically1");
+		player.currentChar.y += (int)previousDpadAxisY;
+		player.currentChar.y = Mathf.Clamp(player.currentChar.y, 0, cols - 1);
 	}
-
 
 	void SpawnSelectableCharacters()
 	{
@@ -168,13 +170,11 @@ public class CharSelect : MonoBehaviour {
 	{
 		hasSelected = true;
 
-		Player player = FindObjectOfType<Player>();
-
 		for (int i=0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				if (i == currentChar.x && j == currentChar.y)
+				if (i == player.currentChar.x && j == player.currentChar.y)
 				{
 					player.playerCharacter = chars[i][j].gameObject;
 					DontDestroyOnLoad(player.playerCharacter);
@@ -246,7 +246,6 @@ public class CharSelect : MonoBehaviour {
 		yield return new WaitForSeconds(waitTime);
 		startGameFailMsg = false;
 	}
-
 
 	/*
 	 * private Rect NormalizeRect

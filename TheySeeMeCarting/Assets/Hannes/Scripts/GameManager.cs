@@ -44,6 +44,23 @@ public class GameManager : MonoBehaviour {
 		foreach(GameObject playerPrefab in playerPrefabs)
 		{
 			Player player = (Instantiate(playerPrefab) as GameObject).GetComponent<Player>();
+
+			if(pn == 0) // Set correct Camera rect for player 4
+			{
+				player.playerCol = Color.blue;
+			}
+			else if(pn == 1) // Set correct Camera rect for player 4
+			{
+				player.playerCol = Color.red;
+			}
+			/*
+			else if(pn == 2) // Set correct Camera rect for player 4
+			{
+			}
+			else if(pn == 3) // Set correct Camera rect for player 4
+			{
+			}*/
+
 			player.playerNumber = pn;
 			players.Add(player); // Adds a new player to the game
 
