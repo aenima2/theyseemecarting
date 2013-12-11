@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CharSelect : MonoBehaviour { 
 
-	public Color notSelectedColor; // Standard de-selected color
+	public Color notSelectedColor; // Set de-selected color
 
 	[HideInInspector] // Variable invisible in inspector
 	public float previousDpadAxisX; // Previous D-pad X-axis input
@@ -16,9 +16,7 @@ public class CharSelect : MonoBehaviour {
 	
 	public GameObject[] charPrefabs; // All the different character prefabs
 	public GameObject[][] chars; // The game objects created to be showed on screen
-
-	private bool startGameFailMsg = false; // Checks if all players have chosen a character
-
+	
 	[HideInInspector]
 	public bool activateP2 = false;
 	[HideInInspector]
@@ -28,7 +26,9 @@ public class CharSelect : MonoBehaviour {
 
 	private Player player;
 	private GameManager gm;
-	
+	private GUIManager GUIMan;
+
+
 
 	void Start()
 	{
@@ -36,80 +36,16 @@ public class CharSelect : MonoBehaviour {
 		//Cart cart = FindObjectOfType<Cart>();
 		player = FindObjectOfType<Player>();
 		gm = FindObjectOfType<GameManager>();
+		GUIMan = FindObjectOfType<GUIManager>();
 
 		//cart.cartCam.enabled = false;
 	}
-	
-	void Update()
-	{
-
-	}
-
-	void OnGUI()
-	{
-		// Checks which character is selected at the moment and display it in the window
-		// Needs to be reworked due to problem with multiple players
-		if(player != null)
-		{
-			GameObject selectedChar = charPrefabs[(int)(player.currentChar.x + cols * player.currentChar.y)];
-			//Shows a label with the name of the selected character
-			string labelChar = selectedChar.name;
-			GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
-		}
-		
 
 
-		// Activate player 2 gui
-		if(activateP2 == true)
-		{
-		Rect player2msg = new Rect(0.15f, 0.85f, 0.4f, 0.2f);
-		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
-		GUI.Label (new Rect(NormalizeRect(player2msg)), "Player 2"); // Displays message
-		}
-		else
-		{
-		Rect activateP2msg = new Rect(0.15f, 0.85f, 0.4f, 0.2f);
-		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
-		GUI.Label (new Rect(NormalizeRect(activateP2msg)), "Press start to join"); // Displays message
-		}
-		// Activate player 3 gui
-		if(activateP3 == true)
-		{
-			Rect player2msg = new Rect(0.4f, 0.85f, 0.4f, 0.2f);
-			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
-			GUI.Label (new Rect(NormalizeRect(player2msg)), "Player 3"); // Displays message
-		}
-		else
-		{
-			Rect activateP2msg = new Rect(0.4f, 0.85f, 0.4f, 0.2f);
-			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
-			GUI.Label (new Rect(NormalizeRect(activateP2msg)), "Press start to join"); // Displays message
-		}
-		// Activate player 4 gui
-		if(activateP4 == true)
-		{
-			Rect player2msg = new Rect(0.65f, 0.85f, 0.4f, 0.2f);
-			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
-			GUI.Label (new Rect(NormalizeRect(player2msg)), "Player 4"); // Displays message
-		}
-		else
-		{
-			Rect activateP2msg = new Rect(0.65f, 0.85f, 0.4f, 0.2f);
-			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
-			GUI.Label (new Rect(NormalizeRect(activateP2msg)), "Press start to join"); // Displays message
-		}
-
-
-
-		// All players must select a character Msg
-		if(startGameFailMsg == true)
-		{
-			Rect playersMustSelect = new Rect(0.3f, 0.2f, 0.4f, 0.2f);
-			GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
-			GUI.Label (new Rect(NormalizeRect(playersMustSelect)), "All players must select a character"); // Displays message
-		}
-	}
-
+	/*
+	 * void SpawnSelectableCharacters
+	 * 
+	 */
 	void SpawnSelectableCharacters()
 	{
 		chars = new GameObject[rows][];
@@ -126,6 +62,7 @@ public class CharSelect : MonoBehaviour {
 			}
 		}
 	}
+
 
 	/*
 	 * void SetColor
@@ -158,6 +95,7 @@ public class CharSelect : MonoBehaviour {
 		}
 	}
 
+
 	/*
 	 * public void ScrollHorizontally
 	 * Scrolls through objects in the rows by comparing the value of the previously selected char
@@ -176,6 +114,7 @@ public class CharSelect : MonoBehaviour {
 		player.currentChar.x = Mathf.Clamp(player.currentChar.x, 0, rows - 1);
 	}
 
+
 	/*
 	 * public void ScrollVertically
 	 * Scrolls through objects in the cols by comparing the value of the previously selected char
@@ -193,6 +132,7 @@ public class CharSelect : MonoBehaviour {
 		player.currentChar.y += (int)previousDpadAxisY;
 		player.currentChar.y = Mathf.Clamp(player.currentChar.y, 0, cols - 1);
 	}
+
 	
 	/*
 	 * public void SelectCharacter
@@ -201,23 +141,14 @@ public class CharSelect : MonoBehaviour {
 	 */
 	public void SelectCharacter(Player p)
 	{
-
 		player = p;
-
 		player.hasSelected = true;
-		for (int i=0; i < rows; i++)
-		{
-			for (int j = 0; j < cols; j++)
-			{
-				if (i == player.currentChar.x && j == player.currentChar.y)
-				{
-					player.playerVehicle = chars[i][j].gameObject;
-					DontDestroyOnLoad(player.playerVehicle);
-				}
-			}
-		}
-		//currentChar = player.possibleCharacters;
+
+		GameObject selectedChar = charPrefabs[(int)(player.currentChar.x * 2 + player.currentChar.y)];
+		//print (selectedChar);
+		player.playerVehicle = selectedChar;
 	}
+
 
 	/*
 	 * public void SelectCharacter
@@ -227,9 +158,9 @@ public class CharSelect : MonoBehaviour {
 	public void DeSelectCharacter(Player p)
 	{
 		player = p;
-
 		player.hasSelected = false;
 	}
+
 
 	/*
 	 * public void TryStartGame
@@ -252,10 +183,11 @@ public class CharSelect : MonoBehaviour {
 		}
 		else
 		{
-			startGameFailMsg = true;
-			StartCoroutine(Coroutine1(2f)); // Active 2 sec
+			GUIMan.startGameFailMsg = true;
+			StartCoroutine(GUIMan.Coroutine1(2f)); // Active 2 sec
 		}
 	}
+
 
 	/*
 	 * void StartGame
@@ -265,38 +197,5 @@ public class CharSelect : MonoBehaviour {
 	void StartGame()
 	{
 		Application.LoadLevel("testlevel");
-		Player player = FindObjectOfType<Player>();
-		player.inMenu = false;
-		//Cart cart = FindObjectOfType<Cart>();
-		//cart.cartCam.enabled = true;
-		GameManager gm = FindObjectOfType<GameManager>();
-		player.SpawnVehicle(gm.pn);
-	}
-	
-	/*
-	 * IEnumerator Coroutine1
-	 * Adds wait time for the Start game fail message
-	 * 
-	 */
-	IEnumerator Coroutine1(float waitTime)
-	{
-		yield return new WaitForSeconds(waitTime);
-		startGameFailMsg = false;
-	}
-
-	/*
-	 * private Rect NormalizeRect
-	 * Normalizes the Rect in GUI so it stays on screen even when screen width and height changes
-	 * 
-	 */
-	private Rect NormalizeRect(Rect r)
-	{
-		r.x *= Screen.width;		
-		r.y *= Screen.height;
-		
-		r.width *= Screen.width;
-		r.height *= Screen.height;
-		
-		return r;
 	}
 }

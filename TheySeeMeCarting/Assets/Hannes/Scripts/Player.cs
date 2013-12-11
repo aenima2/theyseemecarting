@@ -25,8 +25,8 @@ public class Player : MonoBehaviour {
 	[HideInInspector]
 	public Vector2 currentChar = Vector2.zero; // The index of the current character
 
-	// Menu handling
-	public bool inMenu = false;
+	//[HideInInspector]
+	public bool inMenu = false; // Menu handling
 
 	//public DelegateMenu delegateMenu;
 
@@ -43,10 +43,10 @@ public class Player : MonoBehaviour {
 	[HideInInspector]
 	public GameObject playerVehicle;
 
-	public List<GameObject> possibleCharacters; // used for multi char select
+	//public List<GameObject> possibleCharacters; // used for multi char select
 	public int characterIndex; // used for multi char select (change to static (i think))
 
-	public int playerNumber; // Player number
+	public float playerNumber; // Player number
 
 	//[HideInInspector]
 	//public int nop = 0; // Number of players
@@ -83,29 +83,20 @@ public class Player : MonoBehaviour {
 
 	}
 
-	public Vehicle SpawnVehicle(int pn)
+	public Vehicle SpawnVehicle(float pn)
 	{
-		print ("spawnvehicle function");
-		//float nop;
-
-		characterIndex = Random.Range (0, 3); // Set the cart to be spawned to random
-
+		// Spawn vehicle
 		if(GameObject.FindWithTag("CartSpawn") != null)
 		{
-		GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
-		cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
-		print ("found spawnloc");
-		vehicle = ((GameObject)Instantiate(playerVehicle/*[characterIndex-1]*/, cartSpawnLocations[0].position, Quaternion.identity)).GetComponent<Vehicle>();
-		print ("spawned cart");
-		}
-		else
-		{
-			print(Time.timeSinceLevelLoad);
+			GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
+			cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
+			vehicle = ((GameObject)Instantiate(playerVehicle, cartSpawnLocations[(int)pn].position, Quaternion.identity)).GetComponent<Vehicle>();
 		}
 
+		Cart cart = FindObjectOfType<Cart>();
 
-		//Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
-		//cam.enabled = true;
+		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
+		cam.enabled = true;
 		//print ("cam active");
 
 		//cart.player = this; // Sets to player
@@ -114,49 +105,34 @@ public class Player : MonoBehaviour {
 		//cart = ((GameObject)Instantiate(prefabCart, cartSpawnLocations[pn].position, Quaternion.identity)).GetComponent<Cart>();
 		//cart.player = this; // Sets to player
 
-		GameManager gm = FindObjectOfType<GameManager>(); // Gathers how many players that should spawn
-		// Failsafe to make sure there's a gamemanager in the scene
-		if(gm == null)
-		{
-			Debug.LogError("Couldn't find a Game Manager in the scene");
-		}
 
-		/*nop = gm.numberOfPlayers; // Sets number of players to "nop"
-
-		//Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
-		
 		// If 2 players
-		if (nop <= 2)
+		if (gm.nop <= 2)
 		{
-			cam.rect = new Rect(0f, 0.5f - (pn / nop), 1f, 0.5f);
+			cam.rect = new Rect(0f, 0.5f - (playerNumber / gm.nop), 1f, 0.5f);
 		}
 
 		// If more than 2 players
-		else if (nop > 2)
+		else if (gm.nop > 2)
 		{
-			if(pn == 0) // Set correct Camera rect for player 4
+			if(playerNumber == 0) // Set correct Camera rect for player 1
 			{
-				playerCol = Color.blue;
 				cam.rect = new Rect(0f, 0.5f, 0.5f, 0.5f);
 			}
-			else if(pn == 1) // Set correct Camera rect for player 4
+			else if(playerNumber == 1) // Set correct Camera rect for player 2
 			{
 				cam.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
 			}
-			else if(pn == 2) // Set correct Camera rect for player 4
+			else if(playerNumber == 2) // Set correct Camera rect for player 3
 			{
 				cam.rect = new Rect(0f, 0f, 0.5f, 0.5f);
 			}
-			else if(pn == 3) // Set correct Camera rect for player 4
+			else if(playerNumber == 3) // Set correct Camera rect for player 4
 			{
 				cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
 			}
-		}*/
+		}
 
-		//tank.tankColor = tankColor;
-		//tank.SetColor(tankColor);
-
-		//return cart;
 		return vehicle;
 	}
 	

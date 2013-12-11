@@ -54,12 +54,11 @@ MonoBehaviour:
   vehicle: {fileID: 11400000, guid: a042d5223840507489b1cfc583cbabf0, type: 2}
   spawner: {fileID: 11400000, guid: af80c931cf3fec144b8ae298098b59f4, type: 2}
   cartSpawnLocations: []
-  playerCharacter: {fileID: 0}
+  playerVehicle: {fileID: 0}
   possibleCharacters:
   - {fileID: 100002, guid: b841585000a227b41b61e83dd2d7cc37, type: 2}
   characterIndex: 0
   playerNumber: 0
-  nop: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
