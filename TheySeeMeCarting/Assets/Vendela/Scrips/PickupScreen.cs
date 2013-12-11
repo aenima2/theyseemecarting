@@ -35,11 +35,11 @@ public class PickupScreen : MonoBehaviour {
 				continue;
 			}
 			
-			//GUI.color = currentPlayer.vehicle.renderer.material.color;
+			GUI.color = currentPlayer.vehicle.renderer.material.color;
 			
 			
 			int life = currentPlayer.vehicle.life;
-			//TITTA NÄRMARE PÅ: float pickup = Pickup.pickupList;
+			//TITTA NÄRMARE PÅ!! int pickupList = currentPlayer.vehicle.pickupList.GetComponent <PickupSpawner_vcl>();
 			GUI.Box (r, players[i].name  + "\n" + "Life: " + life + "\n" + "Pickup: ");
 			r.y += r.height; 
 
