@@ -10,12 +10,14 @@ public class PendingPlayerActivation : MonoBehaviour {
 	private CharSelect cs;
 	private GameManager gm;
 	private Player player;
+	private GUIManager GUIMan;
 
 	void Start()
 	{
 		cs = FindObjectOfType<CharSelect>();
 		gm = FindObjectOfType<GameManager>();
 		player = FindObjectOfType<Player>();
+		GUIMan = FindObjectOfType<GUIManager>();
 	}
 
 	
@@ -33,7 +35,7 @@ public class PendingPlayerActivation : MonoBehaviour {
 		{
 			if(Input.GetButtonDown("360_StartButton1"))
 			{
-				cs.activateP2 = true;
+				GUIMan.activateP2 = true;
 				gm.CreatePlayers();
 				joinedP2 = true;
 				//if(cs.chars[0][1].renderer.material.color == cs.notSelectedColor)
@@ -45,7 +47,7 @@ public class PendingPlayerActivation : MonoBehaviour {
 		{
 			if(Input.GetButtonDown("360_StartButton2")) // OBS not correct button, for testpurpose only
 			{
-				cs.activateP3 = true;
+				GUIMan.activateP3 = true;
 				gm.CreatePlayers();
 				joinedP3 = true;
 				cs.chars[0][0].renderer.material.color = Color.green; // Marks the first character as player 2
@@ -56,7 +58,7 @@ public class PendingPlayerActivation : MonoBehaviour {
 		{
 			if(Input.GetButtonDown("360_BackButton0")) // OBS not correct button, for testpurpose only
 			{
-				cs.activateP4 = true;
+				GUIMan.activateP4 = true;
 				gm.CreatePlayers();
 				joinedP4 = true;
 				cs.chars[0][0].renderer.material.color = Color.yellow; // Marks the first character as player 2

@@ -11,16 +11,16 @@ public class GameManager : MonoBehaviour {
 	//public float numberOfPlayers; // Number of players (attached to class)
 	
 	public List<Player> players = new List<Player>();
-	public List<Cart> carts = new List<Cart>();
+	public List<Vehicle> vehicles = new List<Vehicle>();
 	
 	[HideInInspector]
 	public int pn = 0;
 	[HideInInspector]
-	public int nop;
+	public float nop;
 
 	void Awake()
 	{
-		DontDestroyOnLoad(transform.gameObject);
+		DontDestroyOnLoad(transform.gameObject); // might not be needed
 	}
 
 	void Start ()
@@ -56,8 +56,8 @@ public class GameManager : MonoBehaviour {
 			player.playerNumber = pn;
 			players.Add(player); // Adds a new player to the game
 
-			/*Cart cart = player.SpawnCart(pn); // Accessing the spawning function from the Spawn initiate script
-			carts.Add(cart); // Adds a new cart to the Game manager list*/
+			//Vehicle vehicle = player.SpawnVehicle(pn); // Accessing the spawning function from the Spawn initiate script
+			//vehicles.Add(vehicle); // Adds a new cart to the Game manager list
 			pn++;
 		}
 	}
