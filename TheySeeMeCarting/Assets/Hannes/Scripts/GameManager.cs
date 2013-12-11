@@ -13,20 +13,20 @@ public class GameManager : MonoBehaviour {
 	public List<Player> players = new List<Player>();
 	public List<Cart> carts = new List<Cart>();
 	
-	[System.NonSerialized]
+	[HideInInspector]
 	public int pn = 0;
+	[HideInInspector]
+	public int nop;
 
 	void Awake()
 	{
 		DontDestroyOnLoad(transform.gameObject);
-		SetNumberOfPlayers(1);
-		CreatePlayers();
 	}
 
 	void Start ()
 	{
-		//Activate here when full menu is made
-		//CreatePlayers();
+		SetNumberOfPlayers(1);
+		CreatePlayers();
 	}
 	
 	public void SetNumberOfPlayers(float n)
@@ -39,8 +39,6 @@ public class GameManager : MonoBehaviour {
 
 	public void CreatePlayers()
 	{
-		//int pn = 0;
-
 		foreach(GameObject playerPrefab in playerPrefabs)
 		{
 			Player player = (Instantiate(playerPrefab) as GameObject).GetComponent<Player>();

@@ -166,11 +166,10 @@ MonoBehaviour:
   vehicle: {fileID: 671119915}
   spawner: {fileID: 0}
   cartSpawnLocations: []
-  playerCharacter: {fileID: 0}
+  playerVehicle: {fileID: 0}
   possibleCharacters: []
   characterIndex: 0
   playerNumber: 0
-  nop: 0
 --- !u!4 &446954114
 Transform:
   m_ObjectHideFlags: 0
@@ -225,11 +224,10 @@ MonoBehaviour:
   vehicle: {fileID: 1345104557}
   spawner: {fileID: 0}
   cartSpawnLocations: []
-  playerCharacter: {fileID: 0}
+  playerVehicle: {fileID: 0}
   possibleCharacters: []
   characterIndex: 0
   playerNumber: 0
-  nop: 0
 --- !u!4 &460616354
 Transform:
   m_ObjectHideFlags: 0
