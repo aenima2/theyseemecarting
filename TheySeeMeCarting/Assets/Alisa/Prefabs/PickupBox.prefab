@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6687479, y: 2.6921308, z: -17.9595833}
+  m_LocalPosition: {x: 12.2181702, y: 2.93962765, z: -10.1913128}
   m_LocalScale: {x: 2.17806673, y: 2.17806673, z: 2.17806673}
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickups:
   - {fileID: 100004, guid: b0deb34151133ea4b85b338ddaad5140, type: 2}
-  - {fileID: 100002, guid: 3e4ed7b4c17df704fa20ab7ec08974c1, type: 2}
+  - {fileID: 100002, guid: d11479c62a2b2f24aa3a060c9eaa420c, type: 2}
   - {fileID: 100000, guid: 4666c817ee7b2964bbf916691cc8de6c, type: 2}
   - {fileID: 100000, guid: 9194a1620fcc55344b2114dc63c5c5d3, type: 2}
   - {fileID: 100000, guid: bb9055e803875de4da7aea2db98d98d3, type: 2}
@@ -97,10 +97,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626ad52d426fb174b81271f3ddac8256, type: 3}
+  m_Script: {fileID: 11500000, guid: 7958c920f2cfb7d46b17c1013e9dc49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlesSystem: {fileID: 19800000, guid: 45e0630b2f8fb1c4fa06c8a77782250b, type: 2}
+  particles: {fileID: 19800000, guid: 45e0630b2f8fb1c4fa06c8a77782250b, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

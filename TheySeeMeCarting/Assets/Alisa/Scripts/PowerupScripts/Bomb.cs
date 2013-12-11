@@ -25,8 +25,9 @@ public class Bomb : MonoBehaviour {
 
 	void Explode(){
 
-		ParticleFX particles = gameObject.GetComponent<ParticleFX>();
-		particles.SpawnFX();
+		FXSpawner fxSpawner = gameObject.GetComponent<FXSpawner>();
+		fxSpawner.SpawnFX();
+
 		Raycast ray = raycastHolder.GetComponentInChildren<Raycast>();
 		ray.RayCast();
 		Destroy (gameObject);

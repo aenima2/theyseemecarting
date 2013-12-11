@@ -5,7 +5,7 @@ public class Immortality : MonoBehaviour {
 
 	public float lifeSpan;
 
-	public VehicleTest spawner;
+	public Vehicle spawner;
 	
 	void Start () {
 		StartCoroutine (LifeSpan());

@@ -42,7 +42,7 @@ public class Raycast : MonoBehaviour {
 
 					done = true;
 
-					VehicleTest player = hit.collider.gameObject.GetComponent<VehicleTest>();
+					Vehicle player = hit.collider.gameObject.GetComponent<Vehicle>();
 					Rigidbody playerRB = hit.collider.gameObject.GetComponent<Rigidbody>();
 
 					playerRB.AddExplosionForce(300f, transform.position, 20f); 

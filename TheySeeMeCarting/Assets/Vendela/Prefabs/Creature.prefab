@@ -13,7 +13,6 @@ GameObject:
   - 23: {fileID: 2300000}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Creature
@@ -40,7 +39,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,8 +64,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.35976624, y: 8.40318966, z: -.900609016}
+  m_LocalRotation: {x: -.281805307, y: 0, z: 0, w: .959471643}
+  m_LocalPosition: {x: 3.35976624, y: 5.50697279, z: 7.45940495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -191,7 +190,7 @@ Rigidbody:
   m_AngularDrag: .0500000007
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &6500000
@@ -243,26 +242,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebe3104d18b2fd4caa7754182d95cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 5
+  isImmortal: 0
   playerNum: 1
   speed: 40
   speedRotation: 180
+  player: {fileID: 0}
   gravityVel: {x: 0, y: 0, z: 0}
   acc: 1
   accBack: .300000012
   velDamp: .100000001
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17877c9ec871c6845ba2bddd99918d34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 5
-  isImmortal: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,6 +266,7 @@ MonoBehaviour:
   pickupList: []
   currentPickup: 0
   PlayerNum: 1
+  previousDpadAxisX: 0
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
