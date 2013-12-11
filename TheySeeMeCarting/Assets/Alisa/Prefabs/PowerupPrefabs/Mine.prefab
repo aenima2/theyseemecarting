@@ -44,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6.29002047, z: 0}
   m_LocalScale: {x: .393650591, y: 6.16702986, z: .393650591}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -129,7 +129,6 @@ MonoBehaviour:
   caster: {fileID: 100002}
   rotDegree: 10
   rayLength: 20
-  done: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

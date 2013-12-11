@@ -31,18 +31,6 @@ public class Vehicle : MonoBehaviour {
 		rigidbody.centerOfMass = new Vector3 (0f,-1f,0f);
 
 	}
-		
-	
-	/*void OnGUI(){
-		Rect r = new Rect(32,32,512,32);
-		GUI.Box (r,"Player= " + playerNum);
-
-		r.y += r.height;
-
-		GUI.Box (r,"Forward2 = " + Input.GetAxis ("Forward2") + playerNum);
-		}*/
-	
-
 
 	void FixedUpdate(){
 
@@ -79,7 +67,6 @@ public class Vehicle : MonoBehaviour {
 
 			PickupSpawner_vcl pickupSpawner = gameObject.GetComponent<PickupSpawner_vcl>();
 			pickupSpawner.ShufflePickups();
-			Debug.Log ("shuffle");
 			
 		}
 

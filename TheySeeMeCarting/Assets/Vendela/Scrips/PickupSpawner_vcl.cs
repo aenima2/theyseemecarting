@@ -95,8 +95,6 @@ public class PickupSpawner_vcl : MonoBehaviour {
 			previousDpadAxisX = Input.GetAxis ("DPADHor" + vehicle.playerNum);
 			currentPickup += previousDpadAxisX;
 			currentPickup = Mathf.Clamp (currentPickup, 0f, pickupList.Count-1f);
-
-			Debug.Log (currentPickup);
 			
 		}
 		
