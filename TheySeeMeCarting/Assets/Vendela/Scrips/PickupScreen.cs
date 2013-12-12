@@ -34,6 +34,8 @@ public class PickupScreen : MonoBehaviour {
 			//TITTA NÄRMARE PÅ: PickupSpawner_vcl Pickup = GetComponent<PickupSpawner_vcl>();
 			PickupSpawner_vcl pickupSpawner = currentPlayer.vehicle.GetComponent<PickupSpawner_vcl>();
 
+			int pickupNum = pickupSpawner.pickupList.Count;
+
 			if (pickupSpawner.pickupList.Count > 0){
 
 			int currentP = (int)pickupSpawner.currentPickup;
@@ -53,8 +55,8 @@ public class PickupScreen : MonoBehaviour {
 			
 			int life = currentPlayer.vehicle.life;
 			//TITTA NÄRMARE PÅ!! int pickupList = currentPlayer.vehicle.pickupList.GetComponent <PickupSpawner_vcl>();
-			GUI.Box (r, players[i].name  + "\n" + "Life: " + life + "\n" + "Pickup: " + currentPickup);
-			r.y += r.height; 
+			GUI.Box (r, players[i].name  + "\n" + "Life: " + life + "\n" + pickupNum + " Pickups" + "\n" + "Current Pickup:"+ "\n" + currentPickup);
+			r.y += r.height + 10f; 
 
 		}
 		
