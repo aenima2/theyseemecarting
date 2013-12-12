@@ -6,6 +6,8 @@ public class VictoryScreen : MonoBehaviour {
 	
 	public int vic;
 	public bool isVictory;
+
+	public GameObject[] players;
 	
 	
 	void Start () {
@@ -23,14 +25,39 @@ public class VictoryScreen : MonoBehaviour {
 	}
 	// how victory is decided
 	void Update () {
+
+		checkWin ();
+
 		if(vic <= 0 && !isVictory){
 			Debug.Log ("You won");
-			
-			
-			
+
+			for (int i = 0; i < players.Length; i++) {
+				
+				Player currentPlayer = players[i].GetComponent<Player>();
+				
+				if(currentPlayer.vehicle != null){
+					Debug.Log (currentPlayer.name);
+					
+				}
+				
+			}
 			isVictory = true;
 			
 		}
 		
+	}
+
+	void checkWin(){
+
+		for (int i = 0; i < players.Length; i++) {
+
+			Player currentPlayer = players[i].GetComponent<Player>();
+
+			if(currentPlayer.vehicle == null){
+				vic--;
+
+			}
+			
+				}
 	}
 }
