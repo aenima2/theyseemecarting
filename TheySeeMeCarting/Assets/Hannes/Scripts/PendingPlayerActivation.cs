@@ -38,8 +38,8 @@ public class PendingPlayerActivation : MonoBehaviour {
 				GUIMan.activateP2 = true;
 				gm.CreatePlayers();
 				joinedP2 = true;
-				//if(cs.chars[0][1].renderer.material.color == cs.notSelectedColor)
-					//cs.chars[0][1].renderer.material.color = Color.red; // Marks the first character as player 2
+				if(cs.chars[0][1].renderer.material.color == cs.notSelectedColor)
+					cs.chars[0][1].renderer.material.color = Color.red; // Marks the first character as player 2
 				print("player 2 joined");
 			}
 		}

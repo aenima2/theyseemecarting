@@ -8,12 +8,12 @@ public class Player : MonoBehaviour {
 	public string playerName;
 	public Color playerCol;
 
-	// Cart handling
+	/*// Cart handling
 	public KeyCode forward;
 	public KeyCode back;
 	public KeyCode left;
 	public KeyCode right;
-	public KeyCode fire;
+	public KeyCode fire;*/
 
 	[HideInInspector]
 	public float previousDpadAxisX;
@@ -66,8 +66,8 @@ public class Player : MonoBehaviour {
 		print("number of players: " + gm.nop);
 		inMenu = true;
 		cs = FindObjectOfType<CharSelect>();
-		//if(playerNumber == 0)
-		//	cs.chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = Color.blue; // Highlight the first character at start (using the same color as player1, if their color changes, change this color to match it
+		if(playerNumber == 0)
+			cs.chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = Color.blue; // Highlight the first character at start (using the same color as player1, if their color changes, change this color to match it
 		// Add bool if in menu (for control)
 		// Show Selectcharacter menu
 		// Change prefab depending on player selection
@@ -96,8 +96,7 @@ public class Player : MonoBehaviour {
 		Cart cart = FindObjectOfType<Cart>();
 
 		Camera cam = cart.transform.FindChild("CartCam").GetComponent<Camera>(); // Get the camera from the cart
-		cam.enabled = true;
-		//print ("cam active");
+		cam.enabled = true; // Enable the cam
 
 		//cart.player = this; // Sets to player
 		//vehicle.player = this;
@@ -155,13 +154,11 @@ public class Player : MonoBehaviour {
 		// Button commands
 		if(Input.GetButtonDown("Select" + playerNumber))
 		{
-			print ("select");
 			cs.SelectCharacter(this);
 		}
 		if(Input.GetButtonDown("DeSelect" + playerNumber))
 		{
 			cs.DeSelectCharacter(this);
-			print ("deselect");
 		}
 		if(Input.GetButtonDown("StartAll"))
 		{
