@@ -58,7 +58,7 @@ public class CharSelect : MonoBehaviour {
 			chars[i] = new GameObject[rows];
 			for (int j = 0; j < cols; j++)
 			{
-				chars[i][j] = (GameObject) Instantiate (charPrefabs[i * cols + j], new Vector2(i + i * 0.2f,j + j * 0.2f), Quaternion.identity);
+				chars[i][j] = (GameObject) Instantiate (charPrefabs[i * cols + j], new Vector2(i + i * 1.4f,j + j * 0.4f), Quaternion.identity);
 			}
 		}
 	}
@@ -145,8 +145,9 @@ public class CharSelect : MonoBehaviour {
 		player.hasSelected = true;
 
 		GameObject selectedChar = charPrefabs[(int)(player.currentChar.x * 2 + player.currentChar.y)];
-		//print (selectedChar);
+		print (selectedChar);
 		player.playerVehicle = selectedChar;
+		print (player.playerVehicle);
 	}
 
 
@@ -196,6 +197,6 @@ public class CharSelect : MonoBehaviour {
 	 */
 	void StartGame()
 	{
-		Application.LoadLevel("testlevel");
+		Application.LoadLevel("_Build_01");
 	}
 }

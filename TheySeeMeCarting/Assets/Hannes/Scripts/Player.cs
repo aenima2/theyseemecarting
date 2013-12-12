@@ -66,8 +66,8 @@ public class Player : MonoBehaviour {
 		print("number of players: " + gm.nop);
 		inMenu = true;
 		cs = FindObjectOfType<CharSelect>();
-		if(playerNumber == 0)
-			cs.chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = Color.blue; // Highlight the first character at start (using the same color as player1, if their color changes, change this color to match it
+		//if(playerNumber == 0)
+		//	cs.chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = Color.blue; // Highlight the first character at start (using the same color as player1, if their color changes, change this color to match it
 		// Add bool if in menu (for control)
 		// Show Selectcharacter menu
 		// Change prefab depending on player selection
@@ -85,9 +85,11 @@ public class Player : MonoBehaviour {
 
 	public Vehicle SpawnVehicle(float pn)
 	{
+		print ("spawn vehicle script");
 		// Spawn vehicle
 		if(GameObject.FindWithTag("CartSpawn") != null)
 		{
+			print ("found cartspawn");
 			GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
 			cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
 			vehicle = ((GameObject)Instantiate(playerVehicle, cartSpawnLocations[(int)pn].position, Quaternion.identity)).GetComponent<Vehicle>();
