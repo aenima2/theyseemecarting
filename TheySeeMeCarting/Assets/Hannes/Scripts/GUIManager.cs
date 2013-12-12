@@ -28,6 +28,11 @@ public class GUIManager : MonoBehaviour {
 			GUI.Label(new Rect((Screen.width - 100) / 2, 20, 100, 50), labelChar);
 		}
 
+		// Show player 1 is active
+		Rect player1msg = new Rect(-0.05f, 0.85f, 0.4f, 0.2f);
+		GUI.skin.label.alignment = TextAnchor.MiddleCenter; // Centralizes the text
+		GUI.Label (new Rect(NormalizeRect(player1msg)), "Player 1"); // Displays message
+
 		// Activate player 2 gui
 		if(activateP2 == true)
 		{
