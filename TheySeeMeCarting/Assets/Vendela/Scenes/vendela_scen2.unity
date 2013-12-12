@@ -2487,7 +2487,7 @@ MonoBehaviour:
     x: .699999988
     y: .200000003
     width: .200000003
-    height: .200000003
+    height: .300000012
   r:
     serializedVersion: 2
     x: 0
@@ -3384,7 +3384,7 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: .5
+    y: -.5
     width: 1
     height: 1
   near clip plane: .300000012
