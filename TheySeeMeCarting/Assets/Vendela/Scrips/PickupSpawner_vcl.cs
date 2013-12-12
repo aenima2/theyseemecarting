@@ -11,9 +11,7 @@ public class PickupSpawner_vcl : MonoBehaviour {
 	
 	public int PlayerNum; 
 
-
-
-		
+	public float previousDpadAxisX;
 		
 	void Start () {
 		
@@ -43,6 +41,7 @@ public class PickupSpawner_vcl : MonoBehaviour {
 		int currentPickupInt = (int)currentPickup;
 		
 		GameObject pickup = (GameObject)Instantiate(pickupList[currentPickupInt], transform.position, transform.localRotation);
+
 		if (pickup.collider != null){
 			Physics.IgnoreCollision (pickup.collider, collider);
 		}
@@ -50,7 +49,7 @@ public class PickupSpawner_vcl : MonoBehaviour {
 		if (pickup.gameObject.name.Contains ("Immortality")){
 			
 			Immortality immo = pickup.GetComponent<Immortality>();
-			VehicleTest player = gameObject.GetComponent<VehicleTest>();
+			Vehicle player = gameObject.GetComponent<Vehicle>();
 			
 			immo.spawner = player;
 			
@@ -75,7 +74,7 @@ public class PickupSpawner_vcl : MonoBehaviour {
 		
 		if (pickup.rigidbody != null){
 			
-			Vector3 throwAngle = new Vector3(0f, 20f, 10f);
+			Vector3 throwAngle = new Vector3(0f, 7f, 8f);
 			pickup.rigidbody.AddRelativeForce(throwAngle, ForceMode.VelocityChange);
 		}
 		
@@ -90,24 +89,14 @@ public class PickupSpawner_vcl : MonoBehaviour {
 	public void ShufflePickups()
 	{
 		Vehicle vehicle = gameObject.GetComponent<Vehicle>();
-		
-		if (Input.GetAxis ("Shuffle" + vehicle.playerNum) < 0f){
-			
-			currentPickup -= 1f;
-			currentPickup = Mathf.Clamp (currentPickup, 0f, pickupList.Count-1f);
-			Debug.Log (currentPickup);
-			
-		}
-		
-		if (Input.GetAxis ("Shuffle" + vehicle.playerNum) > 0f){
 
-			
-			currentPickup += 1f;
+		if (Input.GetAxis ("DPADHor" + vehicle.playerNum) != previousDpadAxisX){
+
+			previousDpadAxisX = Input.GetAxis ("DPADHor" + vehicle.playerNum);
+			currentPickup += previousDpadAxisX;
 			currentPickup = Mathf.Clamp (currentPickup, 0f, pickupList.Count-1f);
-			Debug.Log (currentPickup);
 			
 		}
-		
 		
 	}
 

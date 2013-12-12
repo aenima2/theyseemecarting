@@ -5,6 +5,8 @@ public class Mine : MonoBehaviour {
 
 	public GameObject raycastHolder;
 
+	public ParticleSystem particles;
+
 
 	void Start () {
 	
@@ -19,8 +21,8 @@ public class Mine : MonoBehaviour {
 
 		if (other.gameObject.tag == "Player"){
 
-			ParticleFX particles = gameObject.GetComponent<ParticleFX>();
-			particles.SpawnFX();
+			FXSpawner fxSpawner = gameObject.GetComponent<FXSpawner>();
+			fxSpawner.SpawnFX();
 
 			Raycast ray = raycastHolder.GetComponentInChildren<Raycast>();
 			ray.RayCast ();
@@ -28,4 +30,5 @@ public class Mine : MonoBehaviour {
 		}
 		
 	}
+
 }

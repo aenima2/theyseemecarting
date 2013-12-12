@@ -25,9 +25,9 @@ public class Pickup : MonoBehaviour {
 		//If Collider is a Player
 		if (other.gameObject.tag == "Player"){
 
-			PickupSpawner colPlayer = other.gameObject.GetComponent<PickupSpawner>();
-			ParticleFX particles = gameObject.GetComponent<ParticleFX>();
-			particles.SpawnFX();
+			PickupSpawner_vcl colPlayer = other.gameObject.GetComponent<PickupSpawner_vcl>();
+			FXSpawner fxSpawner = gameObject.GetComponent<FXSpawner>();
+			fxSpawner.SpawnFX();
 
 			int i = colPlayer.pickupList.Count;
 

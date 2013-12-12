@@ -11,8 +11,6 @@ public class Raycast : MonoBehaviour {
 
 	public float rayLength;
 
-	public bool done;
-
 	void Start () {
 	
 	}
@@ -20,18 +18,11 @@ public class Raycast : MonoBehaviour {
 
 	void Update () {
 	
-		//if (!done){
-		//RayCast ();
-		//}
 	}
 				
 	public void RayCast(){
 
 		for (int i = 0; i < 361; i++) {
-			
-			if (i >= 359){
-				done = true;
-			}
 			
 			Vector3 rayDirection = transform.forward;
 			transform.Rotate (0f, rotDegree, 0f);
@@ -40,9 +31,7 @@ public class Raycast : MonoBehaviour {
 
 				if (hit.collider.gameObject.tag == "Player"){
 
-					done = true;
-
-					VehicleTest player = hit.collider.gameObject.GetComponent<VehicleTest>();
+					Vehicle player = hit.collider.gameObject.GetComponent<Vehicle>();
 					Rigidbody playerRB = hit.collider.gameObject.GetComponent<Rigidbody>();
 
 					playerRB.AddExplosionForce(300f, transform.position, 20f); 
@@ -51,9 +40,6 @@ public class Raycast : MonoBehaviour {
 					break;
 
 				}
-				Debug.Log("Raycast collision"+ hit.collider.name);
-				
-				Debug.DrawLine (transform.position, hit.point);
 			}
 
 		}

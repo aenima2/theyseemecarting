@@ -44,8 +44,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: .701675415, z: 0, w: .712496817}
-  m_LocalPosition: {x: 23.6897831, y: 2.81468105, z: -12.0509634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.014183, y: 4.63972569, z: -12.0509634}
   m_LocalScale: {x: 2.05170035, y: 2.05170035, z: 2.05170035}
   m_Children:
   - {fileID: 400002}
@@ -102,7 +102,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -131,7 +131,6 @@ MonoBehaviour:
   caster: {fileID: 100000}
   rotDegree: 10
   rayLength: 20
-  done: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,17 +139,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626ad52d426fb174b81271f3ddac8256, type: 3}
+  m_Script: {fileID: 11500000, guid: 7958c920f2cfb7d46b17c1013e9dc49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlesSystem: {fileID: 19800000, guid: 78f2be8e63f06d34c8f8b336e06d2dfb, type: 2}
+  particles: {fileID: 19800000, guid: 78f2be8e63f06d34c8f8b336e06d2dfb, type: 2}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255

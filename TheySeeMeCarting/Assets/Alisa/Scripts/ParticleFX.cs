@@ -3,19 +3,28 @@ using System.Collections;
 
 public class ParticleFX : MonoBehaviour {
 
-	public ParticleSystem particlesSystem;
-	
 	void Start () {
+
 	
 	}
 
 	void Update () {
-	
+
+		ParticleSystem ps = gameObject.GetComponent<ParticleSystem>();
+
+		if (!ps.isPlaying){
+
+			Destroy ();
+
+		}
+
 	}
 
-	public void SpawnFX(){
-		ParticleSystem particleFX = (ParticleSystem)Instantiate(particlesSystem, transform.position, Quaternion.identity);
+	void Destroy(){
+		Destroy (gameObject);
 	}
+	
+
 
 }
 

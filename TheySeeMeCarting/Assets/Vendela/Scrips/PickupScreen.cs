@@ -12,6 +12,8 @@ public class PickupScreen : MonoBehaviour {
 	public int fontSize;
 	
 	public GameObject[] players;
+
+	string currentPickup;
 	
 	
 	void OnGUI (){
@@ -30,7 +32,18 @@ public class PickupScreen : MonoBehaviour {
 			
 			Player currentPlayer = players[i].GetComponent<Player>();
 			//TITTA NÄRMARE PÅ: PickupSpawner_vcl Pickup = GetComponent<PickupSpawner_vcl>();
-			
+			PickupSpawner_vcl pickupSpawner = currentPlayer.vehicle.GetComponent<PickupSpawner_vcl>();
+
+			if (pickupSpawner.pickupList.Count > 0){
+
+			int currentP = (int)pickupSpawner.currentPickup;
+			currentPickup = pickupSpawner.pickupList[currentP].name;
+
+			}else{
+				currentPickup = "No pickups!";
+			}
+
+
 			if (currentPlayer.vehicle == null) {
 				continue;
 			}
@@ -40,7 +53,7 @@ public class PickupScreen : MonoBehaviour {
 			
 			int life = currentPlayer.vehicle.life;
 			//TITTA NÄRMARE PÅ!! int pickupList = currentPlayer.vehicle.pickupList.GetComponent <PickupSpawner_vcl>();
-			GUI.Box (r, players[i].name  + "\n" + "Life: " + life + "\n" + "Pickup: ");
+			GUI.Box (r, players[i].name  + "\n" + "Life: " + life + "\n" + "Pickup: " + currentPickup);
 			r.y += r.height; 
 
 		}
