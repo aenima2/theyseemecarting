@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CharPrefab : MonoBehaviour {
 
-	[HideInInspector]
+	//[HideInInspector]
 	public List<Player> players = new List<Player>(); // Adds a list of all possible players
 
 	
