@@ -3,9 +3,13 @@ using System.Collections;
 
 public class Turret : MonoBehaviour {
 
+	public GameObject spawnMaster;
+
 	public Transform turretHead;
 
-	public Transform enemy;
+	public Transform target;
+
+	public Transform[] targets;
 
 	public GameObject bulletPrefab;
 
@@ -21,6 +25,7 @@ public class Turret : MonoBehaviour {
 
 	public float speed;
 
+	public float damp;
 	
 	void Start () {
 	
@@ -37,7 +42,7 @@ public class Turret : MonoBehaviour {
 	void Update () {
 	
 
-		LocateEnemy ();
+		LocateTarget ();
 
 		StartCoroutine (LifeSpan());
 
@@ -64,9 +69,12 @@ public class Turret : MonoBehaviour {
 
 	}
 
-	void LocateEnemy(){
+	void LocateTarget(){
 
-		turretHead.LookAt (enemy);
+		Quaternion rotate = Quaternion.LookRotation(target.position - turretHead.position);
+		turretHead.rotation = Quaternion.Slerp (turretHead.rotation, rotate, Time.deltaTime * damp);
+
+		//turretHead.LookAt (target);
 
 
 	}

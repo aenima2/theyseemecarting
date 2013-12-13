@@ -84,7 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickups:
   - {fileID: 100004, guid: b0deb34151133ea4b85b338ddaad5140, type: 2}
-  - {fileID: 100002, guid: d11479c62a2b2f24aa3a060c9eaa420c, type: 2}
+  - {fileID: 100002, guid: 10b34decb72efa243b020a1fc241dd79, type: 2}
   - {fileID: 100000, guid: 4666c817ee7b2964bbf916691cc8de6c, type: 2}
   - {fileID: 100000, guid: 9194a1620fcc55344b2114dc63c5c5d3, type: 2}
   - {fileID: 100000, guid: bb9055e803875de4da7aea2db98d98d3, type: 2}

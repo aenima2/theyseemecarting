@@ -11,7 +11,7 @@ public class Vehicle : MonoBehaviour {
 
 	public float speed;
 	public float speedRotation;
-	public Player player;
+	//public Player player;
 	
 	public Vector3 gravityVel = Vector3.zero;
 
