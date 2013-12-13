@@ -27,7 +27,6 @@ public class PendingPlayerActivation : MonoBehaviour {
 			ActivatePlayer();
 	}
 
-	// Should 
 
 	void ActivatePlayer()
 	{

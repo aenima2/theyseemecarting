@@ -71,6 +71,11 @@ public class PickupSpawner_vcl : MonoBehaviour {
 			MeshRenderer pickupMat = pickup.GetComponent<MeshRenderer>();
 			pickupMat.material = gameObject.GetComponent<MeshRenderer>().material;
 		}
+
+		if (pickup.gameObject.name.Contains ("Turret")){
+			Turret t = pickup.gameObject.GetComponent<Turret>();
+			t.spawnMaster = gameObject;
+		}
 		
 		if (pickup.rigidbody != null){
 			

@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.18711281, y: 5.71632862, z: -2.52142119}
+  m_LocalPosition: {x: -10.1271267, y: 3.18897724, z: -2.52142119}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -201,14 +201,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6c553dcfaae6b49b9d75b9d72cd1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnMaster: {fileID: 0}
   turretHead: {fileID: 400000}
-  enemy: {fileID: 0}
+  target: {fileID: 0}
+  targets: []
   bulletPrefab: {fileID: 100000, guid: 50690e9830f610848a4fe8163f73b6a2, type: 2}
   lifeSpan: 50
   destroyedFX: {fileID: 19800000, guid: be1ef7f22ca20cd498dcf504477bc762, type: 2}
   shootDelay: 0
   velDamp: .100000001
   speed: 100
+  damp: 2
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
