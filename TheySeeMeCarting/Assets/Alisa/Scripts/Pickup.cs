@@ -31,8 +31,6 @@ public class Pickup : MonoBehaviour {
 
 			int i = colPlayer.pickupList.Count;
 
-			Debug.Log (i);
-
 			if (i > 2){
 				colPlayer.pickupList.RemoveAt(0);
 			}

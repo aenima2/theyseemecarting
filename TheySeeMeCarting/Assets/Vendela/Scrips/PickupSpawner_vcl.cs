@@ -32,15 +32,16 @@ public class PickupSpawner_vcl : MonoBehaviour {
 	//Spawn pickups
 	public void SpawnPickup(){
 		
-		
 		//if pickup list is empty, don't spawn.
 		if (pickupList.Count == 0){
 			return;
 		}
 		
 		int currentPickupInt = (int)currentPickup;
-		
+
+
 		GameObject pickup = (GameObject)Instantiate(pickupList[currentPickupInt], transform.position, transform.localRotation);
+		Debug.Log ("Spawned");
 
 		if (pickup.collider != null){
 			Physics.IgnoreCollision (pickup.collider, collider);
@@ -60,7 +61,6 @@ public class PickupSpawner_vcl : MonoBehaviour {
 		}
 
 		if (pickup.gameObject.name.Contains ("Replicant")){
-			//Debug.Log ("Its a clone!");
 			
 			MeshFilter pickupMesh = pickup.GetComponent<MeshFilter>();
 			pickupMesh.mesh = gameObject.GetComponent<MeshFilter>().mesh;
@@ -73,14 +73,15 @@ public class PickupSpawner_vcl : MonoBehaviour {
 		}
 
 		if (pickup.gameObject.name.Contains ("Turret")){
-			Turret t = pickup.gameObject.GetComponent<Turret>();
+			Turret t = pickup.gameObject.GetComponentInChildren<Turret>();
 			t.spawnMaster = gameObject;
 		}
 		
 		if (pickup.rigidbody != null){
 			
-			Vector3 throwAngle = new Vector3(0f, 7f, 8f);
+			Vector3 throwAngle = new Vector3(0f, 7f, 40f);
 			pickup.rigidbody.AddRelativeForce(throwAngle, ForceMode.VelocityChange);
+
 		}
 		
 		//Remove spawned pickup from the list and reset currently chosen pickup to 0(first in list).

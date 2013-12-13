@@ -16,7 +16,7 @@ public class Replicant : MonoBehaviour {
 		GetWayPoints ();
 	}
 	void Start () {
-		Debug.Log (ClonePosition ());
+
 	}
 
 	void Update () {
