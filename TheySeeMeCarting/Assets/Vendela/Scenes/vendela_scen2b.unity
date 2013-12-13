@@ -2464,6 +2464,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1224231071}
   - 114: {fileID: 1224231070}
+  - 114: {fileID: 1224231072}
   m_Layer: 0
   m_Name: _CarManager
   m_TagString: Untagged
@@ -2509,6 +2510,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1224231072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1224231069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b2d690c45290c4bbf16470bf3fa2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vic: 1
+  isVictory: 0
+  players:
+  - {fileID: 783619034}
+  - {fileID: 850914961}
 --- !u!1001 &1253141370
 Prefab:
   m_ObjectHideFlags: 0
