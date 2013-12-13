@@ -15,8 +15,10 @@ public class CharSelect : MonoBehaviour {
 	public int cols; // Set number of cols for the matrix
 	
 	public GameObject[] charPrefabs; // All the different character prefabs
+	[HideInInspector]
+	public int charPrefabIndex;
 	public GameObject[][] chars; // The game objects created to be showed on screen
-	
+
 	[HideInInspector]
 	public bool activateP2 = false;
 	[HideInInspector]
@@ -32,6 +34,8 @@ public class CharSelect : MonoBehaviour {
 
 	void Start()
 	{
+
+
 		SpawnSelectableCharacters();
 		//Cart cart = FindObjectOfType<Cart>();
 		player = FindObjectOfType<Player>();
@@ -58,7 +62,7 @@ public class CharSelect : MonoBehaviour {
 			chars[i] = new GameObject[rows];
 			for (int j = 0; j < cols; j++)
 			{
-				chars[i][j] = (GameObject) Instantiate (charPrefabs[i * cols + j], new Vector2(i + i * 1.4f,j + j * 0.4f), Quaternion.identity);
+				chars[i][j] = (GameObject) Instantiate (charPrefabs[i * cols + j], new Vector2(i + i * 0.2f,j + j * 0.4f), Quaternion.identity);
 			}
 		}
 	}
@@ -144,10 +148,16 @@ public class CharSelect : MonoBehaviour {
 		player = p;
 		player.hasSelected = true;
 
-		GameObject selectedChar = charPrefabs[(int)(player.currentChar.x * 2 + player.currentChar.y)];
+		int selectedChar = (int)(player.currentChar.x * 2 + player.currentChar.y);
+		player.characterIndex = selectedChar;
 		print (selectedChar);
-		player.playerVehicle = selectedChar;
-		print (player.playerVehicle);
+
+		//GameObject selectedChar = charPrefabs[(int)(player.currentChar.x * 2 + player.currentChar.y)];
+
+		//print (charPrefabs[(int)(player.currentChar.x * 2 + player.currentChar.y)]);
+		//player.playerVehicle = selectedChar;
+
+	
 	}
 
 
@@ -197,6 +207,7 @@ public class CharSelect : MonoBehaviour {
 	 */
 	void StartGame()
 	{
+		//Application.LoadLevel("testlevel");
 		Application.LoadLevel("_Build_01");
 	}
 }

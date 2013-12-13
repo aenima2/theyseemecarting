@@ -270,6 +270,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: 77157f58402d4e848907bc3e6d117e4d, type: 2}
   - {fileID: 100000, guid: 42c40a647c5249f449506648d211d08a, type: 2}
   - {fileID: 100000, guid: 6a65c68b51998094e9d2833bb6ed97a6, type: 2}
+  charPrefabIndex: 0
   activateP2: 0
   activateP3: 0
   activateP4: 0

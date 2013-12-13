@@ -40,11 +40,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: 
   playerCol: {r: .254123718, g: .234050587, b: .816176474, a: 0}
-  forward: 0
-  back: 0
-  left: 0
-  right: 0
-  fire: 0
   previousDpadAxisX: 0
   previousDpadAxisY: 0
   hasSelected: 0
@@ -55,8 +50,13 @@ MonoBehaviour:
   spawner: {fileID: 11400000, guid: af80c931cf3fec144b8ae298098b59f4, type: 2}
   cartSpawnLocations: []
   playerVehicle: {fileID: 0}
-  possibleCharacters:
-  - {fileID: 100002, guid: b841585000a227b41b61e83dd2d7cc37, type: 2}
+  possibleCharacter:
+  - {fileID: 100012, guid: c85fa7e82e157da46a36abf64c987564, type: 2}
+  - {fileID: 100012, guid: 842c4ead9a80bdc47a8b51771020541b, type: 2}
+  - {fileID: 100012, guid: fce38b72da49e7d429bff6620c6d0101, type: 2}
+  - {fileID: 100012, guid: ff5542ab15ad30f4593a15fa807b4b4c, type: 2}
+  - {fileID: 100012, guid: 94dccd4aa34a6984fb40c2d922a766fb, type: 2}
+  - {fileID: 100012, guid: 260b9e8b1e7db0240892fa7ae9e9fc4d, type: 2}
   characterIndex: 0
   playerNumber: 0
 --- !u!1001 &100100000
