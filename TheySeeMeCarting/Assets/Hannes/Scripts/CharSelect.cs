@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CharSelect : MonoBehaviour { 
 
-	public Color notSelectedColor; // Set de-selected color
+	public Material notSelectedMat;
 
 	[HideInInspector] // Variable invisible in inspector
 	public float previousDpadAxisX; // Previous D-pad X-axis input
@@ -25,7 +25,7 @@ public class CharSelect : MonoBehaviour {
 	public bool activateP3 = false;
 	[HideInInspector]
 	public bool activateP4 = false;
-
+	
 	private Player player;
 	private GameManager gm;
 	private GUIManager GUIMan;
@@ -41,8 +41,6 @@ public class CharSelect : MonoBehaviour {
 		player = FindObjectOfType<Player>();
 		gm = FindObjectOfType<GameManager>();
 		GUIMan = FindObjectOfType<GUIManager>();
-
-		//cart.cartCam.enabled = false;
 	}
 
 
@@ -63,6 +61,10 @@ public class CharSelect : MonoBehaviour {
 			for (int j = 0; j < cols; j++)
 			{
 				chars[i][j] = (GameObject) Instantiate (charPrefabs[i * cols + j], new Vector2(i + i * 0.2f,j + j * 0.4f), Quaternion.identity);
+				chars[i][j].renderer.material = notSelectedMat;
+				//print ("start color: " + chars[i][j].renderer.material);
+				//print ("not selected mat: " + notSelectedMat);
+				//print ("start color: " + chars[i][j].renderer.material);
 			}
 		}
 	}
@@ -84,15 +86,24 @@ public class CharSelect : MonoBehaviour {
 				if (i == player.currentChar.x && j == player.currentChar.y)
 				{
 					charP.Select(player);
-					if(chars[i][j].renderer.material.color == notSelectedColor) // If a player already highlighted a character, don't highlight again
-						chars[i][j].renderer.material.color = player.playerCol;
+
+					if(chars[i][j].renderer.sharedMaterial == notSelectedMat) // If a character prefab is colored with the notSelected color, highlight it
+					{
+						chars[i][j].renderer.sharedMaterial = player.playerMat; // Match the color of the character with the player color
+					}
+
+					else
+					{
+						//chars[i][j].renderer.material.color = Color.black;
+						//print ("merge colors");
+					}
 				}
 				else
 				{
 					charP.DeSelect(player);
 					if(charP.players.Count < 1)
 					{
-						chars[i][j].renderer.material.color = notSelectedColor;
+						chars[i][j].renderer.material = notSelectedMat;
 					}
 				}
 			}
@@ -110,12 +121,14 @@ public class CharSelect : MonoBehaviour {
 	{
 		player = p;
 
-		SetColor(); // Calls for SetColor function to add the highlight color to the current character
+		//CharPrefab charP = FindObjectOfType<CharPrefab>();
 
 		player.previousDpadAxisX = Input.GetAxis ("DPADHor" + player.playerNumber); // Set the current D-pad X-axis as previous
 
 		player.currentChar.x += (int)player.previousDpadAxisX;
 		player.currentChar.x = Mathf.Clamp(player.currentChar.x, 0, rows - 1);
+
+		SetColor(); // Calls for SetColor function to add the highlight color to the current character
 	}
 
 
@@ -129,12 +142,12 @@ public class CharSelect : MonoBehaviour {
 	{
 		player = p;
 
-		SetColor(); // Calls for SetColor function to add the highlight color to the current character
-
 		previousDpadAxisY = Input.GetAxis ("DPADVert" + player.playerNumber); // Set the current D-pad Y-axis as previous
 
 		player.currentChar.y += (int)previousDpadAxisY;
 		player.currentChar.y = Mathf.Clamp(player.currentChar.y, 0, cols - 1);
+
+		SetColor(); // Calls for SetColor function to add the highlight color to the current character
 	}
 
 	
@@ -148,16 +161,7 @@ public class CharSelect : MonoBehaviour {
 		player = p;
 		player.hasSelected = true;
 
-		int selectedChar = (int)(player.currentChar.x * 2 + player.currentChar.y);
-		player.characterIndex = selectedChar;
-		print (selectedChar);
-
-		//GameObject selectedChar = charPrefabs[(int)(player.currentChar.x * 2 + player.currentChar.y)];
-
-		//print (charPrefabs[(int)(player.currentChar.x * 2 + player.currentChar.y)]);
-		//player.playerVehicle = selectedChar;
-
-	
+		player.characterIndex = (int)(player.currentChar.x * 2 + player.currentChar.y);
 	}
 
 

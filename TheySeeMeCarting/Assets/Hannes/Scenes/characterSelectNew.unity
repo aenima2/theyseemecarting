@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f060dc623c11a4a91df6a3a9ae4780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notSelectedColor: {r: 1, g: 1, b: 1, a: 0}
+  notSelectedMat: {fileID: 2100000, guid: 97f256c3991cfed46ba0743532bd43cf, type: 2}
   previousDpadAxisX: 0
   previousDpadAxisY: 0
   rows: 3
@@ -345,6 +345,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 100000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
+  player1mat: {fileID: 2100000, guid: 2734f482410d6c444b59ca3bdae060a0, type: 2}
+  player2mat: {fileID: 2100000, guid: 320a8096a88b3334bba474276634157b, type: 2}
+  player3mat: {fileID: 0}
+  player4mat: {fileID: 0}
   players: []
   vehicles: []
   pn: 0
@@ -395,6 +399,14 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3ca78aad9f361b1458117bba886d5b7f, type: 2}
+      propertyPath: player1mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2734f482410d6c444b59ca3bdae060a0, type: 2}
+    - target: {fileID: 11400000, guid: 3ca78aad9f361b1458117bba886d5b7f, type: 2}
+      propertyPath: player2mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 320a8096a88b3334bba474276634157b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ca78aad9f361b1458117bba886d5b7f, type: 2}
   m_RootGameObject: {fileID: 687948956}

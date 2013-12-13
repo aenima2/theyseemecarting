@@ -42,7 +42,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 97f256c3991cfed46ba0743532bd43cf, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8409ef0bb54ba6d408709d9bf96bc082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selected: 0
   players: []
 --- !u!136 &13600000
 CapsuleCollider:

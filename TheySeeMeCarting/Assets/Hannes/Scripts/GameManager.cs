@@ -7,6 +7,11 @@ public class GameManager : MonoBehaviour {
 	public GameObject playerPrefab;
 	private List<GameObject> playerPrefabs = new List<GameObject>(); // This is where you put the playerPrefabs to create lists from, probably good to make this more generic*/
 
+	public Material player1mat;
+	public Material player2mat;
+	public Material player3mat;
+	public Material player4mat;
+
 	//[System.NonSerialized] // Variable invisible in inspector
 	//public float numberOfPlayers; // Number of players (attached to class)
 	
@@ -18,6 +23,8 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector]
 	public float nop;
 
+	private CharSelect cs;
+
 	void Awake()
 	{
 		DontDestroyOnLoad(transform.gameObject); // might not be needed
@@ -27,6 +34,7 @@ public class GameManager : MonoBehaviour {
 	{
 		SetNumberOfPlayers(1);
 		CreatePlayers();
+		cs = FindObjectOfType<CharSelect>(); // Reference to CharSelect script
 	}
 	
 	public void SetNumberOfPlayers(float n)
@@ -45,11 +53,25 @@ public class GameManager : MonoBehaviour {
 
 			if(pn == 0) // Set correct color for player 1
 			{
-				player.playerCol = Color.blue;
+				player.playerMat = player1mat;
 			}
-			else if(pn == 1) // Set correct color for player 2
+			else if(pn == 1) // Select character and set color for player 3
 			{
-				player.playerCol = Color.red;
+				player.playerMat = player2mat;
+				CharPrefab charP = cs.chars[0][0].GetComponent<CharPrefab>();
+				charP.Select (player);
+			}
+			else if(pn == 2) // Select character and set color for player 3
+			{
+				player.playerMat = player3mat;
+				CharPrefab charP = cs.chars[0][0].GetComponent<CharPrefab>();
+				charP.Select (player);
+			}
+			else if(pn == 3) // Select character and set color for player 4
+			{
+				player.playerMat = player4mat;
+				CharPrefab charP = cs.chars[0][0].GetComponent<CharPrefab>();
+				charP.Select (player);
 			}
 
 			//player.inMenu = true;

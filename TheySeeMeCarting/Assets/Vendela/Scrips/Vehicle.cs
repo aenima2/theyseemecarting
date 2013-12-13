@@ -11,7 +11,7 @@ public class Vehicle : MonoBehaviour {
 
 	public float speed;
 	public float speedRotation;
-
+	
 	public Vector3 gravityVel = Vector3.zero;
 
 	public Camera vehicleCam;
@@ -68,7 +68,14 @@ public class Vehicle : MonoBehaviour {
 	{
 		player = p;
 
-		transform.Rotate(0f, speedRotation * Time.deltaTime * Input.GetAxis ("Horizontal" + player.playerNumber), 0f);
+		if(player.direction > 0) // If player is moving forward
+		{
+			transform.Rotate(0f, speedRotation * Time.deltaTime * Input.GetAxis ("Horizontal" + player.playerNumber), 0f);
+		}
+		else // If player is moving backwards
+		{
+			transform.Rotate(0f, -speedRotation * Time.deltaTime * Input.GetAxis ("Horizontal" + player.playerNumber), 0f);
+		}
 	}
 
 
@@ -82,7 +89,6 @@ public class Vehicle : MonoBehaviour {
 		player = p;
 
 		vel += transform.forward * acc * Input.GetAxis ("Forward" + player.playerNumber);
-
 	}
 
 

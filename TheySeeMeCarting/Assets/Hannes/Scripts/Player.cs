@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿  using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,9 +6,8 @@ public class Player : MonoBehaviour {
 
 	// Player info
 	public string playerName;
-	public Color playerCol;
-
-
+	public Material playerMat;
+	
 	[HideInInspector]
 	public float previousDpadAxisX;
 	[HideInInspector]
@@ -18,19 +17,15 @@ public class Player : MonoBehaviour {
 
 	[HideInInspector]
 	public Vector2 currentChar = Vector2.zero; // The index of the current character
+	[HideInInspector]
+	public GameObject curCharGO;
 
-	//[HideInInspector]
+	[HideInInspector]
 	public bool inMenu = false; // Menu handling
+	
+	public float direction; // Used to check if player is moving forward or back
 
-	//public DelegateMenu delegateMenu;
 
-	//[HideInInspector]
-	//public Cart cart; 
-
-	public Vehicle vehicle; // Vehicle script
-
-	private CharSelect cs; // CharSelect script
-	private GameManager gm; // GameManager script
 
 	public CartSpawnLoader spawner;
 
@@ -45,6 +40,11 @@ public class Player : MonoBehaviour {
 
 	public float playerNumber; // Player number
 
+	public Vehicle vehicle; // Vehicle script
+	private CharSelect cs; // CharSelect script
+	private GameManager gm; // GameManager script
+
+
 
 	
 	void Awake() {
@@ -58,11 +58,12 @@ public class Player : MonoBehaviour {
 
 		gm.nop++;
 		//print("number of players: " + gm.nop);
+
 		inMenu = true;
 
-		if(inMenu == true)
-			if(playerNumber == 0)
-				cs.chars[(int)currentChar.x][(int)currentChar.y].renderer.material.color = Color.blue; // Highlight the first character at start (using the same color as player1, if their color changes, change this color to match it
+		Player1SelectAtStart();
+
+
 	}
 
 	void FixedUpdate()
@@ -75,6 +76,23 @@ public class Player : MonoBehaviour {
 	{
 		if (inMenu == true)
 			MenuInput();
+	}
+
+
+	public void Player1SelectAtStart()
+	{
+		if(inMenu == true)
+		{
+			if(playerNumber == 0)
+			{
+				curCharGO = cs.chars[(int)currentChar.x][(int)currentChar.y]; // Set curCharGO by getting the charPrefab from current coordinates
+				
+				CharPrefab charP = curCharGO.GetComponent<CharPrefab>(); // Get reference from CharPrefab script
+				charP.Select (this); // Set curCharGO as selected
+				
+				curCharGO.renderer.material = playerMat; // Highlight the first character at start
+			}
+		}
 	}
 
 
@@ -161,8 +179,21 @@ public class Player : MonoBehaviour {
 	void VehicleInput()
 	{
 		// Vehicle navigation
-		vehicle.MoveForward(this); // Forward
-		vehicle.MoveBack(this); // Back
+		if(Input.GetAxis ("Forward" + playerNumber) != 0f)
+		{
+			//moveForw = true;
+			direction = (Input.GetAxis ("Forward" + playerNumber));
+			vehicle.MoveForward(this); // Forward
+		}
+
+		if(Input.GetAxis ("Back" + playerNumber) != 0f)
+		{
+			//moveForw = false;
+			direction = (Input.GetAxis ("Forward" + playerNumber));
+			vehicle.MoveBack(this); // Back
+		}
+
+
 		vehicle.VehicleRotation(this); // Rotate (was in update)
 
 		// Button commands
