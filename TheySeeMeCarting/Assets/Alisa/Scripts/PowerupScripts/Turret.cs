@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Turret : MonoBehaviour {
 
+	public GameObject spawnMaster;
+
 	public Transform turretHead;
 
-	public Transform enemy;
+	public Transform target;
 
 	public GameObject bulletPrefab;
 
@@ -21,27 +24,15 @@ public class Turret : MonoBehaviour {
 
 	public float speed;
 
+	public float damp;
 	
 	void Start () {
+
+	}
 	
-	}
-
-	void FixedUpdate(){
-
-		//rigidbody.velocity += Physics.gravity * Time.deltaTime;
-
-		//vel *= Mathf.Pow(velDamp, Time.deltaTime);
-		//rigidbody.velocity = vel * Time.deltaTime * speed;
-	}
-
 	void Update () {
-	
-
-		LocateEnemy ();
 
 		StartCoroutine (LifeSpan());
-
-		Shoot();
 
 		if (Input.GetKeyDown (KeyCode.A)){
 			SpawnBullet ();
@@ -64,17 +55,43 @@ public class Turret : MonoBehaviour {
 
 	}
 
-	void LocateEnemy(){
+	void LocateTarget(){
 
-		turretHead.LookAt (enemy);
+		if (target != null){
 
+		Quaternion rotate = Quaternion.LookRotation(target.position - turretHead.position);
+		turretHead.rotation = Quaternion.Slerp (turretHead.rotation, rotate, Time.deltaTime * damp);
 
+		}
 	}
+
+	void OnTriggerStay(Collider other){
+
+		if(other.gameObject != spawnMaster){
+
+			if (target == null){
+				target = other.transform;
+			}
+
+			float targetToTurret = Vector3.Distance (transform.position, target.transform.position);
+			float otherToTurret = Vector3.Distance (transform.position, other.transform.position);
+
+			if (targetToTurret > otherToTurret){
+
+			target = other.transform;
+
+			}
+
+			LocateTarget ();
+			Shoot ();
+
+		}
+		}
 
 	void Shoot(){
 
 		shootDelay += Time.deltaTime;
-		if (shootDelay>0.2f){
+		if (shootDelay>0.25f){
 		SpawnBullet ();
 			shootDelay = 0.0f;
 		}
@@ -92,10 +109,4 @@ public class Turret : MonoBehaviour {
 
 	}
 
-//	void OnCollisionEnter(Collision other){
-//
-//		if(other.gameObject.tag == "Arena"){
-//			rigidbody.drag = 3f;
-//		}
-//	}
 }

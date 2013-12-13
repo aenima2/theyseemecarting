@@ -46,7 +46,7 @@ public class VictoryScreen : MonoBehaviour {
 		}
 		
 	}
-
+	//checking who is the winner
 	void checkWin(){
 
 		for (int i = 0; i < players.Length; i++) {
