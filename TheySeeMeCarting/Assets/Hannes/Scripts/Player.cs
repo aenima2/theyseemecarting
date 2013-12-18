@@ -1,4 +1,4 @@
-﻿  using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -22,15 +22,16 @@ public class Player : MonoBehaviour {
 
 	[HideInInspector]
 	public bool inMenu = false; // Menu handling
+	public bool vehicleActive = false;
 	
 	public float direction; // Used to check if player is moving forward or back
 
 
 
-	public CartSpawnLoader spawner;
+	public VehicleSpawnLoader spawner;
 
 	[HideInInspector]
-	public List<Transform> cartSpawnLocations;
+	public List<Transform> vehicleSpawnLocations;
 
 	[HideInInspector]
 	public GameObject playerVehicle;
@@ -44,10 +45,10 @@ public class Player : MonoBehaviour {
 	private CharSelect cs; // CharSelect script
 	private GameManager gm; // GameManager script
 
-
-
 	
-	void Awake() {
+
+	void Awake()
+	{
 		DontDestroyOnLoad(transform.gameObject);
 	}
 
@@ -56,10 +57,8 @@ public class Player : MonoBehaviour {
 		gm = FindObjectOfType<GameManager>();
 		cs = FindObjectOfType<CharSelect>();
 
-		gm.nop++;
-		//print("number of players: " + gm.nop);
-
-		inMenu = true;
+		gm.nop++; // Increase number of players with 1
+		inMenu = true; // Set player controller to in menu
 
 		Player1SelectAtStart();
 
@@ -69,6 +68,7 @@ public class Player : MonoBehaviour {
 	void FixedUpdate()
 	{
 		if(inMenu == false)
+			if (vehicleActive == true)
 			VehicleInput();
 	}
 	
@@ -79,6 +79,12 @@ public class Player : MonoBehaviour {
 	}
 
 
+	/*
+	 * public void Player1SelectAtStart
+	 * Make sure the character the first player spawns on is selected in the system.
+	 * OBS! Might not be needed when the rest of the start menu is set up
+	 * 
+	 */
 	public void Player1SelectAtStart()
 	{
 		if(inMenu == true)
@@ -102,8 +108,8 @@ public class Player : MonoBehaviour {
 		if(GameObject.FindWithTag("CartSpawn") != null)
 		{
 			GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
-			cartSpawnLocations = spawnLoc.GetComponent<CartSpawnLoader>().cartSpawnLocations;
-			vehicle = ((GameObject)Instantiate(possibleCharacter[characterIndex]/*playerVehicle*/, cartSpawnLocations[(int)pn].position, Quaternion.identity)).GetComponent<Vehicle>();
+			vehicleSpawnLocations = spawnLoc.GetComponent<VehicleSpawnLoader>().vehicleSpawnLocations;
+			vehicle = ((GameObject)Instantiate(possibleCharacter[characterIndex]/*playerVehicle*/, vehicleSpawnLocations[(int)pn].position, Quaternion.identity)).GetComponent<Vehicle>();
 		}
 
 		Camera cam = vehicle.transform.FindChild("Camera").GetComponent<Camera>(); // Get the camera from the vehicle
@@ -151,14 +157,17 @@ public class Player : MonoBehaviour {
 		// Menu navigation
 		if(hasSelected == false)
 		{
-			if(Input.GetAxis("DPADHor" + playerNumber) != previousDpadAxisX)
-			{
+			// D-pad
+			/*if(Input.GetAxis("DPADHor" + playerNumber) != previousDpadAxisX)
 				cs.ScrollHorizontally(this);
-			}
 			if(Input.GetAxis("DPADVert" + playerNumber) != previousDpadAxisY)
-			{
+				cs.ScrollVertically(this);*/
+
+			// Left-stick
+			if(Input.GetAxis("Horizontal" + playerNumber) != previousDpadAxisX)
+				cs.ScrollHorizontally(this);
+			if(Input.GetAxis("Vertical" + playerNumber) != previousDpadAxisY)
 				cs.ScrollVertically(this);
-			}
 		}
 
 		// Button commands
@@ -192,7 +201,6 @@ public class Player : MonoBehaviour {
 			direction = (Input.GetAxis ("Forward" + playerNumber));
 			vehicle.MoveBack(this); // Back
 		}
-
 
 		vehicle.VehicleRotation(this); // Rotate (was in update)
 

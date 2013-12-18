@@ -7,6 +7,11 @@ public class GameManager_02 : MonoBehaviour {
 	public GameObject playerPrefab;
 	private List<GameObject> playerPrefabs = new List<GameObject>(); // This is where you put the playerPrefabs to create lists from, probably good to make this more generic*/
 
+	public Material player1mat;
+	public Material player2mat;
+	public Material player3mat;
+	public Material player4mat;
+
 	//[System.NonSerialized] // Variable invisible in inspector
 	//public float numberOfPlayers; // Number of players (attached to class)
 	
@@ -45,11 +50,11 @@ public class GameManager_02 : MonoBehaviour {
 
 			if(pn == 0) // Set correct color for player 1
 			{
-				player.playerCol = Color.blue;
+				player.playerMat = player1mat;
 			}
 			else if(pn == 1) // Set correct color for player 2
 			{
-				player.playerCol = Color.red;
+				player.playerMat = player2mat;
 			}
 
 			//player.inMenu = true;

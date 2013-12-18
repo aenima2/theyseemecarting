@@ -123,7 +123,8 @@ public class Vehicle : MonoBehaviour {
 	 */
 	public void Jump()
 	{
-		print ("jump");
+		//print ("jump");
+		vel += transform.up * 8;
 	}
 
 

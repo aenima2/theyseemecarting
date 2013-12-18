@@ -3,10 +3,13 @@ using System.Collections;
 
 public class InitLvl1 : MonoBehaviour {
 
+	private Player player;
 
 	void Start ()
 	{
 		Initialize();
+		player = FindObjectOfType<Player>();
+		StartCoroutine(ActivateVehicle(1)); // Holds vehicle control activation
 	}
 
 
@@ -22,5 +25,17 @@ public class InitLvl1 : MonoBehaviour {
 			p.inMenu = false;
 			p.vehicle = FindObjectOfType<Vehicle>();
 		}
+	}
+
+
+	/*
+	 * IEnumerator Coroutine1
+	 * Adds wait time for the vehicle controls to activate
+	 * 
+	 */
+	public IEnumerator ActivateVehicle(float waitTime)
+	{
+		yield return new WaitForSeconds(waitTime);
+		player.vehicleActive = true;
 	}
 }

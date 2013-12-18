@@ -121,9 +121,8 @@ public class CharSelect : MonoBehaviour {
 	{
 		player = p;
 
-		//CharPrefab charP = FindObjectOfType<CharPrefab>();
-
-		player.previousDpadAxisX = Input.GetAxis ("DPADHor" + player.playerNumber); // Set the current D-pad X-axis as previous
+		//player.previousDpadAxisX = Input.GetAxis("DPADHor" + player.playerNumber); // Set the current D-pad X-axis as previous
+		player.previousDpadAxisX = Input.GetAxis("Horizontal" + player.playerNumber); // Set the current left-stick X-axis as previous
 
 		player.currentChar.x += (int)player.previousDpadAxisX;
 		player.currentChar.x = Mathf.Clamp(player.currentChar.x, 0, rows - 1);
@@ -142,9 +141,10 @@ public class CharSelect : MonoBehaviour {
 	{
 		player = p;
 
-		previousDpadAxisY = Input.GetAxis ("DPADVert" + player.playerNumber); // Set the current D-pad Y-axis as previous
+		//previousDpadAxisY = Input.GetAxis ("DPADVert" + player.playerNumber); // Set the current D-pad Y-axis as previous
+		previousDpadAxisY = Input.GetAxis ("Vertical" + player.playerNumber); // Set the current left-stick Y-axis as previous
 
-		player.currentChar.y += (int)previousDpadAxisY;
+		player.currentChar.y -= (int)previousDpadAxisY;
 		player.currentChar.y = Mathf.Clamp(player.currentChar.y, 0, cols - 1);
 
 		SetColor(); // Calls for SetColor function to add the highlight color to the current character
