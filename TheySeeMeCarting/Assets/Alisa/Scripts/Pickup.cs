@@ -6,21 +6,20 @@ public class Pickup : MonoBehaviour {
 	public GameObject[] pickups;
 
 	public GameObject pickup;
+	
+	//private PickupSpawner spawner;
 
-	void Start () {
-
+	void Start()
+	{
+		//spawner = FindObjectOfType<PickupSpawner>();
 		int rand = Random.Range (0, pickups.Length);
 		pickup = pickups[rand];
 	}
 
-	void Update () {
-	
-	}
 
 	void OnTriggerEnter(Collider other){
 
-		Debug.Log ("Collision detected");
-
+		Debug.Log ("Collision detected ");
 
 		//If Collider is a Player
 		if (other.gameObject.tag == "Player"){
@@ -40,7 +39,5 @@ public class Pickup : MonoBehaviour {
 			//Destroy Pickup
 			Destroy (gameObject);
 		}
-
-		}
-
 	}
+}

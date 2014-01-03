@@ -39,9 +39,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 100000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
-  numberOfPlayers: 4
+  player1mat: {fileID: 2100000, guid: 2734f482410d6c444b59ca3bdae060a0, type: 2}
+  player2mat: {fileID: 2100000, guid: 320a8096a88b3334bba474276634157b, type: 2}
+  player3mat: {fileID: 2100000, guid: f603b988a4a8fc44c98d4d98e422d251, type: 2}
+  player4mat: {fileID: 2100000, guid: e5100a80c6b1e05409bac1aa51a5af8a, type: 2}
   players: []
-  carts: []
+  vehicles: []
+  pn: 0
+  nop: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

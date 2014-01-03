@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d26f90ea773c06498193578c8b3df69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cartSpawnLocations: []
+  vehicleSpawnLocations: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

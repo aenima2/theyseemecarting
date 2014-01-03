@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	public GameObject playerPrefab;
-	private List<GameObject> playerPrefabs = new List<GameObject>(); // This is where you put the playerPrefabs to create lists from, probably good to make this more generic*/
+	private List<GameObject> playerPrefabs = new List<GameObject>();
 
 	public Material player1mat;
 	public Material player2mat;
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 	{
 		for(int i=0; i < n; i++)
 		{
-			playerPrefabs.Add(playerPrefab); // Add set number of playerPrefabs to the playerPrefab list
+			playerPrefabs.Add(playerPrefab); // Add set number of playerPrefabs to the playerPrefabs list
 		}
 	}
 

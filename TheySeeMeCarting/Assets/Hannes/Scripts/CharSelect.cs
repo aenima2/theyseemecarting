@@ -15,8 +15,8 @@ public class CharSelect : MonoBehaviour {
 	public int cols; // Set number of cols for the matrix
 	
 	public GameObject[] charPrefabs; // All the different character prefabs
-	[HideInInspector]
-	public int charPrefabIndex;
+	//[HideInInspector]
+	//public int charPrefabIndex;
 	public GameObject[][] chars; // The game objects created to be showed on screen
 
 	[HideInInspector]
@@ -154,6 +154,7 @@ public class CharSelect : MonoBehaviour {
 	/*
 	 * public void SelectCharacter
 	 * If player has selected, sets hasSelected bool to true
+	 * sets the correct characterIndex so that the right character will spawn
 	 * 
 	 */
 	public void SelectCharacter(Player p)
@@ -161,7 +162,7 @@ public class CharSelect : MonoBehaviour {
 		player = p;
 		player.hasSelected = true;
 
-		player.characterIndex = (int)(player.currentChar.x * 2 + player.currentChar.y);
+		player.characterIndex = (int)(player.currentChar.x * 2 + player.currentChar.y); 
 	}
 
 
