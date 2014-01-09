@@ -45,6 +45,9 @@ public class Player : MonoBehaviour {
 	private CharSelect cs; // CharSelect script
 	private GameManager gm; // GameManager script
 
+	//private VehicleScript vhcl; // New Vehicle script
+
+
 	
 
 	void Awake()
@@ -150,7 +153,7 @@ public class Player : MonoBehaviour {
 
 		return vehicle;
 	}
-	
+
 
 	void MenuInput()
 	{

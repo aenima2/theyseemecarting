@@ -114,6 +114,9 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400012}
+  - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: Cart_01
   m_TagString: Player
@@ -497,7 +500,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   serializedVersion: 2
-  m_Mass: 2000
+  m_Mass: 100
   m_Drag: .100000001
   m_AngularDrag: .5
   m_UseGravity: 1
@@ -544,7 +547,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ebe3104d18b2fd4caa7754182d95cca, type: 3}
   m_Name: 
@@ -554,7 +557,6 @@ MonoBehaviour:
   playerNum: 0
   speed: 100
   speedRotation: 100
-  player: {fileID: 0}
   gravityVel: {x: 0, y: 0, z: 0}
   vehicleCam: {fileID: 2000000}
   acc: 1
@@ -617,6 +619,52 @@ MonoBehaviour:
   currentWheelCollider: {fileID: 14600004}
   slipPrefab: {fileID: 0}
   rotationValue: 0
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e153dc76c048642ace189530b39a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WheelL: {fileID: 14600006}
+  WheelR: {fileID: 14600002}
+  AntiRoll: 5000
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e153dc76c048642ace189530b39a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WheelL: {fileID: 14600000}
+  WheelR: {fileID: 14600004}
+  AntiRoll: 5000
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64b7088bda91534787c9bad9732e46e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelFL: {fileID: 14600000}
+  wheelFR: {fileID: 14600004}
+  wheelRL: {fileID: 14600006}
+  wheelRR: {fileID: 14600002}
+  steerMax: 20
+  motorMax: 10
+  brakeMax: 100
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -632,7 +680,7 @@ WheelCollider:
   m_GameObject: {fileID: 100004}
   m_Center: {x: -.899999976, y: -.360000014, z: 1.35000002}
   m_Radius: .5
-  m_SuspensionDistance: 0
+  m_SuspensionDistance: .200000003
   m_SuspensionSpring:
     spring: 1
     damper: 3
@@ -643,13 +691,13 @@ WheelCollider:
     extremumValue: 20000
     asymptoteSlip: 2
     asymptoteValue: 10000
-    stiffnessFactor: 1
+    stiffnessFactor: .200000003
   m_SidewaysFriction:
     extremumSlip: 1
     extremumValue: 20000
     asymptoteSlip: 2
     asymptoteValue: 10000
-    stiffnessFactor: 1
+    stiffnessFactor: .200000003
   m_Enabled: 1
 --- !u!146 &14600002
 WheelCollider:
@@ -659,7 +707,7 @@ WheelCollider:
   m_GameObject: {fileID: 100006}
   m_Center: {x: .899999976, y: -.360000014, z: -1.36000001}
   m_Radius: .5
-  m_SuspensionDistance: 0
+  m_SuspensionDistance: .200000003
   m_SuspensionSpring:
     spring: 1
     damper: 3
@@ -670,13 +718,13 @@ WheelCollider:
     extremumValue: 20000
     asymptoteSlip: 2
     asymptoteValue: 10000
-    stiffnessFactor: 1
+    stiffnessFactor: .200000003
   m_SidewaysFriction:
     extremumSlip: 1
     extremumValue: 20000
     asymptoteSlip: 2
     asymptoteValue: 10000
-    stiffnessFactor: 1
+    stiffnessFactor: .200000003
   m_Enabled: 1
 --- !u!146 &14600004
 WheelCollider:
@@ -686,7 +734,7 @@ WheelCollider:
   m_GameObject: {fileID: 100008}
   m_Center: {x: .899999976, y: -.360000014, z: 1.35000002}
   m_Radius: .5
-  m_SuspensionDistance: 0
+  m_SuspensionDistance: .200000003
   m_SuspensionSpring:
     spring: 1
     damper: 3
@@ -697,13 +745,13 @@ WheelCollider:
     extremumValue: 20000
     asymptoteSlip: 2
     asymptoteValue: 10000
-    stiffnessFactor: 1
+    stiffnessFactor: .200000003
   m_SidewaysFriction:
     extremumSlip: 1
     extremumValue: 20000
     asymptoteSlip: 2
     asymptoteValue: 10000
-    stiffnessFactor: 1
+    stiffnessFactor: .200000003
   m_Enabled: 1
 --- !u!146 &14600006
 WheelCollider:
@@ -713,7 +761,7 @@ WheelCollider:
   m_GameObject: {fileID: 100010}
   m_Center: {x: -.899999976, y: -.360000014, z: -1.36000001}
   m_Radius: .5
-  m_SuspensionDistance: 0
+  m_SuspensionDistance: .200000003
   m_SuspensionSpring:
     spring: 1
     damper: 3
@@ -724,13 +772,13 @@ WheelCollider:
     extremumValue: 20000
     asymptoteSlip: 2
     asymptoteValue: 10000
-    stiffnessFactor: 1
+    stiffnessFactor: .200000003
   m_SidewaysFriction:
     extremumSlip: 1
     extremumValue: 20000
     asymptoteSlip: 2
     asymptoteValue: 10000
-    stiffnessFactor: 1
+    stiffnessFactor: .200000003
   m_Enabled: 1
 --- !u!1001 &100100000
 Prefab:

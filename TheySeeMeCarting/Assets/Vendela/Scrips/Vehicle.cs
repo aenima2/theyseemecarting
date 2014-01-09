@@ -39,6 +39,7 @@ public class Vehicle : MonoBehaviour {
 	void FixedUpdate()
 	{
 		VehicleBehavior();
+		print ("criss");
 	}
 
 
