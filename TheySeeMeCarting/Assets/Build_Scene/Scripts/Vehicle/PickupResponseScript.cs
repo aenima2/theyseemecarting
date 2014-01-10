@@ -2,30 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PickupSpawner_vcl : MonoBehaviour {
-	
-	/*
-	public List<GameObject> pickupList;
-	
-	public float currentPickup;
-	
-	public int PlayerNum; 
+public class PickupResponseScript : MonoBehaviour {
 
+	public List<GameObject> pickupList;
+	public float currentPickup;
+	public int PlayerNum;
 	public float previousDpadAxisX;
-		
-	void Start () {
-		
-	}
+
+	private Vector3 curPosition;
 	
-	void Update () {
-		
+	private Player player;
+	
+
+	void Start()
+	{
+		player = FindObjectOfType<Player>();
+		curPosition = gameObject.transform.position;
+	}
+
+	void Update()
+	{
 		ShufflePickups();
-		
-		if (Input.GetKeyDown (KeyCode.R)){
-			
-			SpawnPickup ();
-		}
-		
+
+		if (Input.GetKeyDown (KeyCode.R))
+			SpawnPickup();
+
+		curPosition = gameObject.transform.position;
 	}
 	
 	
@@ -33,35 +35,30 @@ public class PickupSpawner_vcl : MonoBehaviour {
 	public void SpawnPickup(){
 		
 		//if pickup list is empty, don't spawn.
-		if (pickupList.Count == 0){
+		if (pickupList.Count == 0)
 			return;
-		}
 		
 		int currentPickupInt = (int)currentPickup;
-
-
+		
 		GameObject pickup = (GameObject)Instantiate(pickupList[currentPickupInt], transform.position, transform.localRotation);
 		Debug.Log ("Spawned");
-
-		if (pickup.collider != null){
+		
+		if (pickup.collider != null)
 			Physics.IgnoreCollision (pickup.collider, collider);
-		}
-
-		if (pickup.gameObject.name.Contains ("Immortality")){
-			
+		
+		if (pickup.gameObject.name.Contains ("Immortality"))
+		{	
 			Immortality immo = pickup.GetComponent<Immortality>();
-			Vehicle player = gameObject.GetComponent<Vehicle>();
-			
+			VehicleScript player = gameObject.GetComponent<VehicleScript>();
 			immo.spawner = player;
-			
-			
+
 			player.isImmortal = true;
 			
-			setPlayerMat ();
+			setPlayerMat();
 		}
-
-		if (pickup.gameObject.name.Contains ("Replicant")){
-			
+		
+		if (pickup.gameObject.name.Contains ("Replicant"))
+		{
 			MeshFilter pickupMesh = pickup.GetComponent<MeshFilter>();
 			pickupMesh.mesh = gameObject.GetComponent<MeshFilter>().mesh;
 			
@@ -71,17 +68,19 @@ public class PickupSpawner_vcl : MonoBehaviour {
 			MeshRenderer pickupMat = pickup.GetComponent<MeshRenderer>();
 			pickupMat.material = gameObject.GetComponent<MeshRenderer>().material;
 		}
-
-		if (pickup.gameObject.name.Contains ("Turret")){
+		
+		if (pickup.gameObject.name.Contains ("Turret"))
+		{
+			pickup.transform.position = new Vector3(curPosition.x, (curPosition.y + 0.8f), curPosition.z);
+			pickup.transform.parent = gameObject.transform;
 			Turret t = pickup.gameObject.GetComponentInChildren<Turret>();
 			t.spawnMaster = gameObject;
 		}
 		
-		if (pickup.rigidbody != null){
-			
+		if (pickup.rigidbody != null)
+		{
 			Vector3 throwAngle = new Vector3(0f, 7f, 40f);
 			pickup.rigidbody.AddRelativeForce(throwAngle, ForceMode.VelocityChange);
-
 		}
 		
 		//Remove spawned pickup from the list and reset currently chosen pickup to 0(first in list).
@@ -89,27 +88,23 @@ public class PickupSpawner_vcl : MonoBehaviour {
 		currentPickup = 0f;
 		
 	}
-	
-	
+
+
 	//Shuffle between pickups
 	public void ShufflePickups()
 	{
-		Vehicle vehicle = gameObject.GetComponent<Vehicle>();
-
-		if (Input.GetAxis ("DPADHor" + vehicle.playerNum) != previousDpadAxisX){
-
-			previousDpadAxisX = Input.GetAxis ("DPADHor" + vehicle.playerNum);
+		if (Input.GetAxis ("Shuffle" + player.playerNumber) != previousDpadAxisX)
+		{	
+			previousDpadAxisX = Input.GetAxis ("Shuffle" + player.playerNumber);
 			currentPickup += previousDpadAxisX;
 			currentPickup = Mathf.Clamp (currentPickup, 0f, pickupList.Count-1f);
-			
 		}
-		
 	}
+
 
 	void setPlayerMat(){
 		
 		MeshRenderer playerMat = gameObject.GetComponent<MeshRenderer>();
 		playerMat.material.color = Color.green;
 	}
-*/
 }

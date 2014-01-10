@@ -41,10 +41,11 @@ public class Player : MonoBehaviour {
 
 	public float playerNumber; // Player number
 
-	public Vehicle vehicle; // Vehicle script
+	//public Vehicle vehicle; // Vehicle script
 	private CharSelect cs; // CharSelect script
 	private GameManager gm; // GameManager script
 
+	public VehicleScript vehicle;
 	//private VehicleScript vhcl; // New Vehicle script
 
 
@@ -105,14 +106,14 @@ public class Player : MonoBehaviour {
 	}
 
 
-	public Vehicle SpawnVehicle(float pn)
+	public VehicleScript SpawnVehicle(float pn)
 	{
 		// Spawn vehicle
 		if(GameObject.FindWithTag("CartSpawn") != null)
 		{
 			GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
 			vehicleSpawnLocations = spawnLoc.GetComponent<VehicleSpawnLoader>().vehicleSpawnLocations;
-			vehicle = ((GameObject)Instantiate(possibleCharacter[characterIndex]/*playerVehicle*/, vehicleSpawnLocations[(int)pn].position, Quaternion.identity)).GetComponent<Vehicle>();
+			vehicle = ((GameObject)Instantiate(possibleCharacter[characterIndex]/*playerVehicle*/, vehicleSpawnLocations[(int)pn].position, Quaternion.identity)).GetComponent<VehicleScript>();
 		}
 
 		Camera cam = vehicle.transform.FindChild("Camera").GetComponent<Camera>(); // Get the camera from the vehicle
@@ -150,6 +151,8 @@ public class Player : MonoBehaviour {
 				cam.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
 			}
 		}
+
+		StartCoroutine (ActivateVehicleControls (1)); // Adds wait time before the controls activate, to give players a chance to get ready before the fight
 
 		return vehicle;
 	}
@@ -190,35 +193,54 @@ public class Player : MonoBehaviour {
 
 	void VehicleInput()
 	{
+		/*
 		// Vehicle navigation
 		if(Input.GetAxis ("Forward" + playerNumber) != 0f)
 		{
-			//moveForw = true;
-			direction = (Input.GetAxis ("Forward" + playerNumber));
-			vehicle.MoveForward(this); // Forward
+			//direction = (Input.GetAxis ("Forward" + playerNumber));
+			vehicle.Torque(this); // Forward
 		}
+		*/
 
+		/*
 		if(Input.GetAxis ("Back" + playerNumber) != 0f)
 		{
 			//moveForw = false;
 			direction = (Input.GetAxis ("Forward" + playerNumber));
-			vehicle.MoveBack(this); // Back
+			vehicle.Torque(this); // Back
 		}
+		*/
 
-		vehicle.VehicleRotation(this); // Rotate (was in update)
+		vehicle.Torque(this); // Forward/Back
 
+		vehicle.Steering(this); // Rotate
+
+		if(Input.GetButtonDown ("Fire" + playerNumber)) // Fire
+			vehicle.Fire();
+
+		/*
 		// Button commands
 		if(Input.GetButtonDown ("Jump" + playerNumber)) // Jump
-		{
 			vehicle.Jump();
-		}
-		if(Input.GetButtonDown ("Fire" + playerNumber)) // Fire
-		{
-			vehicle.Fire();
-		}
+		*/
+
 		if (Input.GetAxis ("Shuffle" + playerNumber) > 0f) // Scroll through pickups (was in update)
 		{
 			vehicle.ShufflePickups();
 		}
+	}
+
+
+	/*
+	 * IEnumerator Coroutine1
+	 * Adds wait time for the vehicle controls to activate
+	 * 
+	 */
+	public IEnumerator ActivateVehicleControls(float waitTime)
+	{
+		print ("before veh active");
+		yield return new WaitForSeconds(waitTime);
+		vehicleActive = true;
+		print ("after veh active");
 	}
 }

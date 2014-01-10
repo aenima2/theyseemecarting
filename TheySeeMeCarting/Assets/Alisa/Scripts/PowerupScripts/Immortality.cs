@@ -5,7 +5,7 @@ public class Immortality : MonoBehaviour {
 
 	public float lifeSpan;
 
-	public Vehicle spawner;
+	public VehicleScript spawner;
 	
 	void Start () {
 		StartCoroutine (LifeSpan());
@@ -18,7 +18,7 @@ public class Immortality : MonoBehaviour {
 	IEnumerator LifeSpan(){
 		yield return new WaitForSeconds(lifeSpan);
 		spawner.isImmortal = false;
-		spawner.setColor ();
+		spawner.SetColor ();
 		Destroy (gameObject);
 	}
 }

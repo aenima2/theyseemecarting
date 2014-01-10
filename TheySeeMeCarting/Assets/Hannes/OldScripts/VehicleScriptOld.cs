@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class VehicleScript : MonoBehaviour {		
+public class VehicleScriptOld : MonoBehaviour {		
 		
 	public WheelCollider wheelFL;
 	public WheelCollider wheelFR;
 	public WheelCollider wheelRL;
 	public WheelCollider wheelRR;
 	
-	public float steerMax = 20f;
-	public float motorMax = 10f;
-	public float brakeMax = 100f;
+	public float steerMax;
+	public float motorMax;
+	public float brakeMax;
 
-	private float steer = 0f;
-	public float motor = 0f;
-	private float brake = 0f;
+	public float steer;
+	public float motor;
+	public float brake;
 
 
 	private Player player;
@@ -29,20 +29,23 @@ public class VehicleScript : MonoBehaviour {
 	
 	void FixedUpdate()
 	{
-		steer = Mathf.Clamp(Input.GetAxis("Horizontal" + player.playerNumber), -1, 1);
-		motor = Mathf.Clamp(Input.GetAxis("Vertical" + player.playerNumber), 0, 1);
-		brake = -1 * Mathf.Clamp(Input.GetAxis("Vertical" + player.playerNumber), -1, 0);
-
-		MoveForward();
+		steer = Mathf.Clamp(Input.GetAxis("Horizontal0"), -1, 1);
+		motor = Mathf.Clamp(Input.GetAxis("Forward0"), 0, 1);
+		brake = -1 * Mathf.Clamp(Input.GetAxis("Back0"), -1, 0);
 
 		wheelRL.motorTorque = motorMax * motor;
 		wheelRR.motorTorque = motorMax * motor;
+
+		print ("speed " + motorMax * motor);
+
 		wheelRL.brakeTorque = brakeMax * brake;
 		wheelRR.brakeTorque = brakeMax * brake;
+
 		wheelFL.steerAngle = steerMax * steer;
 		wheelFR.steerAngle = steerMax * steer;
 	}
 
+	/*
 	public void MoveForward()
 	{
 		if (Input.GetAxis ("Forward0") != 0f)
@@ -53,4 +56,5 @@ public class VehicleScript : MonoBehaviour {
 			print (motorMax * Input.GetAxis("Forward0"));
 		}
 	}
+	*/
 }

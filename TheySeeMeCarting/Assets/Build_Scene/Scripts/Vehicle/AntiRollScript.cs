@@ -20,18 +20,31 @@ public class AntiRollScript : MonoBehaviour {
 		bool groundedR = WheelR.GetGroundHit(out hit);
 
 		if (groundedL)
+		{
 			travelL = (-WheelL.transform.InverseTransformPoint (hit.point).y - WheelL.radius) / WheelL.suspensionDistance;
+			//print ("grounded L");
+		}
 
 		if (groundedR)
+		{
 			travelR = (-WheelR.transform.InverseTransformPoint (hit.point).y - WheelR.radius) / WheelR.suspensionDistance;
+			//print ("grounded R");
+		}
 
 		float antiRollForce = (travelL - travelR) * AntiRoll;
 
-		if (groundedL)
-			rigidbody.AddForceAtPosition (WheelL.transform.up * -antiRollForce, WheelL.transform.position);
+		//print (antiRollForce);
 
-		if(groundedR)
+		if (groundedL)
+		{
+			rigidbody.AddForceAtPosition (WheelL.transform.up * -antiRollForce, WheelL.transform.position);
+			//print ("antiroll L");
+		}
+
+		if (groundedR)
+		{
 			rigidbody.AddForceAtPosition (WheelR.transform.up * antiRollForce, WheelR.transform.position);
-	
+			//print ("antiroll R");
+		}
 	}
 }

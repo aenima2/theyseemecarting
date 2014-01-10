@@ -109,12 +109,12 @@ public class Vehicle : MonoBehaviour {
 	 * public void Fire
 	 * Spawns a pickup from the PickupSpawner_vcl script in front of the vehicle
 	 * 
-	 */
+	 *
 	public void Fire()
 	{
 		PickupSpawner_vcl spawnPickup = gameObject.GetComponent<PickupSpawner_vcl>();
 		spawnPickup.SpawnPickup();
-	}
+	}*/
 
 
 	/*
@@ -133,12 +133,12 @@ public class Vehicle : MonoBehaviour {
 	 * public void ShufflePickups
 	 * Enables players to scroll through picked up pickups by calling the Function from the PickupSpawner_vcl
 	 * 
-	 */
+	 *
 	public void ShufflePickups()
 	{
 		PickupSpawner_vcl shufflePickup = gameObject.GetComponent<PickupSpawner_vcl>();
 		shufflePickup.ShufflePickups();
-	}
+	}*/
 
 
 	/*

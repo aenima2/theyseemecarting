@@ -40,11 +40,13 @@ public class Turret : MonoBehaviour {
 
 	}
 
-	Vector3 BulletSpawnLoc(){
+	Vector3 BulletSpawnLoc()
+	{
 		return turretHead.position + turretHead.forward * 1.15f;
 	}
 
-	void SpawnBullet(){
+	void SpawnBullet()
+	{
 
 		Vector3 bulletSpawnLoc = BulletSpawnLoc ();
 
@@ -65,11 +67,13 @@ public class Turret : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerStay(Collider other){
+	void OnTriggerStay(Collider other)
+	{
 
-		if(other.gameObject != spawnMaster){
-
-			if (target == null){
+		if(other.gameObject != spawnMaster)
+		{
+			if (target == null)
+			{
 				target = other.transform;
 			}
 
@@ -86,27 +90,29 @@ public class Turret : MonoBehaviour {
 			Shoot ();
 
 		}
-		}
+	}
 
 	void Shoot(){
 
 		shootDelay += Time.deltaTime;
-		if (shootDelay>0.25f){
-		SpawnBullet ();
+		if (shootDelay > 0.25f)
+		{
+			SpawnBullet ();
 			shootDelay = 0.0f;
 		}
 	}
 	
 
-	void DestructFX(){
-	ParticleSystem desFX = (ParticleSystem)Instantiate (destroyedFX, gameObject.transform.position, Quaternion.identity);
+	void DestructFX()
+	{
+		ParticleSystem desFX = (ParticleSystem)Instantiate (destroyedFX, gameObject.transform.position, Quaternion.identity);
 	}
 
-	IEnumerator LifeSpan(){
+	IEnumerator LifeSpan()
+	{
 		yield return new WaitForSeconds(lifeSpan);
 		DestructFX ();
 		Destroy (gameObject);
-
 	}
 
 }

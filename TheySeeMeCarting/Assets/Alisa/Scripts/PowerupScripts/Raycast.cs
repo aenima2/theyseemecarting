@@ -31,12 +31,12 @@ public class Raycast : MonoBehaviour {
 
 				if (hit.collider.gameObject.tag == "Player"){
 
-					Vehicle player = hit.collider.gameObject.GetComponent<Vehicle>();
+					VehicleScript vehicle = hit.collider.gameObject.GetComponent<VehicleScript>();
 					Rigidbody playerRB = hit.collider.gameObject.GetComponent<Rigidbody>();
 
 					playerRB.AddExplosionForce(300f, transform.position, 20f); 
 
-					player.CalcLife();
+					vehicle.CalcLife();
 					break;
 
 				}

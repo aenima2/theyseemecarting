@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour {
 
 		if (other.gameObject.tag == "Player"){
 
-			Vehicle vehicle = other.gameObject.GetComponent<Vehicle>();
+			VehicleScript vehicle = other.gameObject.GetComponent<VehicleScript>();
 			vehicle.CalcLife();
 
 		}

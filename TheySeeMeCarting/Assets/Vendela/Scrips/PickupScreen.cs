@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PickupScreen : MonoBehaviour {
 	
-	
+	/*
 	public Rect myRect;
 	
 	public Rect r;
@@ -67,7 +67,7 @@ public class PickupScreen : MonoBehaviour {
 		
 	}
 	
-
+	*/
 
 	
 	void Start () {
