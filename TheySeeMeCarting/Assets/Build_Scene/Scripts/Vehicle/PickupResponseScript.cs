@@ -71,7 +71,7 @@ public class PickupResponseScript : MonoBehaviour {
 		
 		if (pickup.gameObject.name.Contains ("Turret"))
 		{
-			pickup.transform.position = new Vector3(curPosition.x, (curPosition.y + 0.8f), curPosition.z);
+			pickup.transform.position = new Vector3(curPosition.x, (curPosition.y + 1f), curPosition.z);
 			pickup.transform.parent = gameObject.transform;
 			Turret t = pickup.gameObject.GetComponentInChildren<Turret>();
 			t.spawnMaster = gameObject;
@@ -93,9 +93,9 @@ public class PickupResponseScript : MonoBehaviour {
 	//Shuffle between pickups
 	public void ShufflePickups()
 	{
-		if (Input.GetAxis ("Shuffle" + player.playerNumber) != previousDpadAxisX)
+		if (Input.GetAxis ("Shuffle0") != previousDpadAxisX)
 		{	
-			previousDpadAxisX = Input.GetAxis ("Shuffle" + player.playerNumber);
+			previousDpadAxisX = Input.GetAxis ("Shuffle0");
 			currentPickup += previousDpadAxisX;
 			currentPickup = Mathf.Clamp (currentPickup, 0f, pickupList.Count-1f);
 		}

@@ -554,7 +554,6 @@ MonoBehaviour:
   playerNum: 0
   speed: 100
   speedRotation: 100
-  player: {fileID: 0}
   gravityVel: {x: 0, y: 0, z: 0}
   vehicleCam: {fileID: 2000000}
   acc: 1
@@ -571,10 +570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d17eae7d2a9adc48808ba350298481b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupList: []
-  currentPickup: 0
-  PlayerNum: 0
-  previousDpadAxisX: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

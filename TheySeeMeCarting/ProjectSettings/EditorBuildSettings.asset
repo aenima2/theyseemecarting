@@ -12,6 +12,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Hannes/Scenes/testlevel.unity
   - enabled: 1
-    path: Assets/Build_Scene/_Build_01.unity
+    path: Assets/Build_Scene/Scenes/_Build_01.unity
   - enabled: 1
-    path: Assets/Build_Scene/_characterSelect_01.unity
+    path: Assets/Build_Scene/Scenes/_characterSelect_01.unity
