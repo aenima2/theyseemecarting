@@ -542,6 +542,7 @@ MonoBehaviour:
   frontLeftWheel: {fileID: 14600006}
   frontRightWheel: {fileID: 14600004}
   engineTorque: 100
+  rotationSpeed: 60
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

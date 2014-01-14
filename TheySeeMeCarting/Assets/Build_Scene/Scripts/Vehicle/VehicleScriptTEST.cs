@@ -15,9 +15,12 @@ public class VehicleScriptTEST : MonoBehaviour {
 	//public float[] gearRatio;
 	//public int currentGear;
 	
-	public float engineTorque = 230.0f; // speed
+	public float engineTorque; // speed
+	private Vector3 speed;
+
+	//private float still;
 	
-	private float engineRPM = 0.0f;
+	private float engineRPM;
 	
 	private Camera vehicleCam; 
 	
@@ -38,10 +41,19 @@ public class VehicleScriptTEST : MonoBehaviour {
 	{
 		Torque();
 		Steering();
+
+		//if (speed.x == still)
+		//	AssistedSteering();
+
 		if (Input.GetButtonDown("Fire0"))
 			Fire();
 		if (Input.GetButtonDown("Shuffle0")) 
 			ShufflePickups();
+		if (Input.GetButtonDown("Jump0")) 
+			Jump();
+
+		speed = rigidbody.velocity; // Set actual velocity as speed
+		//print (speed.x);
 	}
 	
 	
@@ -58,12 +70,39 @@ public class VehicleScriptTEST : MonoBehaviour {
 	}
 	
 	
-	public void Steering ()
+	public void Steering()
 	{
 		// the steer angle is an arbitrary value multiplied by the user input.
-		frontLeftWheel.steerAngle = 10 * Input.GetAxis("Horizontal0");
-		frontRightWheel.steerAngle = 10 * Input.GetAxis("Horizontal0");
+		if (frontLeftWheel.motorTorque > 50) 
+		{
+			rigidbody.angularDrag = 20;
+			//frontLeftWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+			//frontRightWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+		} else
+		{
+			rigidbody.angularDrag = 1;
+			//frontLeftWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+			//frontRightWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+		}
+
+		frontLeftWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+		frontRightWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
 	}
+
+
+	public void AssistedSteering()
+	{
+		transform.Rotate(0f, 10 * Time.deltaTime * Input.GetAxis ("Horizontal0"), 0f);
+		print("turning");
+	}
+
+
+	public void Jump()
+	{
+		print ("jump");
+		rigidbody.AddForce (0f, 500000f, 0);
+	}
+
 	
 	public void Fire()
 	{
