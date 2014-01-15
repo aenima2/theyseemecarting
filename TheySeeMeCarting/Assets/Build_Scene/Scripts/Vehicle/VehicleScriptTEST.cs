@@ -42,6 +42,8 @@ public class VehicleScriptTEST : MonoBehaviour {
 		Torque();
 		Steering();
 
+		KeyBoardTorque();
+
 		//if (speed.x == still)
 		//	AssistedSteering();
 
@@ -99,6 +101,22 @@ public class VehicleScriptTEST : MonoBehaviour {
 		frontLeftWheel.motorTorque = engineTorque * Input.GetAxis("Forward0");
 		frontRightWheel.motorTorque = engineTorque * Input.GetAxis("Forward0");
 	}
+
+
+	void KeyBoardTorque()
+	{
+		if (Input.GetKey(KeyCode.W))
+		{
+			frontLeftWheel.motorTorque = engineTorque;
+			frontRightWheel.motorTorque = engineTorque;
+		}
+
+		if (Input.GetKey(KeyCode.S))
+		{
+			frontLeftWheel.motorTorque = -engineTorque;
+			frontRightWheel.motorTorque = -engineTorque;
+		}
+	}
 	
 	
 	public void Steering()
@@ -118,6 +136,15 @@ public class VehicleScriptTEST : MonoBehaviour {
 
 		frontLeftWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
 		frontRightWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+	}
+
+	void KeyBoardSteering()
+	{
+		if (Input.GetKey(KeyCode.A))
+		{
+			frontLeftWheel.steerAngle = 100;
+			frontRightWheel.steerAngle = 100;
+		}
 	}
 
 
