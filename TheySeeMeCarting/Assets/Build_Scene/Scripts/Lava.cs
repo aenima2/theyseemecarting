@@ -9,21 +9,25 @@ public class Lava : MonoBehaviour {
 
 	public GameObject testVehiclePrefab;
 
-	public VehicleScriptTEST vehicle;
+	private Player player;
+
+	public int currentPlayer;
+
+
+	public VehicleScript vehicle;
+
+	public VehicleScriptTEST vehicleTEST;
+
+	void Start()
+	{
+		player = FindObjectOfType<Player>();
+	}
 
 	void OnTriggerEnter(Collider other)
 	{
-		Destroy (other.gameObject);
-		SpawnVehicle();
-	}
+		other.GetComponent<VehicleScript>().CalcLife();
+		other.transform.position = new Vector3(40f, 3f, 40f);
 
-	void SpawnVehicle()
-	{
-		if(GameObject.FindWithTag("CartSpawn") != null)
-		{
-			GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
-			vehicleSpawnLocations = spawnLoc.GetComponent<VehicleSpawnLoader>().vehicleSpawnLocations;
-			vehicle = ((GameObject)Instantiate(testVehiclePrefab, vehicleSpawnLocations[0].position, Quaternion.identity)).GetComponent<VehicleScriptTEST>();
-		}
+		//Destroy (other.gameObject.transform.parent.gameObject);
 	}
 }

@@ -41,7 +41,7 @@ public class PickupResponseScript : MonoBehaviour {
 		int currentPickupInt = (int)currentPickup;
 		
 		GameObject pickup = (GameObject)Instantiate(pickupList[currentPickupInt], transform.position, transform.localRotation);
-		Debug.Log ("Spawned");
+		//Debug.Log ("Spawned");
 		
 		if (pickup.collider != null)
 			Physics.IgnoreCollision (pickup.collider, collider);
@@ -71,8 +71,8 @@ public class PickupResponseScript : MonoBehaviour {
 		
 		if (pickup.gameObject.name.Contains ("Turret"))
 		{
-			pickup.transform.position = new Vector3(curPosition.x, (curPosition.y + 1f), curPosition.z);
-			pickup.transform.parent = gameObject.transform;
+			pickup.transform.position = new Vector3(curPosition.x, (curPosition.y + 1f), curPosition.z); // Spawns at player position
+			pickup.transform.parent = gameObject.transform; // Adds itself as parent to vehicle
 			Turret t = pickup.gameObject.GetComponentInChildren<Turret>();
 			t.spawnMaster = gameObject;
 		}

@@ -34,10 +34,7 @@ public class CharSelect : MonoBehaviour {
 
 	void Start()
 	{
-
-
 		SpawnSelectableCharacters();
-		//Cart cart = FindObjectOfType<Cart>();
 		player = FindObjectOfType<Player>();
 		gm = FindObjectOfType<GameManager>();
 		GUIMan = FindObjectOfType<GUIManager>();
@@ -213,6 +210,7 @@ public class CharSelect : MonoBehaviour {
 	void StartGame()
 	{
 		//Application.LoadLevel("testlevel");
-		Application.LoadLevel("_Build_01");
+		//Application.LoadLevel("_Build_01");
+		Application.LoadLevel("Prototype");
 	}
 }

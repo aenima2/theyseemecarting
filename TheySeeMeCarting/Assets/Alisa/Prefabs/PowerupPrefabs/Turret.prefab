@@ -239,7 +239,7 @@ MonoBehaviour:
   turretHead: {fileID: 400000}
   target: {fileID: 0}
   bulletPrefab: {fileID: 100000, guid: 50690e9830f610848a4fe8163f73b6a2, type: 2}
-  lifeSpan: 200
+  lifeSpan: 20
   destroyedFX: {fileID: 19800000, guid: be1ef7f22ca20cd498dcf504477bc762, type: 2}
   shootDelay: 0
   velDamp: .100000001
@@ -290,7 +290,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 100004}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: .5
   m_Height: 2
   m_Direction: 1

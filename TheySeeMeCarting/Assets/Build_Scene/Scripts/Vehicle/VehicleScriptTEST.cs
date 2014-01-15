@@ -17,16 +17,16 @@ public class VehicleScriptTEST : MonoBehaviour {
 	
 	public float engineTorque; // speed
 	private Vector3 speed;
-
-	//private float still;
 	
 	private float engineRPM;
 	
 	private Camera vehicleCam; 
 	
 	private Player player;
-	
-	
+
+	public bool inAir = false; // Used to check if the vehicle is air-born
+
+
 	
 	void Start()
 	{
@@ -53,9 +53,40 @@ public class VehicleScriptTEST : MonoBehaviour {
 			Jump();
 
 		speed = rigidbody.velocity; // Set actual velocity as speed
-		//print (speed.x);
+		//print (speed.y);
+
+		/*
+		if(inAir)
+		{
+			rigidbody.AddForce(0f, -50000f, 0f);// * Time.fixedDeltaTime;
+			//Physics.gravity = new Vector3(0f, -100f, 0f);
+			//speed -= Physics.gravity * Time.fixedDeltaTime * 100;
+		}
+		//else
+		//	Physics.gravity = new Vector3(0f, -10f, 0f);
+		*/
 	}
-	
+
+
+	void FixedUpdate()
+	{
+		CheckGrounded();
+	}
+
+
+	public void CheckGrounded()
+	{
+		WheelHit hit;
+		
+		bool groundedL = frontLeftWheel.GetGroundHit(out hit);
+		bool groundedR = frontRightWheel.GetGroundHit(out hit);
+		
+		if(groundedL || groundedR) // If any of the front-wheels touches the ground, the vehicle is grounded
+			inAir = false;
+		else // If not the vehicle is in air
+			inAir = true;
+	}
+
 	
 	public void Torque ()
 	{
@@ -73,7 +104,7 @@ public class VehicleScriptTEST : MonoBehaviour {
 	public void Steering()
 	{
 		// the steer angle is an arbitrary value multiplied by the user input.
-		if (frontLeftWheel.motorTorque > 50) 
+		if (frontLeftWheel.motorTorque > 70) 
 		{
 			rigidbody.angularDrag = 20;
 			//frontLeftWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");

@@ -45,11 +45,8 @@ public class Player : MonoBehaviour {
 	private CharSelect cs; // CharSelect script
 	private GameManager gm; // GameManager script
 
+	//[HideInInspector]
 	public VehicleScript vehicle;
-	//private VehicleScript vhcl; // New Vehicle script
-
-
-	
 
 	void Awake()
 	{
@@ -113,7 +110,7 @@ public class Player : MonoBehaviour {
 		{
 			GameObject spawnLoc = GameObject.FindWithTag("CartSpawn").gameObject;
 			vehicleSpawnLocations = spawnLoc.GetComponent<VehicleSpawnLoader>().vehicleSpawnLocations;
-			vehicle = ((GameObject)Instantiate(possibleCharacter[characterIndex]/*playerVehicle*/, vehicleSpawnLocations[(int)pn].position, Quaternion.identity)).GetComponent<VehicleScript>();
+			vehicle = ((GameObject)Instantiate(possibleCharacter[characterIndex], vehicleSpawnLocations[(int)pn].position, Quaternion.identity)).GetComponent<VehicleScript>();
 		}
 
 		Camera cam = vehicle.transform.FindChild("Camera").GetComponent<Camera>(); // Get the camera from the vehicle
@@ -193,23 +190,8 @@ public class Player : MonoBehaviour {
 
 	void VehicleInput()
 	{
-		/*
-		// Vehicle navigation
-		if(Input.GetAxis ("Forward" + playerNumber) != 0f)
-		{
-			//direction = (Input.GetAxis ("Forward" + playerNumber));
-			vehicle.Torque(this); // Forward
-		}
-		*/
-
-		/*
-		if(Input.GetAxis ("Back" + playerNumber) != 0f)
-		{
-			//moveForw = false;
-			direction = (Input.GetAxis ("Forward" + playerNumber));
-			vehicle.Torque(this); // Back
-		}
-		*/
+		if (vehicle == null)
+			return;
 
 		vehicle.Torque(this); // Forward/Back
 
@@ -218,16 +200,12 @@ public class Player : MonoBehaviour {
 		if(Input.GetButtonDown ("Fire" + playerNumber)) // Fire
 			vehicle.Fire();
 
-		/*
 		// Button commands
 		if(Input.GetButtonDown ("Jump" + playerNumber)) // Jump
 			vehicle.Jump();
-		*/
 
 		if (Input.GetAxis ("Shuffle" + playerNumber) > 0f) // Scroll through pickups (was in update)
-		{
 			vehicle.ShufflePickups();
-		}
 	}
 
 
@@ -238,9 +216,9 @@ public class Player : MonoBehaviour {
 	 */
 	public IEnumerator ActivateVehicleControls(float waitTime)
 	{
-		print ("before veh active");
+		//print ("before veh active");
 		yield return new WaitForSeconds(waitTime);
 		vehicleActive = true;
-		print ("after veh active");
+		//print ("after veh active");
 	}
 }

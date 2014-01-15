@@ -8,6 +8,12 @@ public class AntiRollScript : MonoBehaviour {
 
 	public float AntiRoll = 5000.0f;
 
+	private VehicleScriptTEST vehicle;
+
+	void Start()
+	{
+		vehicle = FindObjectOfType<VehicleScriptTEST>();
+	}
 
 	void FixedUpdate()
 	{
@@ -45,6 +51,11 @@ public class AntiRollScript : MonoBehaviour {
 		{
 			rigidbody.AddForceAtPosition (WheelR.transform.up * antiRollForce, WheelR.transform.position);
 			//print ("antiroll R");
+		}
+		else
+		{
+			//vehicle.inAir = true;
+			//print ("inair");
 		}
 	}
 }

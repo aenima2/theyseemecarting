@@ -52,12 +52,12 @@ MonoBehaviour:
   vehicleSpawnLocations: []
   playerVehicle: {fileID: 0}
   possibleCharacter:
-  - {fileID: 100014, guid: 0c6aafc8c7f313e4dbc536a89c6557bc, type: 2}
-  - {fileID: 100014, guid: 0c6aafc8c7f313e4dbc536a89c6557bc, type: 2}
-  - {fileID: 100014, guid: 0c6aafc8c7f313e4dbc536a89c6557bc, type: 2}
-  - {fileID: 100014, guid: 0c6aafc8c7f313e4dbc536a89c6557bc, type: 2}
-  - {fileID: 100014, guid: 0c6aafc8c7f313e4dbc536a89c6557bc, type: 2}
-  - {fileID: 100014, guid: 0c6aafc8c7f313e4dbc536a89c6557bc, type: 2}
+  - {fileID: 100000, guid: dbfaa734be036394b9886c9f0b57c36e, type: 2}
+  - {fileID: 100000, guid: dbfaa734be036394b9886c9f0b57c36e, type: 2}
+  - {fileID: 100000, guid: dbfaa734be036394b9886c9f0b57c36e, type: 2}
+  - {fileID: 100000, guid: dbfaa734be036394b9886c9f0b57c36e, type: 2}
+  - {fileID: 100000, guid: dbfaa734be036394b9886c9f0b57c36e, type: 2}
+  - {fileID: 100000, guid: dbfaa734be036394b9886c9f0b57c36e, type: 2}
   characterIndex: 0
   playerNumber: 0
   vehicle: {fileID: 0}

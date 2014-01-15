@@ -6,18 +6,21 @@ public class VehicleScript : MonoBehaviour {
 	public int life;
 	public bool isImmortal;
 
+	//[HideInInspector]
+	public float playerVehicleNr;
+
 	// These variables allow the script to power the wheels of the car.
 	public WheelCollider frontLeftWheel;
 	public WheelCollider frontRightWheel;
-	
-	// These variables are for the gears, the array is the list of ratios. The script
-	// uses the defined gear ratios to determine how much torque to apply to the wheels.
-	//public float[] gearRatio;
-	//public int currentGear;
 
-	public float engineTorque = 230.0f; // speed
+	public float engineTorque; // speed
+	public float wheelTurn; // How much the front wheels can turn
 
-	private float engineRPM = 0.0f;
+	private float engineRPM; // Currently not in use
+	private Vector3 speed; // Current vehicle speed
+
+
+	public bool inAir = false; // Used to check if the vehicle is air-born
 
 	private Camera vehicleCam; 
 
@@ -28,23 +31,34 @@ public class VehicleScript : MonoBehaviour {
 	void Start()
 	{
 		// I usually alter the center of mass to make the car more stable. I'ts less likely to flip this way.
-		rigidbody.centerOfMass += new Vector3(0f, -0.75f, 0.25f);
+		transform.FindChild("Chassi").rigidbody.centerOfMass += new Vector3(0f, -0.75f, 0.25f);
 
 		player = FindObjectOfType<Player>();
 	}
-	
 
 	void Update()
 	{
-		
-		// Compute the engine RPM based on the average RPM of the two wheels, then call the shift gear function
-		//engineRPM = (frontLeftWheel.rpm + frontRightWheel.rpm) / 2 * gearRatio[currentGear]; // does nothing atm
+		//speed = rigidbody.velocity; // Sets current speed
+		//print (speed);
+	}
 
-		/*
-		// the steer angle is an arbitrary value multiplied by the user input.
-		frontLeftWheel.steerAngle = 10 * Input.GetAxis("Horizontal" + player.playerNumber);
-		frontRightWheel.steerAngle = 10 * Input.GetAxis("Horizontal" + player.playerNumber);
-		*/
+	void FixedUpdate()
+	{
+		CheckGrounded();
+	}
+
+
+	public void CheckGrounded()
+	{
+		WheelHit hit;
+		
+		bool groundedL = frontLeftWheel.GetGroundHit(out hit);
+		bool groundedR = frontRightWheel.GetGroundHit(out hit);
+		
+		if(groundedL || groundedR) // If any of the front-wheels touches the ground, the vehicle is grounded
+			inAir = false;
+		else // If not the vehicle is in air
+			inAir = true;
 	}
 
 
@@ -52,10 +66,7 @@ public class VehicleScript : MonoBehaviour {
 	{
 		player = P;
 
-		print ("torque " + player.playerNumber);
-
-		// finally, apply the values to the wheels.	The torque applied is divided by the current gear, and
-		// multiplied by the user input variable.
+		// apply torque to the front wheels
 		frontLeftWheel.motorTorque = engineTorque * Input.GetAxis("Forward" + player.playerNumber);
 		frontRightWheel.motorTorque = engineTorque * Input.GetAxis("Forward" + player.playerNumber);
 	}
@@ -63,16 +74,40 @@ public class VehicleScript : MonoBehaviour {
 
 	public void Steering (Player P)
 	{
-		// the steer angle is an arbitrary value multiplied by the user input.
-		frontLeftWheel.steerAngle = 10 * Input.GetAxis("Horizontal" + player.playerNumber);
-		frontRightWheel.steerAngle = 10 * Input.GetAxis("Horizontal" + player.playerNumber);
+		// changes the angulardrag depending on how much motor torque is added to the wheels, needs to be changed to how fast you're going
+		if (frontLeftWheel.motorTorque > 70) 
+		{
+			rigidbody.angularDrag = 2000;
+			//wheelTurn = 10;
+			//frontLeftWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+			//frontRightWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+		} else
+		{
+			rigidbody.angularDrag = 10f;
+			//wheelTurn = 30;
+			//frontLeftWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+			//frontRightWheel.steerAngle = 10 * Input.GetAxis ("Horizontal0");
+		}
+
+		// the steer angle is an arbitrary value multiplied by the user input
+		frontLeftWheel.steerAngle = wheelTurn * Input.GetAxis("Horizontal" + player.playerNumber);
+		frontRightWheel.steerAngle = wheelTurn * Input.GetAxis("Horizontal" + player.playerNumber);
 	}
+
 
 	public void Fire()
 	{
 		PickupResponseScript spawnPowerup = gameObject.GetComponent<PickupResponseScript>();
 		spawnPowerup.SpawnPickup();
 	}
+
+
+	public void Jump()
+	{
+		print ("jump");
+		rigidbody.velocity = new Vector3(0f, 5f, 0f);
+	}
+
 
 	/*
 	 * public void ShufflePickups

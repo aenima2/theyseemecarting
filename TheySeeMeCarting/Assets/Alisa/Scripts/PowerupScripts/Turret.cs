@@ -25,10 +25,7 @@ public class Turret : MonoBehaviour {
 	public float speed;
 
 	public float damp;
-	
-	void Start () {
 
-	}
 	
 	void Update () {
 
@@ -107,12 +104,16 @@ public class Turret : MonoBehaviour {
 	{
 		ParticleSystem desFX = (ParticleSystem)Instantiate (destroyedFX, gameObject.transform.position, Quaternion.identity);
 	}
+	
+
 
 	IEnumerator LifeSpan()
 	{
+		print ("turret lifespan start");
 		yield return new WaitForSeconds(lifeSpan);
 		DestructFX ();
 		Destroy (gameObject);
+		print ("turret lifespan end");
 	}
 
 }
