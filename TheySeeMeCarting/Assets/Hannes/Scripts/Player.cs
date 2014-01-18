@@ -77,6 +77,8 @@ public class Player : MonoBehaviour {
 	{
 		if (inMenu == true)
 			MenuInput();
+
+		KeyBoardInput();
 	}
 
 
@@ -221,4 +223,24 @@ public class Player : MonoBehaviour {
 		vehicleActive = true;
 		//print ("after veh active");
 	}
+
+
+	// For testing with keyboard
+	void KeyBoardInput()
+	{
+		if(Input.GetKeyDown(KeyCode.S))
+		{
+			cs.SelectCharacter(this);
+		}
+		if(Input.GetKeyDown(KeyCode.D))
+		{
+			cs.DeSelectCharacter(this);
+		}
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			cs.TryStartGame();
+		}
+	}
+
+
 }
