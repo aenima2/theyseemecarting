@@ -5714,8 +5714,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 765347927}
   - 114: {fileID: 765347926}
+  - 114: {fileID: 765347928}
   m_Layer: 0
-  m_Name: LvlInit
+  m_Name: _GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5743,6 +5744,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &765347928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 765347925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4a63d7d53ccbf4ea439e930081c5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuSceneName: characterSelectNew
+  pauseMenuFont: {fileID: 12800000, guid: a61c3d385ca53d24f86a8c65a8b550b0, type: 3}
 --- !u!1 &767389137
 GameObject:
   m_ObjectHideFlags: 0

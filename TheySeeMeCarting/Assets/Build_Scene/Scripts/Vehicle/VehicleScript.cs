@@ -104,8 +104,11 @@ public class VehicleScript : MonoBehaviour {
 
 	public void Jump()
 	{
-		print ("jump");
-		rigidbody.velocity = new Vector3(0f, 5f, 0f);
+		if(!inAir) // Only jump if vehicle is grounded
+		{
+			print ("jump");
+			rigidbody.velocity = new Vector3(0f, 5f, 0f);
+		}
 	}
 
 

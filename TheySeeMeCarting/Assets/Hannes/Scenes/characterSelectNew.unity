@@ -255,21 +255,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 558550534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14f060dc623c11a4a91df6a3a9ae4780, type: 3}
+  m_Script: {fileID: 11500000, guid: 16fc260cbaae94048aaed44c391bf456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notSelectedMat: {fileID: 2100000, guid: 97f256c3991cfed46ba0743532bd43cf, type: 2}
+  notSelectedMat: {fileID: 2100000, guid: 319ad16deccf4d84eaee46aaa74b2c8f, type: 2}
   previousDpadAxisX: 0
   previousDpadAxisY: 0
   rows: 3
   cols: 2
   charPrefabs:
-  - {fileID: 100000, guid: 496e521cc14525e44b8e0f60dd2fd542, type: 2}
-  - {fileID: 100000, guid: d8f74e03f898b1e47b6f339944c4a42e, type: 2}
-  - {fileID: 100000, guid: d8b400cc520533b4b8fa5677fb2e094a, type: 2}
-  - {fileID: 100000, guid: 77157f58402d4e848907bc3e6d117e4d, type: 2}
-  - {fileID: 100000, guid: 42c40a647c5249f449506648d211d08a, type: 2}
-  - {fileID: 100000, guid: 6a65c68b51998094e9d2833bb6ed97a6, type: 2}
+  - {fileID: 100000, guid: 222d8640ccad7ba4586ac3712e3a7266, type: 2}
+  - {fileID: 100000, guid: a151ecf1dc6e74242bdf405a231c1328, type: 2}
+  - {fileID: 100000, guid: 7d0dc7ba05b7a8c4682ee708abfcb93c, type: 2}
+  - {fileID: 100000, guid: d55968b38d1897b44be487f74d28e9f1, type: 2}
+  - {fileID: 100000, guid: 3823b15aec980fe4998b6708f6f3f2a1, type: 2}
+  - {fileID: 100000, guid: 5c33a33d00e51044cbf6900fd18b904f, type: 2}
   activateP2: 0
   activateP3: 0
   activateP4: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 560976049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 368eb25b89efb44428e1e7a9f437ed55, type: 3}
+  m_Script: {fileID: 11500000, guid: fc87e356827055e42b64a94cebdb0820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activateP2: 0
@@ -340,14 +340,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 687948956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7a639b90f006649ada6570c6c2bfc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 66e513ea3dbcd084cb45ec649dbc4d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 100000, guid: 09efdf2e446b1f140ac2d235c08b1d3d, type: 2}
-  player1mat: {fileID: 2100000, guid: 2734f482410d6c444b59ca3bdae060a0, type: 2}
-  player2mat: {fileID: 2100000, guid: 320a8096a88b3334bba474276634157b, type: 2}
-  player3mat: {fileID: 2100000, guid: f603b988a4a8fc44c98d4d98e422d251, type: 2}
-  player4mat: {fileID: 2100000, guid: e5100a80c6b1e05409bac1aa51a5af8a, type: 2}
+  player1mat: {fileID: 2100000, guid: aca92ec937edb3c41a8d30af21949250, type: 2}
+  player2mat: {fileID: 2100000, guid: de363e5e69bd1cb44bd5fb27264c2b7e, type: 2}
+  player3mat: {fileID: 2100000, guid: b5f291e4cba5a8348abea69f976b8186, type: 2}
+  player4mat: {fileID: 2100000, guid: 358e06abcf04a9047b9d451b82880c1c, type: 2}
   players: []
   vehicles: []
   pn: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1438996535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69d79c4e05e12f645a856617a52a1d90, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f81d97401927d46bc3fa5216100ea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1444484320

@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Hannes/Scenes/DelegateMenu.unity
+    path: Assets/Build_Scene/Scripts/Hannes/Scenes/DelegateMenu.unity
   - enabled: 1
-    path: Assets/Hannes/Scenes/characterSelectNew.unity
+    path: Assets/Build_Scene/Scripts/Hannes/Scenes/characterSelectNew.unity
   - enabled: 0
-    path: Assets/Hannes/Scenes/testlevel.unity
+    path: Assets/Build_Scene/Scripts/Hannes/Scenes/testlevel.unity
   - enabled: 0
     path: Assets/Build_Scene/Scenes/_Build_01.unity
   - enabled: 0

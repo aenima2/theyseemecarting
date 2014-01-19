@@ -35,7 +35,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5800d21e4fc81c4468c13826c5ddc648, type: 3}
+  m_Script: {fileID: 11500000, guid: 08433b1f98365634faf7992069b8adeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: 
@@ -48,7 +48,7 @@ MonoBehaviour:
   inMenu: 0
   vehicleActive: 0
   direction: 0
-  spawner: {fileID: 11400000, guid: af80c931cf3fec144b8ae298098b59f4, type: 2}
+  spawner: {fileID: 0}
   vehicleSpawnLocations: []
   playerVehicle: {fileID: 0}
   possibleCharacter:
